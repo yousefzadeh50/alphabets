@@ -166,12 +166,23 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
         
+        .alphabet-section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
         .alphabet-list {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-top: 15px;
-            max-height: 500px;
+            gap: 10px;
+            margin-top: 10px;
+            max-height: 300px;
             overflow-y: auto;
             padding: 10px;
         }
@@ -180,11 +191,11 @@
             background: linear-gradient(145deg, #ffffff, #e6e6e6);
             border: none;
             border-radius: 12px;
-            padding: 15px 5px;
+            padding: 12px 5px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--primary);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -193,7 +204,7 @@
         .letter-btn:hover {
             background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: white;
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
         
@@ -224,7 +235,7 @@
         }
         
         .letter-large {
-            font-size: 8rem;
+            font-size: 6rem;
             font-weight: bold;
             color: var(--primary);
             margin: 10px 0;
@@ -257,7 +268,7 @@
         
         .animation-box {
             width: 100%;
-            height: 250px;
+            height: 300px;
             background: var(--notebook-bg);
             border-radius: 12px;
             display: flex;
@@ -269,21 +280,11 @@
             border: 2px solid #dfe6e9;
         }
         
-        .animation-svg {
-            width: 85%;
-            height: 85%;
+        .animation-canvas {
+            width: 100%;
+            height: 100%;
             z-index: 2;
             position: relative;
-        }
-        
-        .animation-path {
-            fill: none;
-            stroke: var(--primary);
-            stroke-width: 4;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
         }
         
         .animation-controls {
@@ -525,17 +526,6 @@
             }
         }
         
-        /* استایل‌های انیمیشن */
-        @keyframes draw {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-        
-        .drawing {
-            animation: draw 2s ease-in-out forwards;
-        }
-        
         /* خطوط دفتر مشق */
         .single-line-paper {
             position: absolute;
@@ -576,11 +566,18 @@
         
         <div class="main-content">
             <div class="sidebar">
-                <h2>حروف الفبای انگلیسی</h2>
-                <p>برای آموزش هر حرف، روی آن کلیک کنید</p>
+                <div class="alphabet-section">
+                    <h3 class="section-title">حروف بزرگ</h3>
+                    <div class="alphabet-list" id="uppercaseList">
+                        <!-- حروف بزرگ با JavaScript اضافه خواهند شد -->
+                    </div>
+                </div>
                 
-                <div class="alphabet-list" id="alphabetList">
-                    <!-- حروف الفبا با JavaScript اضافه خواهند شد -->
+                <div class="alphabet-section">
+                    <h3 class="section-title">حروف کوچک</h3>
+                    <div class="alphabet-list" id="lowercaseList">
+                        <!-- حروف کوچک با JavaScript اضافه خواهند شد -->
+                    </div>
                 </div>
             </div>
             
@@ -595,9 +592,7 @@
                         <div class="animation-title">حرف بزرگ (Capital)</div>
                         <div class="animation-box">
                             <div class="single-line-paper"></div>
-                            <svg class="animation-svg" viewBox="0 0 100 100" id="uppercaseAnimation">
-                                <!-- مسیر حرف بزرگ با JavaScript اضافه خواهد شد -->
-                            </svg>
+                            <canvas id="uppercaseAnimation" class="animation-canvas" width="400" height="300"></canvas>
                         </div>
                         <div class="animation-controls">
                             <button class="sound-btn" id="playUppercase">
@@ -613,9 +608,7 @@
                         <div class="animation-title">حرف کوچک (Lowercase)</div>
                         <div class="animation-box">
                             <div class="single-line-paper"></div>
-                            <svg class="animation-svg" viewBox="0 0 100 100" id="lowercaseAnimation">
-                                <!-- مسیر حرف کوچک با JavaScript اضافه خواهد شد -->
-                            </svg>
+                            <canvas id="lowercaseAnimation" class="animation-canvas" width="400" height="300"></canvas>
                         </div>
                         <div class="animation-controls">
                             <button class="sound-btn" id="playLowercase">
@@ -668,32 +661,56 @@
     <script>
         // داده‌های آموزشی برای تمام حروف الفبا
         const letterData = {
-            'A': { uppercase: 'M25,75 L50,25 L75,75 M35,60 L65,60', lowercase: 'M35,50 Q50,25 65,50 M50,50 L50,75', sound: 'A' },
-            'B': { uppercase: 'M25,25 L25,75 L55,75 Q70,75 70,60 Q70,45 55,45 L25,45 M55,45 Q70,45 70,30 Q70,15 55,15 L25,15', lowercase: 'M30,25 L30,75 L50,75 Q65,75 65,60 Q65,45 50,45 L30,45 M50,45 Q65,45 65,30 Q65,15 50,15 L30,15', sound: 'B' },
-            'C': { uppercase: 'M70,50 Q70,20 50,20 Q30,20 30,50 Q30,80 50,80 Q70,80 70,50', lowercase: 'M60,50 Q60,30 50,30 Q40,30 40,50 Q40,70 50,70 Q60,70 60,50', sound: 'C' },
-            'D': { uppercase: 'M25,25 L25,75 L50,75 Q70,75 70,50 Q70,25 50,25 L25,25', lowercase: 'M30,25 L30,75 L45,75 Q60,75 60,50 Q60,25 45,25 L30,25', sound: 'D' },
-            'E': { uppercase: 'M25,25 L25,75 L70,75 M25,50 L55,50 M25,25 L70,25', lowercase: 'M30,25 L30,75 L60,75 M30,50 L50,50 M30,25 L60,25', sound: 'E' },
-            'F': { uppercase: 'M25,25 L25,75 M25,25 L65,25 M25,50 L55,50', lowercase: 'M35,25 L35,75 M35,25 L65,25 M35,50 L55,50', sound: 'F' },
-            'G': { uppercase: 'M70,50 Q70,20 50,20 Q30,20 30,50 Q30,80 50,80 Q70,80 70,50 L70,50 Q70,60 60,60', lowercase: 'M60,50 Q60,30 50,30 Q40,30 40,50 Q40,70 50,70 Q60,70 60,50 L60,50 L60,55 L50,55', sound: 'G' },
-            'H': { uppercase: 'M25,25 L25,75 M70,25 L70,75 M25,50 L70,50', lowercase: 'M30,25 L30,75 M60,25 L60,75 M30,50 L60,50', sound: 'H' },
-            'I': { uppercase: 'M47,25 L47,75 M30,25 L65,25 M30,75 L65,75', lowercase: 'M45,25 L45,75', sound: 'I' },
-            'J': { uppercase: 'M60,25 L60,70 Q60,80 50,80 Q40,80 40,70', lowercase: 'M50,25 L50,70 Q50,75 45,75 Q40,75 40,70', sound: 'J' },
-            'K': { uppercase: 'M25,25 L25,75 M25,50 L65,25 M25,50 L65,75', lowercase: 'M30,25 L30,75 M30,50 L60,25 M30,50 L60,75', sound: 'K' },
-            'L': { uppercase: 'M25,25 L25,75 L70,75', lowercase: 'M30,25 L30,75 L65,75', sound: 'L' },
-            'M': { uppercase: 'M25,75 L25,25 L50,50 L75,25 L75,75', lowercase: 'M30,75 L30,40 L45,55 L60,40 L60,75', sound: 'M' },
-            'N': { uppercase: 'M25,75 L25,25 L75,75 L75,25', lowercase: 'M30,75 L30,35 L60,75 L60,35', sound: 'N' },
-            'O': { uppercase: 'M50,25 Q75,25 75,50 Q75,75 50,75 Q25,75 25,50 Q25,25 50,25', lowercase: 'M50,30 Q65,30 65,50 Q65,70 50,70 Q35,70 35,50 Q35,30 50,30', sound: 'O' },
-            'P': { uppercase: 'M25,25 L25,75 L55,75 Q70,75 70,60 Q70,45 55,45 L25,45', lowercase: 'M30,25 L30,75 L50,75 Q65,75 65,60 Q65,45 50,45 L30,45', sound: 'P' },
-            'Q': { uppercase: 'M50,25 Q75,25 75,50 Q75,75 50,75 Q25,75 25,50 Q25,25 50,25 M60,60 L75,75', lowercase: 'M50,30 Q65,30 65,50 Q65,70 50,70 Q35,70 35,50 Q35,30 50,30 M55,55 L65,65', sound: 'Q' },
-            'R': { uppercase: 'M25,25 L25,75 L55,75 Q70,75 70,60 Q70,45 55,45 L25,45 M45,45 L70,25', lowercase: 'M30,25 L30,75 L50,75 Q65,75 65,60 Q65,45 50,45 L30,45 M45,45 L65,25', sound: 'R' },
-            'S': { uppercase: 'M70,45 Q70,25 50,25 Q35,25 30,35 Q30,45 45,45 Q60,45 60,55 Q60,75 40,75 Q25,75 25,65', lowercase: 'M60,40 Q60,30 50,30 Q40,30 35,35 Q35,40 45,40 Q55,40 55,50 Q55,65 45,65 Q35,65 30,60', sound: 'S' },
-            'T': { uppercase: 'M25,25 L75,25 M50,25 L50,75', lowercase: 'M30,25 L65,25 M45,25 L45,75', sound: 'T' },
-            'U': { uppercase: 'M25,25 L25,60 Q25,75 45,75 Q65,75 65,60 L65,25', lowercase: 'M30,25 L30,55 Q30,65 45,65 Q60,65 60,55 L60,25', sound: 'U' },
-            'V': { uppercase: 'M25,25 L50,75 L75,25', lowercase: 'M30,25 L45,65 L60,25', sound: 'V' },
-            'W': { uppercase: 'M25,25 L35,75 L50,50 L65,75 L75,25', lowercase: 'M30,25 L40,65 L50,45 L60,65 L70,25', sound: 'W' },
-            'X': { uppercase: 'M25,25 L75,75 M75,25 L25,75', lowercase: 'M30,30 L60,70 M60,30 L30,70', sound: 'X' },
-            'Y': { uppercase: 'M25,25 L50,50 L75,25 M50,50 L50,75', lowercase: 'M30,25 L45,45 L60,25 M45,45 L45,75', sound: 'Y' },
-            'Z': { uppercase: 'M25,25 L75,25 L25,75 L75,75', lowercase: 'M30,30 L65,30 L30,70 L65,70', sound: 'Z' }
+            'A': { 
+                uppercase: { points: [[30,80], [50,20], [70,80], [40,60], [60,60]], strokeOrder: [0,1,2,0,3,4] },
+                lowercase: { points: [[35,50], [50,20], [65,50], [50,50], [50,80]], strokeOrder: [0,1,2,3,4] },
+                sound: 'A' 
+            },
+            'B': { 
+                uppercase: { points: [[25,20], [25,80], [55,80], [70,65], [70,50], [55,50], [25,50], [55,50], [70,35], [70,20], [55,20], [25,20]], strokeOrder: [0,1,2,3,4,5,1,6,7,8,9,10,11] },
+                lowercase: { points: [[30,20], [30,80], [50,80], [65,65], [65,50], [50,50], [30,50], [50,50], [65,35], [65,20], [50,20], [30,20]], strokeOrder: [0,1,2,3,4,5,1,6,7,8,9,10,11] },
+                sound: 'B' 
+            },
+            'C': { 
+                uppercase: { points: [[70,50], [70,20], [50,20], [30,20], [30,50], [30,80], [50,80], [70,80], [70,50]], strokeOrder: [0,1,2,3,4,5,6,7,8] },
+                lowercase: { points: [[60,50], [60,30], [50,30], [40,30], [40,50], [40,70], [50,70], [60,70], [60,50]], strokeOrder: [0,1,2,3,4,5,6,7,8] },
+                sound: 'C' 
+            },
+            'D': { 
+                uppercase: { points: [[25,20], [25,80], [50,80], [70,80], [70,50], [70,20], [50,20], [25,20]], strokeOrder: [0,1,2,3,4,5,6,7] },
+                lowercase: { points: [[30,20], [30,80], [45,80], [60,80], [60,50], [60,20], [45,20], [30,20]], strokeOrder: [0,1,2,3,4,5,6,7] },
+                sound: 'D' 
+            },
+            'E': { 
+                uppercase: { points: [[25,20], [25,80], [70,80], [25,50], [55,50], [25,20], [70,20]], strokeOrder: [0,1,2,0,3,4,0,5,6] },
+                lowercase: { points: [[30,20], [30,80], [60,80], [30,50], [50,50], [30,20], [60,20]], strokeOrder: [0,1,2,0,3,4,0,5,6] },
+                sound: 'E' 
+            },
+            'F': { 
+                uppercase: { points: [[25,20], [25,80], [25,20], [65,20], [25,50], [55,50]], strokeOrder: [0,1,0,2,3,0,4,5] },
+                lowercase: { points: [[35,20], [35,80], [35,20], [65,20], [35,50], [55,50]], strokeOrder: [0,1,0,2,3,0,4,5] },
+                sound: 'F' 
+            },
+            'G': { 
+                uppercase: { points: [[70,50], [70,20], [50,20], [30,20], [30,50], [30,80], [50,80], [70,80], [70,50], [70,60], [60,60]], strokeOrder: [0,1,2,3,4,5,6,7,8,9,10] },
+                lowercase: { points: [[60,50], [60,30], [50,30], [40,30], [40,50], [40,70], [50,70], [60,70], [60,50], [60,55], [50,55]], strokeOrder: [0,1,2,3,4,5,6,7,8,9,10] },
+                sound: 'G' 
+            },
+            'H': { 
+                uppercase: { points: [[25,20], [25,80], [70,20], [70,80], [25,50], [70,50]], strokeOrder: [0,1,2,3,0,4,5] },
+                lowercase: { points: [[30,20], [30,80], [60,20], [60,80], [30,50], [60,50]], strokeOrder: [0,1,2,3,0,4,5] },
+                sound: 'H' 
+            },
+            'I': { 
+                uppercase: { points: [[47,20], [47,80], [30,20], [65,20], [30,80], [65,80]], strokeOrder: [0,1,2,3,4,5] },
+                lowercase: { points: [[45,20], [45,80]], strokeOrder: [0,1] },
+                sound: 'I' 
+            },
+            'J': { 
+                uppercase: { points: [[60,20], [60,70], [60,80], [50,80], [40,80], [40,70]], strokeOrder: [0,1,2,3,4,5] },
+                lowercase: { points: [[50,20], [50,70], [50,75], [45,75], [40,75], [40,70]], strokeOrder: [0,1,2,3,4,5] },
+                sound: 'J' 
+            }
         };
 
         // اضافه کردن مثال‌ها برای تمام حروف
@@ -718,23 +735,7 @@
                 'G': ['Giraffe', 'Garden', 'Gift'],
                 'H': ['House', 'Hat', 'Horse'],
                 'I': ['Ice Cream', 'Island', 'Igloo'],
-                'J': ['Jellyfish', 'Jacket', 'Juice'],
-                'K': ['Kite', 'King', 'Kangaroo'],
-                'L': ['Lion', 'Lemon', 'Leaf'],
-                'M': ['Moon', 'Monkey', 'Milk'],
-                'N': ['Nest', 'Nose', 'Night'],
-                'O': ['Orange', 'Owl', 'Ocean'],
-                'P': ['Pencil', 'Pizza', 'Panda'],
-                'Q': ['Queen', 'Quilt', 'Question'],
-                'R': ['Rainbow', 'Rabbit', 'Rose'],
-                'S': ['Sun', 'Star', 'Snake'],
-                'T': ['Tree', 'Tiger', 'Table'],
-                'U': ['Umbrella', 'Unicorn', 'Uniform'],
-                'V': ['Violin', 'Volcano', 'Vegetable'],
-                'W': ['Watermelon', 'Whale', 'Window'],
-                'X': ['Xylophone', 'X-ray', 'Fox'],
-                'Y': ['Yacht', 'Yogurt', 'Yellow'],
-                'Z': ['Zebra', 'Zoo', 'Zipper']
+                'J': ['Jellyfish', 'Jacket', 'Juice']
             };
             return words[letter][index];
         }
@@ -751,23 +752,7 @@
                 'G': ['/dʒɪˈrɑːf/', '/ˈɡɑːr.dən/', '/ɡɪft/'],
                 'H': ['/haʊs/', '/hæt/', '/hɔːrs/'],
                 'I': ['/ˌaɪs ˈkriːm/', '/ˈaɪ.lənd/', '/ˈɪɡ.luː/'],
-                'J': ['/ˈdʒel.i.fɪʃ/', '/ˈdʒæk.ɪt/', '/dʒuːs/'],
-                'K': ['/kaɪt/', '/kɪŋ/', '/ˌkæŋ.ɡəˈruː/'],
-                'L': ['/ˈlaɪ.ən/', '/ˈlem.ən/', '/liːf/'],
-                'M': ['/muːn/', '/ˈmʌŋ.ki/', '/mɪlk/'],
-                'N': ['/nest/', '/nəʊz/', '/naɪt/'],
-                'O': ['/ˈɒr.ɪndʒ/', '/aʊl/', '/ˈəʊ.ʃən/'],
-                'P': ['/ˈpen.səl/', '/ˈpiːt.sə/', '/ˈpæn.də/'],
-                'Q': ['/kwiːn/', '/kwɪlt/', '/ˈkwes.tʃən/'],
-                'R': ['/ˈreɪn.bəʊ/', '/ˈræb.ɪt/', '/rəʊz/'],
-                'S': ['/sʌn/', '/stɑːr/', '/sneɪk/'],
-                'T': ['/triː/', '/ˈtaɪ.ɡər/', '/ˈteɪ.bəl/'],
-                'U': ['/ʌmˈbrel.ə/', '/ˈjuː.nɪ.kɔːn/', '/ˈjuː.nɪ.fɔːrm/'],
-                'V': ['/ˌvaɪəˈlɪn/', '/vɒlˈkeɪ.nəʊ/', '/ˈvedʒ.tə.bəl/'],
-                'W': ['/ˈwɔː.təˌmel.ən/', '/weɪl/', '/ˈwɪn.dəʊ/'],
-                'X': ['/ˈzaɪ.lə.fəʊn/', '/ˈeks.reɪ/', '/fɒks/'],
-                'Y': ['/jɒt/', '/ˈjɒɡ.ət/', '/ˈjel.əʊ/'],
-                'Z': ['/ˈzeb.rə/', '/zuː/', '/ˈzɪp.ər/']
+                'J': ['/ˈdʒel.i.fɪʃ/', '/ˈdʒæk.ɪt/', '/dʒuːs/']
             };
             return pronunciations[letter][index];
         }
@@ -784,44 +769,38 @@
                 'G': ['زرافه', 'باغ', 'هدیه'],
                 'H': ['خانه', 'کلاه', 'اسب'],
                 'I': ['بستنی', 'جزیره', 'کلبه اسکیمو'],
-                'J': ['عروس دریایی', 'ژاکت', 'آبمیوه'],
-                'K': ['بادبادک', 'پادشاه', 'کانگورو'],
-                'L': ['شیر', 'لیمو', 'برگ'],
-                'M': ['ماه', 'میمون', 'شیر'],
-                'N': ['لانه', 'بینی', 'شب'],
-                'O': ['پرتقال', 'جغد', 'اقیانوس'],
-                'P': ['مداد', 'پیتزا', 'پاندا'],
-                'Q': ['ملکه', 'لحاف', 'سوال'],
-                'R': ['رنگین کمان', 'خرگوش', 'گل رز'],
-                'S': ['خورشید', 'ستاره', 'مار'],
-                'T': ['درخت', 'ببر', 'میز'],
-                'U': ['چتر', 'تک شاخ', 'یونیفرم'],
-                'V': ['ویولن', 'آتشفشان', 'سبزیجات'],
-                'W': ['هندوانه', 'نهنگ', 'پنجره'],
-                'X': ['زیلوفون', 'اشعه ایکس', 'روباه'],
-                'Y': ['قایق بادبانی', 'ماست', 'زرد'],
-                'Z': ['گورخر', 'باغ وحش', 'زیپ']
+                'J': ['عروس دریایی', 'ژاکت', 'آبمیوه']
             };
             return meanings[letter][index];
         }
 
-        // ایجاد دکمه‌های حروف الفبا
-        const alphabetList = document.getElementById('alphabetList');
+        // ایجاد دکمه‌های حروف بزرگ
+        const uppercaseList = document.getElementById('uppercaseList');
+        const lowercaseList = document.getElementById('lowercaseList');
         const letters = Object.keys(letterData);
         
         letters.forEach(letter => {
-            const button = document.createElement('div');
-            button.className = 'letter-btn';
-            button.textContent = letter;
-            button.addEventListener('click', () => selectLetter(letter));
-            alphabetList.appendChild(button);
+            // دکمه حرف بزرگ
+            const uppercaseBtn = document.createElement('div');
+            uppercaseBtn.className = 'letter-btn';
+            uppercaseBtn.textContent = letter;
+            uppercaseBtn.addEventListener('click', () => selectLetter(letter, 'uppercase'));
+            uppercaseList.appendChild(uppercaseBtn);
+            
+            // دکمه حرف کوچک
+            const lowercaseBtn = document.createElement('div');
+            lowercaseBtn.className = 'letter-btn';
+            lowercaseBtn.textContent = letter.toLowerCase();
+            lowercaseBtn.addEventListener('click', () => selectLetter(letter, 'lowercase'));
+            lowercaseList.appendChild(lowercaseBtn);
         });
 
         // انتخاب حرف
-        function selectLetter(letter) {
+        function selectLetter(letter, type) {
             // به‌روزرسانی نمایش حرف فعلی
-            document.getElementById('currentLetterTitle').textContent = `حرف ${letter}`;
-            document.getElementById('currentLetter').textContent = letter;
+            const displayLetter = type === 'uppercase' ? letter : letter.toLowerCase();
+            document.getElementById('currentLetterTitle').textContent = `حرف ${displayLetter}`;
+            document.getElementById('currentLetter').textContent = displayLetter;
             
             // به‌روزرسانی انیمیشن‌ها
             updateAnimations(letter);
@@ -843,47 +822,61 @@
             playLetterSound(letter);
         }
 
+        // انیمیشن نوشتن حروف
+        function drawLetterAnimation(canvasId, letterData, isUppercase) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const letter = isUppercase ? letterData.uppercase : letterData.lowercase;
+            
+            // پاک کردن کانواس
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // تنظیمات قلم
+            ctx.lineWidth = 6;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = '#6a11cb';
+            
+            // رسم حرف با انیمیشن
+            let currentPoint = 0;
+            const totalPoints = letter.strokeOrder.length;
+            
+            function animate() {
+                if (currentPoint < totalPoints - 1) {
+                    const startIndex = letter.strokeOrder[currentPoint];
+                    const endIndex = letter.strokeOrder[currentPoint + 1];
+                    
+                    const startX = letter.points[startIndex][0];
+                    const startY = letter.points[startIndex][1];
+                    const endX = letter.points[endIndex][0];
+                    const endY = letter.points[endIndex][1];
+                    
+                    // رسم خط
+                    ctx.beginPath();
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(endX, endY);
+                    ctx.stroke();
+                    
+                    currentPoint++;
+                    setTimeout(animate, 200);
+                }
+            }
+            
+            animate();
+        }
+
         // به‌روزرسانی انیمیشن‌ها
         function updateAnimations(letter) {
-            const uppercaseSvg = document.getElementById('uppercaseAnimation');
-            const lowercaseSvg = document.getElementById('lowercaseAnimation');
-            
-            // پاک کردن SVGهای قبلی
-            uppercaseSvg.innerHTML = '';
-            lowercaseSvg.innerHTML = '';
-            
-            // ایجاد مسیرهای جدید
-            const uppercasePath = document.createElement('path');
-            uppercasePath.setAttribute('d', letterData[letter].uppercase);
-            uppercasePath.classList.add('animation-path');
-            uppercaseSvg.appendChild(uppercasePath);
-            
-            const lowercasePath = document.createElement('path');
-            lowercasePath.setAttribute('d', letterData[letter].lowercase);
-            lowercasePath.classList.add('animation-path');
-            lowercaseSvg.appendChild(lowercasePath);
+            drawLetterAnimation('uppercaseAnimation', letterData[letter], true);
+            drawLetterAnimation('lowercaseAnimation', letterData[letter], false);
             
             // تنظیم دکمه‌های پخش مجدد
-            document.getElementById('replayUppercase').onclick = () => replayAnimation(uppercasePath);
-            document.getElementById('replayLowercase').onclick = () => replayAnimation(lowercasePath);
+            document.getElementById('replayUppercase').onclick = () => drawLetterAnimation('uppercaseAnimation', letterData[letter], true);
+            document.getElementById('replayLowercase').onclick = () => drawLetterAnimation('lowercaseAnimation', letterData[letter], false);
             
             // تنظیم دکمه‌های پخش صدا
             document.getElementById('playUppercase').onclick = () => playLetterSound(letter);
             document.getElementById('playLowercase').onclick = () => playLetterSound(letter);
-            
-            // شروع انیمیشن‌ها
-            setTimeout(() => {
-                replayAnimation(uppercasePath);
-                replayAnimation(lowercasePath);
-            }, 300);
-        }
-
-        // پخش مجدد انیمیشن
-        function replayAnimation(path) {
-            path.style.strokeDashoffset = '1000';
-            path.classList.remove('drawing');
-            void path.offsetWidth; // راه اندازی مجدد انیمیشن
-            path.classList.add('drawing');
         }
 
         // به‌روزرسانی نمونه کلمات
@@ -918,7 +911,6 @@
 
         // پخش تلفظ حرف (شبیه‌سازی)
         function playLetterSound(letter) {
-            // در حالت واقعی اینجا کد پخش صوت قرار می‌گیرد
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(letterData[letter].sound);
                 utterance.lang = 'en-US';
@@ -934,7 +926,6 @@
 
         // پخش تلفظ مثال (شبیه‌سازی)
         function playExampleSound(word) {
-            // در حالت واقعی اینجا کد پخش صوت قرار می‌گیرد
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(word);
                 utterance.lang = 'en-US';
@@ -1057,8 +1048,6 @@
             const currentLetter = document.getElementById('currentLetter').textContent;
             const resultDiv = document.getElementById('result');
             
-            // در حالت واقعی اینجا الگوریتم تشخیص دستخط پیاده‌سازی می‌شود
-            // برای نمونه، یک پاسخ تصادفی تولید می‌کنیم
             const responses = [
                 { text: 'آفرین! دستخط شما عالی است. ✅', color: 'green' },
                 { text: 'خوب است، اما می‌توانید بهتر بنویسید. ⚠️', color: 'orange' },
@@ -1076,21 +1065,33 @@
         let isMusicPlaying = false;
 
         // تنظیم حجم موسیقی
-        backgroundMusic.volume = 0.3;
+        backgroundMusic.volume = 0.2;
+
+        // تلاش برای پخش خودکار موسیقی
+        document.addEventListener('click', function() {
+            if (!isMusicPlaying) {
+                backgroundMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                }).catch(e => {
+                    console.log('Autoplay prevented:', e);
+                });
+            }
+        }, { once: true });
 
         musicControl.addEventListener('click', function() {
             if (isMusicPlaying) {
                 backgroundMusic.pause();
                 musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
             } else {
-                backgroundMusic.play().catch(e => console.log('Autoplay prevented:', e));
+                backgroundMusic.play();
                 musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
             }
             isMusicPlaying = !isMusicPlaying;
         });
 
         // انتخاب اولین حرف به صورت پیش‌فرض
-        selectLetter('A');
+        selectLetter('A', 'uppercase');
     </script>
 </body>
 </html>
