@@ -258,6 +258,23 @@
             align-items: center;
             justify-content: center;
             font-family: 'Comic Sans MS', cursive;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .letter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .letter-btn:hover::before {
+            left: 100%;
         }
         
         .letter-btn:hover {
@@ -290,6 +307,32 @@
             border-radius: 20px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             border: 3px solid rgba(255,255,255,0.6);
+            position: relative;
+        }
+        
+        .letter-sound-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(145deg, var(--success), #10ac84);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 3px solid white;
+            font-size: 1.5rem;
+        }
+        
+        .letter-sound-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
         
         .letter-large {
@@ -347,34 +390,40 @@
             height: 95%;
             object-fit: contain;
             border-radius: 10px;
+            display: none;
         }
         
         .animation-controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin-top: 20px;
         }
         
-        .sound-btn {
-            background: linear-gradient(145deg, var(--accent), #ff5252);
+        .animation-btn {
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 12px;
+            padding: 12px 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             border: 2px solid white;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .sound-btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        .animation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .animation-btn.pause {
+            background: linear-gradient(145deg, var(--accent), #ff5252);
         }
         
         .examples-section {
@@ -412,6 +461,7 @@
             gap: 10px;
             transition: all 0.3s ease;
             border: 2px solid rgba(255,255,255,0.8);
+            position: relative;
         }
         
         .example-item:hover {
@@ -632,6 +682,13 @@
                 text-align: center;
                 justify-content: center;
             }
+            
+            .letter-sound-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px auto;
+            }
         }
         
         @media (max-width: 576px) {
@@ -664,9 +721,19 @@
             z-index: 3;
             opacity: 1;
             transition: opacity 0.3s ease;
+            cursor: pointer;
         }
         
         .play-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .animation-playing .animation-image {
+            display: block;
+        }
+        
+        .animation-playing .play-overlay {
             opacity: 0;
             pointer-events: none;
         }
@@ -679,6 +746,10 @@
     
     <audio id="hoverSound">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="letterClickSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3" type="audio/mpeg">
     </audio>
 
     <div class="designer-card" id="designerCard">
@@ -729,6 +800,9 @@
             
             <div class="practice-area">
                 <div class="letter-display">
+                    <button class="letter-sound-btn" id="letterSoundBtn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
                     <h2 id="currentLetterTitle">Letter A</h2>
                     <div class="letter-large" id="currentLetter">A</div>
                 </div>
@@ -743,11 +817,14 @@
                             <img id="uppercaseAnimation" class="animation-image" src="https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_a.gif" alt="Uppercase A animation">
                         </div>
                         <div class="animation-controls">
-                            <button class="sound-btn" id="playUppercase">
-                                <i class="fas fa-volume-up"></i>
+                            <button class="animation-btn" id="playUppercase">
+                                <i class="fas fa-play"></i> Play
                             </button>
-                            <button class="sound-btn" id="replayUppercase">
-                                <i class="fas fa-redo"></i>
+                            <button class="animation-btn pause" id="pauseUppercase" style="display: none;">
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                            <button class="animation-btn" id="replayUppercase">
+                                <i class="fas fa-redo"></i> Replay
                             </button>
                         </div>
                     </div>
@@ -761,11 +838,14 @@
                             <img id="lowercaseAnimation" class="animation-image" src="https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_a.gif" alt="Lowercase a animation">
                         </div>
                         <div class="animation-controls">
-                            <button class="sound-btn" id="playLowercase">
-                                <i class="fas fa-volume-up"></i>
+                            <button class="animation-btn" id="playLowercase">
+                                <i class="fas fa-play"></i> Play
                             </button>
-                            <button class="sound-btn" id="replayLowercase">
-                                <i class="fas fa-redo"></i>
+                            <button class="animation-btn pause" id="pauseLowercase" style="display: none;">
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                            <button class="animation-btn" id="replayLowercase">
+                                <i class="fas fa-redo"></i> Replay
                             </button>
                         </div>
                     </div>
@@ -1028,6 +1108,18 @@
             'Z': '/zɛd/ or /ziː/'
         };
 
+        // Animation state management
+        const animationState = {
+            uppercase: {
+                playing: false,
+                currentSrc: ''
+            },
+            lowercase: {
+                playing: false,
+                currentSrc: ''
+            }
+        };
+
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             initializeAlphabet();
@@ -1066,7 +1158,10 @@
                 const button = document.createElement('button');
                 button.className = 'letter-btn';
                 button.textContent = letter;
-                button.addEventListener('click', () => setActiveLetter(letter));
+                button.addEventListener('click', () => {
+                    playLetterClickSound();
+                    setActiveLetter(letter);
+                });
                 uppercaseList.appendChild(button);
             }
             
@@ -1076,9 +1171,20 @@
                 const button = document.createElement('button');
                 button.className = 'letter-btn';
                 button.textContent = letter;
-                button.addEventListener('click', () => setActiveLetter(letter.toUpperCase()));
+                button.addEventListener('click', () => {
+                    playLetterClickSound();
+                    setActiveLetter(letter.toUpperCase());
+                });
                 lowercaseList.appendChild(button);
             }
+        }
+
+        // Play letter click sound
+        function playLetterClickSound() {
+            const clickSound = document.getElementById('letterClickSound');
+            clickSound.volume = 0.5;
+            clickSound.currentTime = 0;
+            clickSound.play().catch(e => console.log('Audio play failed:', e));
         }
 
         // Set active letter and update display
@@ -1101,9 +1207,11 @@
                 document.getElementById('uppercaseAnimation').src = data.uppercase;
                 document.getElementById('lowercaseAnimation').src = data.lowercase;
                 
-                // Reset overlays
-                document.getElementById('uppercaseOverlay').classList.remove('hidden');
-                document.getElementById('lowercaseOverlay').classList.remove('hidden');
+                // Reset animation states
+                resetAnimations();
+                
+                // Play letter sound automatically
+                playLetterSound(letter);
             }
             
             // Update example words
@@ -1111,9 +1219,31 @@
             
             // Clear canvas
             clearCanvas();
+        }
+
+        // Reset animations to initial state
+        function resetAnimations() {
+            // Hide animation images
+            document.getElementById('uppercaseAnimation').style.display = 'none';
+            document.getElementById('lowercaseAnimation').style.display = 'none';
             
-            // Play hover sound
-            playHoverSound();
+            // Show overlays
+            document.getElementById('uppercaseOverlay').classList.remove('hidden');
+            document.getElementById('lowercaseOverlay').classList.remove('hidden');
+            
+            // Reset animation states
+            animationState.uppercase.playing = false;
+            animationState.lowercase.playing = false;
+            
+            // Reset button states
+            document.getElementById('playUppercase').style.display = 'flex';
+            document.getElementById('pauseUppercase').style.display = 'none';
+            document.getElementById('playLowercase').style.display = 'flex';
+            document.getElementById('pauseLowercase').style.display = 'none';
+            
+            // Remove playing class
+            document.getElementById('uppercaseBox').classList.remove('animation-playing');
+            document.getElementById('lowercaseBox').classList.remove('animation-playing');
         }
 
         // Update example words section
@@ -1132,7 +1262,7 @@
                     <div class="example-word">${word}</div>
                     <div class="example-pronunciation">${pron}</div>
                     <div class="example-meaning">Starts with ${letter}</div>
-                    <button class="example-sound" onclick="playLetterSound('${letter}')">
+                    <button class="example-sound" onclick="playWordSound('${word}')">
                         <i class="fas fa-volume-up"></i>
                     </button>
                 `;
@@ -1141,17 +1271,68 @@
             });
         }
 
-        // Play letter sound
+        // Play letter sound with clear female voice
         function playLetterSound(letter) {
-            // In a real application, you would use Web Audio API or preloaded sounds
             const synth = window.speechSynthesis;
+            
+            // Cancel any ongoing speech
+            synth.cancel();
+            
             const utterance = new SpeechSynthesisUtterance(letter);
+            
+            // Configure for clear female voice
             utterance.rate = 0.8;
+            utterance.pitch = 1.2;
+            utterance.volume = 1;
+            
+            // Try to get a female voice
+            const voices = synth.getVoices();
+            const femaleVoice = voices.find(voice => 
+                voice.name.includes('Female') || 
+                voice.name.includes('woman') ||
+                voice.name.includes('Samantha') ||
+                voice.name.includes('Karen')
+            );
+            
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            
+            synth.speak(utterance);
+        }
+
+        // Play word sound with clear female voice
+        function playWordSound(word) {
+            const synth = window.speechSynthesis;
+            
+            // Cancel any ongoing speech
+            synth.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(word);
+            
+            // Configure for clear female voice
+            utterance.rate = 0.7;
+            utterance.pitch = 1.1;
+            utterance.volume = 1;
+            
+            // Try to get a female voice
+            const voices = synth.getVoices();
+            const femaleVoice = voices.find(voice => 
+                voice.name.includes('Female') || 
+                voice.name.includes('woman') ||
+                voice.name.includes('Samantha') ||
+                voice.name.includes('Karen')
+            );
+            
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            
             synth.speak(utterance);
             
             // Visual feedback
             const resultDiv = document.getElementById('result');
-            resultDiv.textContent = `Playing sound: ${letter}`;
+            resultDiv.textContent = `Playing: ${word}`;
             resultDiv.style.color = 'var(--success)';
             
             setTimeout(() => {
@@ -1283,6 +1464,61 @@
             resultDiv.textContent += ` ${randomEncouragement}`;
         }
 
+        // Animation control functions
+        function playUppercaseAnimation() {
+            const img = document.getElementById('uppercaseAnimation');
+            const box = document.getElementById('uppercaseBox');
+            
+            img.style.display = 'block';
+            box.classList.add('animation-playing');
+            animationState.uppercase.playing = true;
+            
+            document.getElementById('playUppercase').style.display = 'none';
+            document.getElementById('pauseUppercase').style.display = 'flex';
+        }
+
+        function pauseUppercaseAnimation() {
+            const img = document.getElementById('uppercaseAnimation');
+            
+            // For GIFs, we need to reload to pause
+            const currentSrc = img.src;
+            img.src = '';
+            img.src = currentSrc;
+            img.style.display = 'none';
+            
+            animationState.uppercase.playing = false;
+            
+            document.getElementById('playUppercase').style.display = 'flex';
+            document.getElementById('pauseUppercase').style.display = 'none';
+        }
+
+        function playLowercaseAnimation() {
+            const img = document.getElementById('lowercaseAnimation');
+            const box = document.getElementById('lowercaseBox');
+            
+            img.style.display = 'block';
+            box.classList.add('animation-playing');
+            animationState.lowercase.playing = true;
+            
+            document.getElementById('playLowercase').style.display = 'none';
+            document.getElementById('pauseLowercase').style.display = 'flex';
+        }
+
+        function pauseLowercaseAnimation() {
+            const img = document.getElementById('lowercaseAnimation');
+            
+            // For GIFs, we need to reload to pause
+            const currentSrc = img.src;
+            img.src = '';
+            img.src = currentSrc;
+            img.style.display = 'none';
+            
+            animationState.lowercase.playing = false;
+            
+            document.getElementById('playLowercase').style.display = 'flex';
+            document.getElementById('pauseLowercase').style.display = 'none';
+        }
+
         // Setup event listeners
         function setupEventListeners() {
             // Clear button
@@ -1291,35 +1527,39 @@
             // Check button
             document.getElementById('checkBtn').addEventListener('click', checkWriting);
             
-            // Animation play buttons
-            document.getElementById('playUppercase').addEventListener('click', function() {
-                document.getElementById('uppercaseOverlay').classList.add('hidden');
+            // Letter sound button
+            document.getElementById('letterSoundBtn').addEventListener('click', function() {
+                const currentLetter = document.getElementById('currentLetter').textContent;
+                playLetterSound(currentLetter);
             });
             
-            document.getElementById('playLowercase').addEventListener('click', function() {
-                document.getElementById('lowercaseOverlay').classList.add('hidden');
-            });
-            
-            // Animation replay buttons
+            // Uppercase animation controls
+            document.getElementById('playUppercase').addEventListener('click', playUppercaseAnimation);
+            document.getElementById('pauseUppercase').addEventListener('click', pauseUppercaseAnimation);
             document.getElementById('replayUppercase').addEventListener('click', function() {
-                const img = document.getElementById('uppercaseAnimation');
-                img.src = img.src;
-                document.getElementById('uppercaseOverlay').classList.remove('hidden');
+                pauseUppercaseAnimation();
+                setTimeout(playUppercaseAnimation, 100);
             });
             
+            // Lowercase animation controls
+            document.getElementById('playLowercase').addEventListener('click', playLowercaseAnimation);
+            document.getElementById('pauseLowercase').addEventListener('click', pauseLowercaseAnimation);
             document.getElementById('replayLowercase').addEventListener('click', function() {
-                const img = document.getElementById('lowercaseAnimation');
-                img.src = img.src;
-                document.getElementById('lowercaseOverlay').classList.remove('hidden');
+                pauseLowercaseAnimation();
+                setTimeout(playLowercaseAnimation, 100);
             });
             
             // Animation box clicks
             document.getElementById('uppercaseBox').addEventListener('click', function() {
-                document.getElementById('uppercaseOverlay').classList.add('hidden');
+                if (!animationState.uppercase.playing) {
+                    playUppercaseAnimation();
+                }
             });
             
             document.getElementById('lowercaseBox').addEventListener('click', function() {
-                document.getElementById('lowercaseOverlay').classList.add('hidden');
+                if (!animationState.lowercase.playing) {
+                    playLowercaseAnimation();
+                }
             });
             
             // Designer card click
@@ -1331,19 +1571,6 @@
                 }, 300);
             });
         }
-
-        // Add some interactive effects
-        document.addEventListener('mousemove', function(e) {
-            const cards = document.querySelectorAll('.letter-btn, .download-btn, button');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
     </script>
 </body>
 </html>
