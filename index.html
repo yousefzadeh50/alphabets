@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Handwriting Practice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6a11cb;
@@ -31,7 +32,8 @@
             min-height: 100vh;
             padding: 20px;
             position: relative;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Comic Neue', cursive;
+            overflow-x: hidden;
         }
         
         .container {
@@ -162,14 +164,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: none;
-            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
         }
         
         .subtitle {
             font-size: 1.3rem;
             opacity: 0.9;
             margin-bottom: 15px;
-            font-family: 'Comic Sans MS', cursive;
         }
         
         .download-section {
@@ -191,7 +192,6 @@
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: 2px solid rgba(255,255,255,0.5);
-            font-family: 'Comic Sans MS', cursive;
         }
         
         .download-btn:hover {
@@ -199,127 +199,148 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         
-        .main-content {
+        .alphabet-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
-        }
-        
-        .sidebar {
+            padding: 20px;
             background: linear-gradient(135deg, #ffecd2, #fcb69f);
             border-radius: 20px;
-            padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
             border: 3px solid rgba(255,255,255,0.6);
-            display: flex;
-            flex-direction: column;
         }
         
-        .alphabet-section {
-            margin-bottom: 20px;
-        }
-        
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-            text-align: center;
-            font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
-            font-family: 'Comic Sans MS', cursive;
-        }
-        
-        .alphabet-list {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            padding: 10px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 12px;
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
-        }
-        
-        .letter-btn {
+        .letter-card {
             background: linear-gradient(145deg, #ffffff, #e6e6e6);
             border: none;
-            border-radius: 10px;
-            padding: 12px 5px;
+            border-radius: 15px;
+            padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.4rem;
+            transition: all 0.4s ease;
             font-weight: bold;
             color: var(--primary);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            min-height: 50px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            min-height: 100px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-family: 'Comic Sans MS', cursive;
+            gap: 8px;
             position: relative;
             overflow: hidden;
         }
         
-        .letter-btn::before {
+        .letter-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transition: left 0.6s;
         }
         
-        .letter-btn:hover::before {
+        .letter-card:hover::before {
             left: 100%;
         }
         
-        .letter-btn:hover {
+        .letter-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
             background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: white;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
         }
         
-        .letter-btn.active {
+        .letter-card.active {
             background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: white;
             transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
         
-        .practice-area {
+        .uppercase-letter {
+            font-size: 2.2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .lowercase-letter {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: inherit;
+            opacity: 0.9;
+            line-height: 1;
+        }
+        
+        .letter-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 95%;
+            max-width: 500px;
+            max-height: 90vh;
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
-            border: 3px solid rgba(255,255,255,0.6);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            overflow-y: auto;
+            border: 4px solid rgba(255,255,255,0.8);
         }
         
-        .letter-display {
-            text-align: center;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            border: 3px solid rgba(255,255,255,0.6);
-            position: relative;
+        .letter-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
         }
         
-        .letter-sound-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(145deg, var(--success), #10ac84);
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .popup-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+        
+        .close-popup {
+            background: linear-gradient(145deg, var(--accent), #ff5252);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -327,32 +348,26 @@
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: 3px solid white;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
         
-        .letter-sound-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        .close-popup:hover {
+            transform: rotate(90deg) scale(1.1);
         }
         
-        .letter-large {
-            font-size: 7rem;
-            font-weight: bold;
-            color: white;
-            margin: 20px 0;
-            font-family: 'Comic Sans MS', cursive;
-            text-shadow: 3px 3px 8px rgba(0,0,0,0.3);
-        }
-        
-        .animation-section {
-            display: flex;
-            justify-content: space-around;
-            margin: 30px 0;
+        .popup-content {
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 25px;
         }
         
+        .animation-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
         .animation-container {
-            flex: 1;
             text-align: center;
             background: linear-gradient(135deg, #d4fc79, #96e6a1);
             padding: 20px;
@@ -363,16 +378,15 @@
         
         .animation-title {
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--dark);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
-            font-family: 'Comic Sans MS', cursive;
         }
         
         .animation-box {
             width: 100%;
-            height: 280px;
+            height: 180px;
             background: white;
             border-radius: 15px;
             display: flex;
@@ -396,25 +410,25 @@
         .animation-controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 15px;
         }
         
         .animation-btn {
             background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 12px;
-            padding: 12px 20px;
+            border-radius: 10px;
+            padding: 10px 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             border: 2px solid white;
-            font-family: 'Comic Sans MS', cursive;
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            font-size: 0.9rem;
         }
         
         .animation-btn:hover {
@@ -429,66 +443,47 @@
         .examples-section {
             background: linear-gradient(135deg, #fad0c4, #ffd1ff);
             border-radius: 20px;
-            padding: 25px;
-            margin: 30px 0;
+            padding: 20px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             border: 3px solid rgba(255,255,255,0.6);
         }
         
         .examples-title {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--primary);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
-            font-family: 'Comic Sans MS', cursive;
         }
         
         .examples-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
         }
         
         .example-item {
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             transition: all 0.3s ease;
             border: 2px solid rgba(255,255,255,0.8);
-            position: relative;
         }
         
         .example-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
         
         .example-word {
             font-weight: bold;
-            font-size: 1.4rem;
-            margin-bottom: 8px;
+            font-size: 1.1rem;
             color: var(--primary);
-            font-family: 'Comic Sans MS', cursive;
-        }
-        
-        .example-pronunciation {
-            font-size: 1rem;
-            color: var(--dark);
-            margin-bottom: 8px;
-            font-family: 'Comic Sans MS', cursive;
-        }
-        
-        .example-meaning {
-            font-size: 1rem;
-            color: var(--secondary);
-            font-weight: bold;
-            font-family: 'Comic Sans MS', cursive;
         }
         
         .example-sound {
@@ -496,27 +491,26 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            margin: 10px auto 0;
+            margin: 5px auto 0;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
             border: 2px solid white;
+            font-size: 0.9rem;
         }
         
         .example-sound:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
         
         .practice-section {
-            margin-top: 30px;
             background: linear-gradient(135deg, #84fab0, #8fd3f4);
-            padding: 25px;
+            padding: 20px;
             border-radius: 20px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             border: 3px solid rgba(255,255,255,0.6);
@@ -524,22 +518,21 @@
         
         .practice-title {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--primary);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
-            font-family: 'Comic Sans MS', cursive;
         }
         
         .practice-canvas-container {
             position: relative;
-            margin: 20px 0;
+            margin: 15px 0;
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             border: 3px solid rgba(255,255,255,0.8);
-            height: 250px;
+            height: 200px;
         }
         
         .practice-canvas {
@@ -554,18 +547,18 @@
         .pen-controls {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            margin: 20px 0;
+            gap: 15px;
+            margin: 15px 0;
             flex-wrap: wrap;
         }
         
         .pen-control {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.9);
-            padding: 15px 20px;
-            border-radius: 12px;
+            padding: 12px 15px;
+            border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             border: 2px solid rgba(255,255,255,0.8);
         }
@@ -573,37 +566,35 @@
         .pen-control label {
             font-weight: bold;
             color: var(--dark);
-            font-size: 1.1rem;
-            font-family: 'Comic Sans MS', cursive;
+            font-size: 1rem;
         }
         
         .pen-control input {
             border: 2px solid var(--primary);
-            border-radius: 8px;
-            padding: 8px;
+            border-radius: 6px;
+            padding: 6px;
             background: white;
         }
         
         .canvas-controls {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 15px;
         }
         
         button {
-            padding: 15px 30px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: 2px solid rgba(255,255,255,0.5);
-            font-family: 'Comic Sans MS', cursive;
         }
         
         button:hover {
@@ -613,96 +604,6 @@
         
         .check-btn {
             background: linear-gradient(145deg, var(--accent), #ff5252);
-        }
-        
-        .result {
-            text-align: center;
-            margin-top: 20px;
-            font-weight: bold;
-            min-height: 40px;
-            padding: 15px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            font-size: 1.2rem;
-            border: 2px solid rgba(255,255,255,0.8);
-            font-family: 'Comic Sans MS', cursive;
-        }
-        
-        @media (max-width: 1200px) {
-            .alphabet-list {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .alphabet-list {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .examples-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .alphabet-list {
-                grid-template-columns: repeat(6, 1fr);
-            }
-            
-            .letter-large {
-                font-size: 5rem;
-            }
-            
-            .animation-section {
-                flex-direction: column;
-                gap: 25px;
-            }
-            
-            .examples-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .designer-card {
-                position: relative;
-                top: auto;
-                left: auto;
-                max-width: 100%;
-                margin-bottom: 20px;
-            }
-            
-            .download-btn {
-                display: block;
-                margin: 15px auto;
-                width: 80%;
-                text-align: center;
-                justify-content: center;
-            }
-            
-            .letter-sound-btn {
-                position: relative;
-                top: auto;
-                right: auto;
-                margin: 10px auto;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .alphabet-list {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .letter-large {
-                font-size: 4rem;
-            }
         }
         
         .play-overlay {
@@ -716,7 +617,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 3rem;
+            font-size: 2rem;
             border-radius: 15px;
             z-index: 3;
             opacity: 1;
@@ -736,6 +637,125 @@
         .animation-playing .play-overlay {
             opacity: 0;
             pointer-events: none;
+        }
+        
+        .sound-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(145deg, var(--success), #10ac84);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 3px solid white;
+            font-size: 1.2rem;
+            z-index: 10;
+        }
+        
+        .sound-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        
+        @keyframes pulse {
+            0% {transform: scale(1);}
+            50% {transform: scale(1.05);}
+            100% {transform: scale(1);}
+        }
+        
+        @keyframes glow {
+            0% {box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);}
+            50% {box-shadow: 0 0 20px rgba(106, 17, 203, 0.8);}
+            100% {box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);}
+        }
+        
+        .bounce {
+            animation: bounce 1s;
+        }
+        
+        .pulse {
+            animation: pulse 0.5s;
+        }
+        
+        .glow {
+            animation: glow 1.5s infinite;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .download-btn {
+                display: block;
+                margin: 10px auto;
+                width: 90%;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .designer-card {
+                position: relative;
+                top: auto;
+                left: auto;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .animation-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .letter-popup {
+                width: 98%;
+                padding: 20px;
+            }
+            
+            .popup-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .alphabet-grid {
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+                gap: 10px;
+                padding: 15px;
+            }
+            
+            .letter-card {
+                min-height: 80px;
+                padding: 15px 8px;
+            }
+            
+            .uppercase-letter {
+                font-size: 1.8rem;
+            }
+            
+            .lowercase-letter {
+                font-size: 1.5rem;
+            }
+            
+            .animation-box {
+                height: 150px;
+            }
         }
     </style>
 </head>
@@ -781,107 +801,98 @@
             </div>
         </header>
         
-        <div class="main-content">
-            <div class="sidebar">
-                <div class="alphabet-section">
-                    <h3 class="section-title">Uppercase Letters</h3>
-                    <div class="alphabet-list" id="uppercaseList">
-                        <!-- Uppercase letters will be added by JavaScript -->
+        <div class="alphabet-grid" id="alphabetGrid">
+            <!-- Alphabet cards will be added by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Letter Popup -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="letter-popup" id="letterPopup">
+        <div class="popup-header">
+            <h2 class="popup-title" id="popupTitle">Letter A</h2>
+            <button class="close-popup" id="closePopup">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <button class="sound-btn" id="letterSoundBtn">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        
+        <div class="popup-content">
+            <div class="animation-section">
+                <div class="animation-container">
+                    <div class="animation-title">Uppercase (Capital)</div>
+                    <div class="animation-box" id="uppercaseBox">
+                        <div class="play-overlay" id="uppercaseOverlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <img id="uppercaseAnimation" class="animation-image" src="" alt="Uppercase animation">
+                    </div>
+                    <div class="animation-controls">
+                        <button class="animation-btn" id="playUppercase">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                        <button class="animation-btn pause" id="pauseUppercase" style="display: none;">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button class="animation-btn" id="replayUppercase">
+                            <i class="fas fa-redo"></i> Replay
+                        </button>
                     </div>
                 </div>
                 
-                <div class="alphabet-section">
-                    <h3 class="section-title">Lowercase Letters</h3>
-                    <div class="alphabet-list" id="lowercaseList">
-                        <!-- Lowercase letters will be added by JavaScript -->
+                <div class="animation-container">
+                    <div class="animation-title">Lowercase</div>
+                    <div class="animation-box" id="lowercaseBox">
+                        <div class="play-overlay" id="lowercaseOverlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <img id="lowercaseAnimation" class="animation-image" src="" alt="Lowercase animation">
+                    </div>
+                    <div class="animation-controls">
+                        <button class="animation-btn" id="playLowercase">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                        <button class="animation-btn pause" id="pauseLowercase" style="display: none;">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button class="animation-btn" id="replayLowercase">
+                            <i class="fas fa-redo"></i> Replay
+                        </button>
                     </div>
                 </div>
             </div>
             
-            <div class="practice-area">
-                <div class="letter-display">
-                    <button class="letter-sound-btn" id="letterSoundBtn">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                    <h2 id="currentLetterTitle">Letter A</h2>
-                    <div class="letter-large" id="currentLetter">A</div>
+            <div class="examples-section">
+                <h3 class="examples-title">Example Words</h3>
+                <div class="examples-grid" id="examplesGrid">
+                    <!-- Example words will be added by JavaScript -->
                 </div>
+            </div>
+            
+            <div class="practice-section">
+                <h3 class="practice-title">Now it's your turn! Practice writing below:</h3>
                 
-                <div class="animation-section">
-                    <div class="animation-container">
-                        <div class="animation-title">Uppercase (Capital)</div>
-                        <div class="animation-box" id="uppercaseBox">
-                            <div class="play-overlay" id="uppercaseOverlay">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <img id="uppercaseAnimation" class="animation-image" src="https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_a.gif" alt="Uppercase A animation">
-                        </div>
-                        <div class="animation-controls">
-                            <button class="animation-btn" id="playUppercase">
-                                <i class="fas fa-play"></i> Play
-                            </button>
-                            <button class="animation-btn pause" id="pauseUppercase" style="display: none;">
-                                <i class="fas fa-pause"></i> Pause
-                            </button>
-                            <button class="animation-btn" id="replayUppercase">
-                                <i class="fas fa-redo"></i> Replay
-                            </button>
-                        </div>
+                <div class="pen-controls">
+                    <div class="pen-control">
+                        <label for="penColor">Pen Color:</label>
+                        <input type="color" id="penColor" value="#6a11cb">
                     </div>
-                    
-                    <div class="animation-container">
-                        <div class="animation-title">Lowercase</div>
-                        <div class="animation-box" id="lowercaseBox">
-                            <div class="play-overlay" id="lowercaseOverlay">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <img id="lowercaseAnimation" class="animation-image" src="https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_a.gif" alt="Lowercase a animation">
-                        </div>
-                        <div class="animation-controls">
-                            <button class="animation-btn" id="playLowercase">
-                                <i class="fas fa-play"></i> Play
-                            </button>
-                            <button class="animation-btn pause" id="pauseLowercase" style="display: none;">
-                                <i class="fas fa-pause"></i> Pause
-                            </button>
-                            <button class="animation-btn" id="replayLowercase">
-                                <i class="fas fa-redo"></i> Replay
-                            </button>
-                        </div>
+                    <div class="pen-control">
+                        <label for="penWidth">Pen Width:</label>
+                        <input type="range" id="penWidth" min="1" max="10" value="4">
                     </div>
                 </div>
                 
-                <div class="examples-section">
-                    <h3 class="examples-title">Example Words</h3>
-                    <div class="examples-grid" id="examplesGrid">
-                        <!-- Example words will be added by JavaScript -->
-                    </div>
+                <div class="practice-canvas-container">
+                    <canvas id="writingCanvas" width="400" height="200" class="practice-canvas"></canvas>
                 </div>
                 
-                <div class="practice-section">
-                    <h3 class="practice-title">Now it's your turn! Practice writing below:</h3>
-                    
-                    <div class="pen-controls">
-                        <div class="pen-control">
-                            <label for="penColor">Pen Color:</label>
-                            <input type="color" id="penColor" value="#6a11cb">
-                        </div>
-                        <div class="pen-control">
-                            <label for="penWidth">Pen Width:</label>
-                            <input type="range" id="penWidth" min="1" max="10" value="4">
-                        </div>
-                    </div>
-                    
-                    <div class="practice-canvas-container">
-                        <canvas id="writingCanvas" width="800" height="250" class="practice-canvas"></canvas>
-                    </div>
-                    
-                    <div class="canvas-controls">
-                        <button id="clearBtn">Clear</button>
-                        <button id="checkBtn" class="check-btn">Check Writing</button>
-                    </div>
-                    
-                    <div class="result" id="result"></div>
+                <div class="canvas-controls">
+                    <button id="clearBtn">Clear</button>
+                    <button id="checkBtn" class="check-btn">Check Writing</button>
                 </div>
             </div>
         </div>
@@ -1078,56 +1089,21 @@
             'Z': ['Zebra', 'Zoo', 'Zipper']
         };
 
-        // Pronunciation guide
-        const pronunciation = {
-            'A': '/eɪ/',
-            'B': '/biː/',
-            'C': '/siː/',
-            'D': '/diː/',
-            'E': '/iː/',
-            'F': '/ɛf/',
-            'G': '/dʒiː/',
-            'H': '/eɪtʃ/',
-            'I': '/aɪ/',
-            'J': '/dʒeɪ/',
-            'K': '/keɪ/',
-            'L': '/ɛl/',
-            'M': '/ɛm/',
-            'N': '/ɛn/',
-            'O': '/oʊ/',
-            'P': '/piː/',
-            'Q': '/kjuː/',
-            'R': '/ɑːr/',
-            'S': '/ɛs/',
-            'T': '/tiː/',
-            'U': '/juː/',
-            'V': '/viː/',
-            'W': '/ˈdʌbəl.juː/',
-            'X': '/ɛks/',
-            'Y': '/waɪ/',
-            'Z': '/zɛd/ or /ziː/'
-        };
-
         // Animation state management
         const animationState = {
-            uppercase: {
-                playing: false,
-                currentSrc: ''
-            },
-            lowercase: {
-                playing: false,
-                currentSrc: ''
-            }
+            uppercase: { playing: false },
+            lowercase: { playing: false }
         };
+
+        let currentLetter = 'A';
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             initializeAlphabet();
             initializeCanvas();
             setupEventListeners();
-            setActiveLetter('A');
             
-            // Play background music
+            // Initialize background music
             const backgroundMusic = document.getElementById('backgroundMusic');
             backgroundMusic.volume = 0.3;
             
@@ -1139,67 +1115,63 @@
                 if (isPlaying) {
                     backgroundMusic.pause();
                     musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    musicControl.style.background = 'linear-gradient(135deg, #ff6b6b, #ff5252)';
                 } else {
-                    backgroundMusic.play();
+                    backgroundMusic.play().catch(e => {
+                        console.log('Audio play failed:', e);
+                        // Fallback: show alert for user interaction
+                        alert('Please click anywhere on the page first to enable audio, then click the music button again.');
+                    });
                     musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    musicControl.style.background = 'linear-gradient(135deg, #a1c4fd, #c2e9fb)';
                 }
                 isPlaying = !isPlaying;
             });
+
+            // Force user interaction for audio
+            document.body.addEventListener('click', function() {
+                // This will enable audio on first user interaction
+                backgroundMusic.play().then(() => {
+                    backgroundMusic.pause();
+                }).catch(e => console.log('Audio initialization:', e));
+            }, { once: true });
         });
 
-        // Initialize alphabet buttons
+        // Initialize alphabet cards
         function initializeAlphabet() {
-            const uppercaseList = document.getElementById('uppercaseList');
-            const lowercaseList = document.getElementById('lowercaseList');
+            const alphabetGrid = document.getElementById('alphabetGrid');
             
-            // Create uppercase letters A-Z
+            // Create cards for A-Z
             for (let i = 65; i <= 90; i++) {
                 const letter = String.fromCharCode(i);
-                const button = document.createElement('button');
-                button.className = 'letter-btn';
-                button.textContent = letter;
-                button.addEventListener('click', () => {
+                const lowercase = letter.toLowerCase();
+                
+                const card = document.createElement('button');
+                card.className = 'letter-card';
+                card.innerHTML = `
+                    <div class="uppercase-letter">${letter}</div>
+                    <div class="lowercase-letter">${lowercase}</div>
+                `;
+                
+                card.addEventListener('click', () => {
                     playLetterClickSound();
-                    setActiveLetter(letter);
+                    card.classList.add('bounce');
+                    setTimeout(() => card.classList.remove('bounce'), 1000);
+                    openLetterPopup(letter);
                 });
-                uppercaseList.appendChild(button);
-            }
-            
-            // Create lowercase letters a-z
-            for (let i = 97; i <= 122; i++) {
-                const letter = String.fromCharCode(i);
-                const button = document.createElement('button');
-                button.className = 'letter-btn';
-                button.textContent = letter;
-                button.addEventListener('click', () => {
-                    playLetterClickSound();
-                    setActiveLetter(letter.toUpperCase());
-                });
-                lowercaseList.appendChild(button);
+                
+                alphabetGrid.appendChild(card);
             }
         }
 
-        // Play letter click sound
-        function playLetterClickSound() {
-            const clickSound = document.getElementById('letterClickSound');
-            clickSound.volume = 0.5;
-            clickSound.currentTime = 0;
-            clickSound.play().catch(e => console.log('Audio play failed:', e));
-        }
-
-        // Set active letter and update display
-        function setActiveLetter(letter) {
-            // Update active button state
-            document.querySelectorAll('.letter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent === letter || btn.textContent === letter.toLowerCase()) {
-                    btn.classList.add('active');
-                }
-            });
+        // Open letter popup
+        function openLetterPopup(letter) {
+            currentLetter = letter;
+            const popup = document.getElementById('letterPopup');
+            const overlay = document.getElementById('popupOverlay');
             
-            // Update letter display
-            document.getElementById('currentLetterTitle').textContent = `Letter ${letter}`;
-            document.getElementById('currentLetter').textContent = letter;
+            // Update popup title
+            document.getElementById('popupTitle').textContent = `Letter ${letter}`;
             
             // Update animations
             const data = letterData[letter];
@@ -1210,7 +1182,7 @@
                 // Reset animation states
                 resetAnimations();
                 
-                // Play letter sound automatically
+                // Play letter sound
                 playLetterSound(letter);
             }
             
@@ -1219,6 +1191,38 @@
             
             // Clear canvas
             clearCanvas();
+            
+            // Show popup
+            popup.classList.add('active');
+            overlay.classList.add('active');
+            
+            // Add glow effect to active letter
+            document.querySelectorAll('.letter-card').forEach(card => {
+                card.classList.remove('active', 'glow');
+                if (card.querySelector('.uppercase-letter').textContent === letter) {
+                    card.classList.add('active', 'glow');
+                }
+            });
+        }
+
+        // Close letter popup
+        function closeLetterPopup() {
+            const popup = document.getElementById('letterPopup');
+            const overlay = document.getElementById('popupOverlay');
+            
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+            
+            // Reset all animations
+            resetAnimations();
+        }
+
+        // Play letter click sound
+        function playLetterClickSound() {
+            const clickSound = document.getElementById('letterClickSound');
+            clickSound.volume = 0.6;
+            clickSound.currentTime = 0;
+            clickSound.play().catch(e => console.log('Audio play failed:', e));
         }
 
         // Reset animations to initial state
@@ -1252,7 +1256,6 @@
             examplesGrid.innerHTML = '';
             
             const words = exampleWords[letter] || [];
-            const pron = pronunciation[letter] || '';
             
             words.forEach(word => {
                 const exampleItem = document.createElement('div');
@@ -1260,8 +1263,6 @@
                 
                 exampleItem.innerHTML = `
                     <div class="example-word">${word}</div>
-                    <div class="example-pronunciation">${pron}</div>
-                    <div class="example-meaning">Starts with ${letter}</div>
                     <button class="example-sound" onclick="playWordSound('${word}')">
                         <i class="fas fa-volume-up"></i>
                     </button>
@@ -1291,7 +1292,8 @@
                 voice.name.includes('Female') || 
                 voice.name.includes('woman') ||
                 voice.name.includes('Samantha') ||
-                voice.name.includes('Karen')
+                voice.name.includes('Karen') ||
+                voice.name.includes('Victoria')
             );
             
             if (femaleVoice) {
@@ -1321,7 +1323,8 @@
                 voice.name.includes('Female') || 
                 voice.name.includes('woman') ||
                 voice.name.includes('Samantha') ||
-                voice.name.includes('Karen')
+                voice.name.includes('Karen') ||
+                voice.name.includes('Victoria')
             );
             
             if (femaleVoice) {
@@ -1329,22 +1332,6 @@
             }
             
             synth.speak(utterance);
-            
-            // Visual feedback
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = `Playing: ${word}`;
-            resultDiv.style.color = 'var(--success)';
-            
-            setTimeout(() => {
-                resultDiv.textContent = '';
-            }, 2000);
-        }
-
-        // Play hover sound
-        function playHoverSound() {
-            const hoverSound = document.getElementById('hoverSound');
-            hoverSound.volume = 0.3;
-            hoverSound.play().catch(e => console.log('Audio play failed:', e));
         }
 
         // Initialize drawing canvas
@@ -1432,36 +1419,6 @@
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = 'Canvas cleared!';
-            resultDiv.style.color = 'var(--accent)';
-            
-            setTimeout(() => {
-                resultDiv.textContent = '';
-            }, 2000);
-        }
-
-        // Check writing (basic implementation)
-        function checkWriting() {
-            const canvas = document.getElementById('writingCanvas');
-            const currentLetter = document.getElementById('currentLetter').textContent;
-            
-            // This is a simplified check - in a real app you would use ML/AI
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = `Great practice! Keep working on letter ${currentLetter}.`;
-            resultDiv.style.color = 'var(--success)';
-            
-            // Add some random encouragement
-            const encouragements = [
-                "Well done!",
-                "Good effort!",
-                "Nice try!",
-                "You're improving!",
-                "Practice makes perfect!"
-            ];
-            const randomEncouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
-            resultDiv.textContent += ` ${randomEncouragement}`;
         }
 
         // Animation control functions
@@ -1521,22 +1478,43 @@
 
         // Setup event listeners
         function setupEventListeners() {
+            // Close popup
+            document.getElementById('closePopup').addEventListener('click', closeLetterPopup);
+            document.getElementById('popupOverlay').addEventListener('click', closeLetterPopup);
+            
+            // Letter sound button
+            document.getElementById('letterSoundBtn').addEventListener('click', function() {
+                playLetterSound(currentLetter);
+                this.classList.add('pulse');
+                setTimeout(() => this.classList.remove('pulse'), 500);
+            });
+            
             // Clear button
             document.getElementById('clearBtn').addEventListener('click', clearCanvas);
             
             // Check button
-            document.getElementById('checkBtn').addEventListener('click', checkWriting);
-            
-            // Letter sound button
-            document.getElementById('letterSoundBtn').addEventListener('click', function() {
-                const currentLetter = document.getElementById('currentLetter').textContent;
-                playLetterSound(currentLetter);
+            document.getElementById('checkBtn').addEventListener('click', function() {
+                this.classList.add('pulse');
+                setTimeout(() => this.classList.remove('pulse'), 500);
+                
+                // Simple encouragement message
+                const encouragements = [
+                    "Great job! 🎉",
+                    "Well done! ✨",
+                    "Excellent work! 🌟",
+                    "You're amazing! 💫",
+                    "Keep practicing! 📚"
+                ];
+                const randomEncouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
+                alert(randomEncouragement);
             });
             
             // Uppercase animation controls
             document.getElementById('playUppercase').addEventListener('click', playUppercaseAnimation);
             document.getElementById('pauseUppercase').addEventListener('click', pauseUppercaseAnimation);
             document.getElementById('replayUppercase').addEventListener('click', function() {
+                this.classList.add('pulse');
+                setTimeout(() => this.classList.remove('pulse'), 300);
                 pauseUppercaseAnimation();
                 setTimeout(playUppercaseAnimation, 100);
             });
@@ -1545,6 +1523,8 @@
             document.getElementById('playLowercase').addEventListener('click', playLowercaseAnimation);
             document.getElementById('pauseLowercase').addEventListener('click', pauseLowercaseAnimation);
             document.getElementById('replayLowercase').addEventListener('click', function() {
+                this.classList.add('pulse');
+                setTimeout(() => this.classList.remove('pulse'), 300);
                 pauseLowercaseAnimation();
                 setTimeout(playLowercaseAnimation, 100);
             });
@@ -1564,11 +1544,15 @@
             
             // Designer card click
             document.getElementById('designerCard').addEventListener('click', function() {
-                playHoverSound();
-                this.style.transform = this.style.transform === 'scale(0.95)' ? 'scale(1)' : 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 300);
+                this.classList.add('pulse');
+                setTimeout(() => this.classList.remove('pulse'), 500);
+            });
+            
+            // Close popup with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeLetterPopup();
+                }
             });
         }
     </script>
