@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آموزش دستخط انگلیسی - محیط تعاملی</title>
+    <title>English Handwriting Practice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -14,17 +14,15 @@
             --warning: #feca57;
             --light: #f8f9fa;
             --dark: #2d3436;
-            --animation: #ffd166;
-            --notebook-bg: #fff9f0;
-            --notebook-line: #b2bec3;
-            --notebook-midline: #ff7675;
+            --paper: #fff9e6;
+            --line: #d4af37;
+            --sky-blue: #87CEEB;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
@@ -33,6 +31,7 @@
             min-height: 100vh;
             padding: 20px;
             position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         .container {
@@ -42,40 +41,56 @@
         
         .designer-card {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, var(--sky-blue), #a1c4fd);
+            border-radius: 15px;
+            padding: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            max-width: 350px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.7);
+            max-width: 250px;
             transition: all 0.5s ease;
+            overflow: hidden;
+            cursor: pointer;
         }
         
-        .designer-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        .designer-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
         .designer-avatar {
-            width: 80px;
-            height: 80px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 1.4rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             overflow: hidden;
-            border: 3px solid white;
+            border: 2px solid white;
+            position: relative;
+            z-index: 2;
         }
         
         .designer-avatar img {
@@ -86,45 +101,49 @@
         
         .designer-info {
             flex: 1;
+            position: relative;
+            z-index: 2;
         }
         
         .designer-name {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 3px;
+            color: white;
             font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
         
         .designer-title {
-            color: var(--accent);
-            font-size: 0.9rem;
-            font-weight: 600;
+            color: white;
+            font-size: 0.75rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         
         .music-control {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
+            border: 3px solid white;
         }
         
         .music-control:hover {
             transform: scale(1.1);
-            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         
         .music-control i {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--primary);
         }
         
@@ -132,22 +151,52 @@
             text-align: center;
             margin-bottom: 30px;
             color: white;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            margin-top: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            padding-top: 10px;
         }
         
         h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: none;
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .subtitle {
             font-size: 1.3rem;
             opacity: 0.9;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .download-section {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--success), #10ac84);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         
         .main-content {
@@ -158,12 +207,14 @@
         }
         
         .sidebar {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
             border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(255,255,255,0.6);
+            display: flex;
+            flex-direction: column;
         }
         
         .alphabet-section {
@@ -171,26 +222,29 @@
         }
         
         .section-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
             color: var(--primary);
             text-align: center;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .alphabet-list {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-            max-height: 300px;
-            overflow-y: auto;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
             padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
         }
         
         .letter-btn {
             background: linear-gradient(145deg, #ffffff, #e6e6e6);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 12px 5px;
             text-align: center;
             cursor: pointer;
@@ -198,14 +252,19 @@
             font-size: 1.4rem;
             font-weight: bold;
             color: var(--primary);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .letter-btn:hover {
             background: linear-gradient(145deg, var(--primary), var(--secondary));
             color: white;
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
         }
         
         .letter-btn.active {
@@ -215,83 +274,86 @@
         }
         
         .practice-area {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            display: flex;
-            flex-direction: column;
+            border: 3px solid rgba(255,255,255,0.6);
         }
         
         .letter-display {
             text-align: center;
-            margin-bottom: 25px;
-            background: linear-gradient(135deg, #ffecd2, #fcb69f);
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.6);
         }
         
         .letter-large {
-            font-size: 6rem;
+            font-size: 7rem;
             font-weight: bold;
-            color: var(--primary);
-            margin: 10px 0;
-            font-family: 'Segoe Script', 'Bradley Hand', cursive;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            color: white;
+            margin: 20px 0;
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.3);
         }
         
         .animation-section {
             display: flex;
             justify-content: space-around;
-            margin: 25px 0;
+            margin: 30px 0;
             gap: 25px;
         }
         
         .animation-container {
             flex: 1;
             text-align: center;
-            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.6);
         }
         
         .animation-title {
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--dark);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .animation-box {
             width: 100%;
-            height: 300px;
-            background: var(--notebook-bg);
-            border-radius: 12px;
+            height: 280px;
+            background: white;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-            border: 2px solid #dfe6e9;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+            border: 3px solid rgba(255,255,255,0.8);
+            cursor: pointer;
         }
         
-        .animation-canvas {
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            position: relative;
+        .animation-image {
+            width: 95%;
+            height: 95%;
+            object-fit: contain;
+            border-radius: 10px;
         }
         
         .animation-controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
+            gap: 20px;
+            margin-top: 20px;
         }
         
         .sound-btn {
@@ -306,69 +368,77 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid white;
         }
         
         .sound-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
         
         .examples-section {
-            background: linear-gradient(135deg, #d4fc79, #96e6a1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 25px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #fad0c4, #ffd1ff);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.6);
         }
         
         .examples-title {
             text-align: center;
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 1.4rem;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .examples-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 20px;
         }
         
         .example-item {
             text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 12px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.8);
         }
         
         .example-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
         
         .example-word {
             font-weight: bold;
-            font-size: 1.3rem;
-            margin-bottom: 5px;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
             color: var(--primary);
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .example-pronunciation {
             font-size: 1rem;
             color: var(--dark);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .example-meaning {
             font-size: 1rem;
             color: var(--secondary);
             font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .example-sound {
@@ -382,40 +452,44 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            margin: 5px auto 0;
+            margin: 10px auto 0;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 2px solid white;
         }
         
         .example-sound:hover {
             transform: scale(1.1);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
         
         .practice-section {
-            margin-top: 25px;
-            background: linear-gradient(135deg, #fad0c4, #ffd1ff);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.6);
         }
         
         .practice-title {
             text-align: center;
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 1.4rem;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .practice-canvas-container {
             position: relative;
             margin: 20px 0;
-            background: var(--notebook-bg);
-            border-radius: 12px;
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border: 2px solid #dfe6e9;
-            height: 200px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.8);
+            height: 250px;
         }
         
         .practice-canvas {
@@ -424,46 +498,51 @@
             height: 100%;
             cursor: crosshair;
             touch-action: none;
+            background: white;
         }
         
         .pen-controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 15px 0;
+            gap: 25px;
+            margin: 20px 0;
             flex-wrap: wrap;
         }
         
         .pen-control {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px 15px;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 2px solid rgba(255,255,255,0.8);
         }
         
         .pen-control label {
             font-weight: bold;
             color: var(--dark);
+            font-size: 1.1rem;
+            font-family: 'Comic Sans MS', cursive;
         }
         
         .pen-control input {
             border: 2px solid var(--primary);
-            border-radius: 5px;
-            padding: 5px;
+            border-radius: 8px;
+            padding: 8px;
+            background: white;
         }
         
         .canvas-controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
+            gap: 25px;
+            margin-top: 20px;
         }
         
         button {
-            padding: 12px 25px;
+            padding: 15px 30px;
             border: none;
             border-radius: 12px;
             background: linear-gradient(145deg, var(--primary), var(--secondary));
@@ -471,13 +550,15 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
-            font-size: 1rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
+            font-family: 'Comic Sans MS', cursive;
         }
         
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
         
         .check-btn {
@@ -486,13 +567,32 @@
         
         .result {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 20px;
             font-weight: bold;
-            min-height: 30px;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            min-height: 40px;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 1.2rem;
+            border: 2px solid rgba(255,255,255,0.8);
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        @media (max-width: 1200px) {
+            .alphabet-list {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .alphabet-list {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .examples-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 768px) {
@@ -510,7 +610,7 @@
             
             .animation-section {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
             }
             
             .examples-grid {
@@ -524,33 +624,70 @@
                 max-width: 100%;
                 margin-bottom: 20px;
             }
+            
+            .download-btn {
+                display: block;
+                margin: 15px auto;
+                width: 80%;
+                text-align: center;
+                justify-content: center;
+            }
         }
         
-        /* خطوط دفتر مشق */
-        .single-line-paper {
+        @media (max-width: 576px) {
+            .alphabet-list {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .letter-large {
+                font-size: 4rem;
+            }
+        }
+        
+        .play-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(to bottom, transparent 49%, var(--notebook-midline) 49%, var(--notebook-midline) 51%, transparent 51%);
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            border-radius: 15px;
+            z-index: 3;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .play-overlay.hidden {
+            opacity: 0;
             pointer-events: none;
-            z-index: 1;
         }
     </style>
 </head>
 <body>
     <audio id="backgroundMusic" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-kids-laughing-583.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-gently-snowfall-560.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="hoverSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="designer-card">
+    <div class="designer-card" id="designerCard">
         <div class="designer-avatar">
-            <img src="https://s34.picofile.com/file/8488183492/2.png" alt="طراح برنامه" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-user\"></i>';">
+            <img src="https://s34.picofile.com/file/8488183492/2.png" alt="Designer" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-user\"></i>';">
         </div>
         <div class="designer-info">
             <h3 class="designer-name">A.R. Yousefzadeh</h3>
-            <p class="designer-title">طراح و توسعه‌دهنده</p>
+            <p class="designer-title">Educational Software Designer</p>
         </div>
     </div>
 
@@ -560,39 +697,50 @@
 
     <div class="container">
         <header>
-            <h1>آموزش دستخط انگلیسی</h1>
-            <p class="subtitle">یادگیری نوشتن صحیح حروف انگلیسی با انیمیشن و محیط تعاملی</p>
+            <h1>English Handwriting Practice</h1>
+            <p class="subtitle">Learn to write English letters with interactive animations</p>
+            
+            <div class="download-section">
+                <a href="https://www.handwritingforkids.com/handwrite/manuscript/alphabets/images/tguideu.gif" class="download-btn" target="_blank">
+                    <i class="fas fa-download"></i> Uppercase Tracing Guide
+                </a>
+                <a href="https://www.handwritingforkids.com/handwrite/manuscript/alphabets/images/tguidel.gif" class="download-btn" target="_blank">
+                    <i class="fas fa-download"></i> Lowercase Tracing Guide
+                </a>
+            </div>
         </header>
         
         <div class="main-content">
             <div class="sidebar">
                 <div class="alphabet-section">
-                    <h3 class="section-title">حروف بزرگ</h3>
+                    <h3 class="section-title">Uppercase Letters</h3>
                     <div class="alphabet-list" id="uppercaseList">
-                        <!-- حروف بزرگ با JavaScript اضافه خواهند شد -->
+                        <!-- Uppercase letters will be added by JavaScript -->
                     </div>
                 </div>
                 
                 <div class="alphabet-section">
-                    <h3 class="section-title">حروف کوچک</h3>
+                    <h3 class="section-title">Lowercase Letters</h3>
                     <div class="alphabet-list" id="lowercaseList">
-                        <!-- حروف کوچک با JavaScript اضافه خواهند شد -->
+                        <!-- Lowercase letters will be added by JavaScript -->
                     </div>
                 </div>
             </div>
             
             <div class="practice-area">
                 <div class="letter-display">
-                    <h2 id="currentLetterTitle">حرف A</h2>
+                    <h2 id="currentLetterTitle">Letter A</h2>
                     <div class="letter-large" id="currentLetter">A</div>
                 </div>
                 
                 <div class="animation-section">
                     <div class="animation-container">
-                        <div class="animation-title">حرف بزرگ (Capital)</div>
-                        <div class="animation-box">
-                            <div class="single-line-paper"></div>
-                            <canvas id="uppercaseAnimation" class="animation-canvas" width="400" height="300"></canvas>
+                        <div class="animation-title">Uppercase (Capital)</div>
+                        <div class="animation-box" id="uppercaseBox">
+                            <div class="play-overlay" id="uppercaseOverlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <img id="uppercaseAnimation" class="animation-image" src="https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_a.gif" alt="Uppercase A animation">
                         </div>
                         <div class="animation-controls">
                             <button class="sound-btn" id="playUppercase">
@@ -605,10 +753,12 @@
                     </div>
                     
                     <div class="animation-container">
-                        <div class="animation-title">حرف کوچک (Lowercase)</div>
-                        <div class="animation-box">
-                            <div class="single-line-paper"></div>
-                            <canvas id="lowercaseAnimation" class="animation-canvas" width="400" height="300"></canvas>
+                        <div class="animation-title">Lowercase</div>
+                        <div class="animation-box" id="lowercaseBox">
+                            <div class="play-overlay" id="lowercaseOverlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <img id="lowercaseAnimation" class="animation-image" src="https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_a.gif" alt="Lowercase a animation">
                         </div>
                         <div class="animation-controls">
                             <button class="sound-btn" id="playLowercase">
@@ -622,34 +772,33 @@
                 </div>
                 
                 <div class="examples-section">
-                    <h3 class="examples-title">نمونه کلمات با این حرف</h3>
+                    <h3 class="examples-title">Example Words</h3>
                     <div class="examples-grid" id="examplesGrid">
-                        <!-- نمونه کلمات با JavaScript اضافه خواهند شد -->
+                        <!-- Example words will be added by JavaScript -->
                     </div>
                 </div>
                 
                 <div class="practice-section">
-                    <h3 class="practice-title">حالا نوبت شماست! حرف را در کادر زیر بنویسید:</h3>
+                    <h3 class="practice-title">Now it's your turn! Practice writing below:</h3>
                     
                     <div class="pen-controls">
                         <div class="pen-control">
-                            <label for="penColor">رنگ قلم:</label>
+                            <label for="penColor">Pen Color:</label>
                             <input type="color" id="penColor" value="#6a11cb">
                         </div>
                         <div class="pen-control">
-                            <label for="penWidth">ضخامت قلم:</label>
-                            <input type="range" id="penWidth" min="1" max="10" value="3">
+                            <label for="penWidth">Pen Width:</label>
+                            <input type="range" id="penWidth" min="1" max="10" value="4">
                         </div>
                     </div>
                     
                     <div class="practice-canvas-container">
-                        <div class="single-line-paper"></div>
-                        <canvas id="writingCanvas" width="800" height="200" class="practice-canvas"></canvas>
+                        <canvas id="writingCanvas" width="800" height="250" class="practice-canvas"></canvas>
                     </div>
                     
                     <div class="canvas-controls">
-                        <button id="clearBtn">پاک کردن</button>
-                        <button id="checkBtn" class="check-btn">بررسی دستخط</button>
+                        <button id="clearBtn">Clear</button>
+                        <button id="checkBtn" class="check-btn">Check Writing</button>
                     </div>
                     
                     <div class="result" id="result"></div>
@@ -659,439 +808,542 @@
     </div>
 
     <script>
-        // داده‌های آموزشی برای تمام حروف الفبا
+        // Complete alphabet data with real GIF animations
         const letterData = {
             'A': { 
-                uppercase: { points: [[30,80], [50,20], [70,80], [40,60], [60,60]], strokeOrder: [0,1,2,0,3,4] },
-                lowercase: { points: [[35,50], [50,20], [65,50], [50,50], [50,80]], strokeOrder: [0,1,2,3,4] },
-                sound: 'A' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_a.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_a.gif',
+                sound: 'A',
+                type: 'vowel'
             },
             'B': { 
-                uppercase: { points: [[25,20], [25,80], [55,80], [70,65], [70,50], [55,50], [25,50], [55,50], [70,35], [70,20], [55,20], [25,20]], strokeOrder: [0,1,2,3,4,5,1,6,7,8,9,10,11] },
-                lowercase: { points: [[30,20], [30,80], [50,80], [65,65], [65,50], [50,50], [30,50], [50,50], [65,35], [65,20], [50,20], [30,20]], strokeOrder: [0,1,2,3,4,5,1,6,7,8,9,10,11] },
-                sound: 'B' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_b.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_b.gif',
+                sound: 'B',
+                type: 'consonant'
             },
             'C': { 
-                uppercase: { points: [[70,50], [70,20], [50,20], [30,20], [30,50], [30,80], [50,80], [70,80], [70,50]], strokeOrder: [0,1,2,3,4,5,6,7,8] },
-                lowercase: { points: [[60,50], [60,30], [50,30], [40,30], [40,50], [40,70], [50,70], [60,70], [60,50]], strokeOrder: [0,1,2,3,4,5,6,7,8] },
-                sound: 'C' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_c.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_c.gif',
+                sound: 'C',
+                type: 'consonant'
             },
             'D': { 
-                uppercase: { points: [[25,20], [25,80], [50,80], [70,80], [70,50], [70,20], [50,20], [25,20]], strokeOrder: [0,1,2,3,4,5,6,7] },
-                lowercase: { points: [[30,20], [30,80], [45,80], [60,80], [60,50], [60,20], [45,20], [30,20]], strokeOrder: [0,1,2,3,4,5,6,7] },
-                sound: 'D' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_d.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_d.gif',
+                sound: 'D',
+                type: 'consonant'
             },
             'E': { 
-                uppercase: { points: [[25,20], [25,80], [70,80], [25,50], [55,50], [25,20], [70,20]], strokeOrder: [0,1,2,0,3,4,0,5,6] },
-                lowercase: { points: [[30,20], [30,80], [60,80], [30,50], [50,50], [30,20], [60,20]], strokeOrder: [0,1,2,0,3,4,0,5,6] },
-                sound: 'E' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_e.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_e.gif',
+                sound: 'E',
+                type: 'vowel'
             },
             'F': { 
-                uppercase: { points: [[25,20], [25,80], [25,20], [65,20], [25,50], [55,50]], strokeOrder: [0,1,0,2,3,0,4,5] },
-                lowercase: { points: [[35,20], [35,80], [35,20], [65,20], [35,50], [55,50]], strokeOrder: [0,1,0,2,3,0,4,5] },
-                sound: 'F' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_f.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_f.gif',
+                sound: 'F',
+                type: 'consonant'
             },
             'G': { 
-                uppercase: { points: [[70,50], [70,20], [50,20], [30,20], [30,50], [30,80], [50,80], [70,80], [70,50], [70,60], [60,60]], strokeOrder: [0,1,2,3,4,5,6,7,8,9,10] },
-                lowercase: { points: [[60,50], [60,30], [50,30], [40,30], [40,50], [40,70], [50,70], [60,70], [60,50], [60,55], [50,55]], strokeOrder: [0,1,2,3,4,5,6,7,8,9,10] },
-                sound: 'G' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_g.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_g.gif',
+                sound: 'G',
+                type: 'consonant'
             },
             'H': { 
-                uppercase: { points: [[25,20], [25,80], [70,20], [70,80], [25,50], [70,50]], strokeOrder: [0,1,2,3,0,4,5] },
-                lowercase: { points: [[30,20], [30,80], [60,20], [60,80], [30,50], [60,50]], strokeOrder: [0,1,2,3,0,4,5] },
-                sound: 'H' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_h.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_h.gif',
+                sound: 'H',
+                type: 'consonant'
             },
             'I': { 
-                uppercase: { points: [[47,20], [47,80], [30,20], [65,20], [30,80], [65,80]], strokeOrder: [0,1,2,3,4,5] },
-                lowercase: { points: [[45,20], [45,80]], strokeOrder: [0,1] },
-                sound: 'I' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_i.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_i.gif',
+                sound: 'I',
+                type: 'vowel'
             },
             'J': { 
-                uppercase: { points: [[60,20], [60,70], [60,80], [50,80], [40,80], [40,70]], strokeOrder: [0,1,2,3,4,5] },
-                lowercase: { points: [[50,20], [50,70], [50,75], [45,75], [40,75], [40,70]], strokeOrder: [0,1,2,3,4,5] },
-                sound: 'J' 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_j.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_j.gif',
+                sound: 'J',
+                type: 'consonant'
+            },
+            'K': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_k.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_k.gif',
+                sound: 'K',
+                type: 'consonant'
+            },
+            'L': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_l.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_l.gif',
+                sound: 'L',
+                type: 'consonant'
+            },
+            'M': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_m.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_m.gif',
+                sound: 'M',
+                type: 'consonant'
+            },
+            'N': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_n.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_n.gif',
+                sound: 'N',
+                type: 'consonant'
+            },
+            'O': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_o.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_o.gif',
+                sound: 'O',
+                type: 'vowel'
+            },
+            'P': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_p.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_p.gif',
+                sound: 'P',
+                type: 'consonant'
+            },
+            'Q': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_q.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_q.gif',
+                sound: 'Q',
+                type: 'consonant'
+            },
+            'R': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_r.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_r.gif',
+                sound: 'R',
+                type: 'consonant'
+            },
+            'S': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_s.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_s.gif',
+                sound: 'S',
+                type: 'consonant'
+            },
+            'T': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_t.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_t.gif',
+                sound: 'T',
+                type: 'consonant'
+            },
+            'U': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_u.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_u.gif',
+                sound: 'U',
+                type: 'vowel'
+            },
+            'V': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_v.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_v.gif',
+                sound: 'V',
+                type: 'consonant'
+            },
+            'W': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_w.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_w.gif',
+                sound: 'W',
+                type: 'consonant'
+            },
+            'X': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_x.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_x.gif',
+                sound: 'X',
+                type: 'consonant'
+            },
+            'Y': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_y.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_y.gif',
+                sound: 'Y',
+                type: 'consonant'
+            },
+            'Z': { 
+                uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_z.gif',
+                lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_z.gif',
+                sound: 'Z',
+                type: 'consonant'
             }
         };
 
-        // اضافه کردن مثال‌ها برای تمام حروف
-        Object.keys(letterData).forEach(letter => {
-            const examples = [
-                { word: getExampleWord(letter, 0), pronunciation: getPronunciation(letter, 0), meaning: getMeaning(letter, 0) },
-                { word: getExampleWord(letter, 1), pronunciation: getPronunciation(letter, 1), meaning: getMeaning(letter, 1) },
-                { word: getExampleWord(letter, 2), pronunciation: getPronunciation(letter, 2), meaning: getMeaning(letter, 2) }
-            ];
-            letterData[letter].examples = examples;
-        });
+        // Example words for each letter
+        const exampleWords = {
+            'A': ['Apple', 'Ant', 'Airplane'],
+            'B': ['Ball', 'Banana', 'Butterfly'],
+            'C': ['Cat', 'Car', 'Cake'],
+            'D': ['Dog', 'Duck', 'Dolphin'],
+            'E': ['Elephant', 'Egg', 'Eagle'],
+            'F': ['Fish', 'Flower', 'Frog'],
+            'G': ['Goat', 'Grapes', 'Giraffe'],
+            'H': ['House', 'Hat', 'Horse'],
+            'I': ['Ice Cream', 'Igloo', 'Island'],
+            'J': ['Jellyfish', 'Juice', 'Jacket'],
+            'K': ['Kite', 'Kangaroo', 'Key'],
+            'L': ['Lion', 'Lemon', 'Leaf'],
+            'M': ['Monkey', 'Moon', 'Milk'],
+            'N': ['Nest', 'Nose', 'Net'],
+            'O': ['Orange', 'Owl', 'Ocean'],
+            'P': ['Pencil', 'Pig', 'Pizza'],
+            'Q': ['Queen', 'Quilt', 'Quail'],
+            'R': ['Rabbit', 'Rainbow', 'Rose'],
+            'S': ['Sun', 'Star', 'Snake'],
+            'T': ['Tree', 'Tiger', 'Table'],
+            'U': ['Umbrella', 'Unicorn', 'Uniform'],
+            'V': ['Violin', 'Volcano', 'Vegetable'],
+            'W': ['Watermelon', 'Whale', 'Window'],
+            'X': ['Xylophone', 'X-ray', 'Fox'],
+            'Y': ['Yoyo', 'Yellow', 'Yacht'],
+            'Z': ['Zebra', 'Zoo', 'Zipper']
+        };
 
-        // تابع برای تولید کلمات مثال
-        function getExampleWord(letter, index) {
-            const words = {
-                'A': ['Apple', 'Ant', 'Animal'],
-                'B': ['Ball', 'Book', 'Bird'],
-                'C': ['Cat', 'Car', 'Circle'],
-                'D': ['Dog', 'Door', 'Dolphin'],
-                'E': ['Elephant', 'Egg', 'Eagle'],
-                'F': ['Fish', 'Flower', 'Fox'],
-                'G': ['Giraffe', 'Garden', 'Gift'],
-                'H': ['House', 'Hat', 'Horse'],
-                'I': ['Ice Cream', 'Island', 'Igloo'],
-                'J': ['Jellyfish', 'Jacket', 'Juice']
-            };
-            return words[letter][index];
-        }
+        // Pronunciation guide
+        const pronunciation = {
+            'A': '/eɪ/',
+            'B': '/biː/',
+            'C': '/siː/',
+            'D': '/diː/',
+            'E': '/iː/',
+            'F': '/ɛf/',
+            'G': '/dʒiː/',
+            'H': '/eɪtʃ/',
+            'I': '/aɪ/',
+            'J': '/dʒeɪ/',
+            'K': '/keɪ/',
+            'L': '/ɛl/',
+            'M': '/ɛm/',
+            'N': '/ɛn/',
+            'O': '/oʊ/',
+            'P': '/piː/',
+            'Q': '/kjuː/',
+            'R': '/ɑːr/',
+            'S': '/ɛs/',
+            'T': '/tiː/',
+            'U': '/juː/',
+            'V': '/viː/',
+            'W': '/ˈdʌbəl.juː/',
+            'X': '/ɛks/',
+            'Y': '/waɪ/',
+            'Z': '/zɛd/ or /ziː/'
+        };
 
-        // تابع برای تولید تلفظ
-        function getPronunciation(letter, index) {
-            const pronunciations = {
-                'A': ['/ˈæp.əl/', '/ænt/', '/ˈæn.ɪ.məl/'],
-                'B': ['/bɔːl/', '/bʊk/', '/bɜːrd/'],
-                'C': ['/kæt/', '/kɑːr/', '/ˈsɜːr.kəl/'],
-                'D': ['/dɒɡ/', '/dɔːr/', '/ˈdɒl.fɪn/'],
-                'E': ['/ˈel.ɪ.fənt/', '/eɡ/', '/ˈiː.ɡəl/'],
-                'F': ['/fɪʃ/', '/ˈflaʊ.ər/', '/fɒks/'],
-                'G': ['/dʒɪˈrɑːf/', '/ˈɡɑːr.dən/', '/ɡɪft/'],
-                'H': ['/haʊs/', '/hæt/', '/hɔːrs/'],
-                'I': ['/ˌaɪs ˈkriːm/', '/ˈaɪ.lənd/', '/ˈɪɡ.luː/'],
-                'J': ['/ˈdʒel.i.fɪʃ/', '/ˈdʒæk.ɪt/', '/dʒuːs/']
-            };
-            return pronunciations[letter][index];
-        }
-
-        // تابع برای تولید معنی
-        function getMeaning(letter, index) {
-            const meanings = {
-                'A': ['سیب', 'مورچه', 'حیوان'],
-                'B': ['توپ', 'کتاب', 'پرنده'],
-                'C': ['گربه', 'ماشین', 'دایره'],
-                'D': ['سگ', 'در', 'دلفین'],
-                'E': ['فیل', 'تخم مرغ', 'عقاب'],
-                'F': ['ماهی', 'گل', 'روباه'],
-                'G': ['زرافه', 'باغ', 'هدیه'],
-                'H': ['خانه', 'کلاه', 'اسب'],
-                'I': ['بستنی', 'جزیره', 'کلبه اسکیمو'],
-                'J': ['عروس دریایی', 'ژاکت', 'آبمیوه']
-            };
-            return meanings[letter][index];
-        }
-
-        // ایجاد دکمه‌های حروف بزرگ
-        const uppercaseList = document.getElementById('uppercaseList');
-        const lowercaseList = document.getElementById('lowercaseList');
-        const letters = Object.keys(letterData);
-        
-        letters.forEach(letter => {
-            // دکمه حرف بزرگ
-            const uppercaseBtn = document.createElement('div');
-            uppercaseBtn.className = 'letter-btn';
-            uppercaseBtn.textContent = letter;
-            uppercaseBtn.addEventListener('click', () => selectLetter(letter, 'uppercase'));
-            uppercaseList.appendChild(uppercaseBtn);
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAlphabet();
+            initializeCanvas();
+            setupEventListeners();
+            setActiveLetter('A');
             
-            // دکمه حرف کوچک
-            const lowercaseBtn = document.createElement('div');
-            lowercaseBtn.className = 'letter-btn';
-            lowercaseBtn.textContent = letter.toLowerCase();
-            lowercaseBtn.addEventListener('click', () => selectLetter(letter, 'lowercase'));
-            lowercaseList.appendChild(lowercaseBtn);
-        });
-
-        // انتخاب حرف
-        function selectLetter(letter, type) {
-            // به‌روزرسانی نمایش حرف فعلی
-            const displayLetter = type === 'uppercase' ? letter : letter.toLowerCase();
-            document.getElementById('currentLetterTitle').textContent = `حرف ${displayLetter}`;
-            document.getElementById('currentLetter').textContent = displayLetter;
+            // Play background music
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            backgroundMusic.volume = 0.3;
             
-            // به‌روزرسانی انیمیشن‌ها
-            updateAnimations(letter);
+            // Music control
+            const musicControl = document.getElementById('musicControl');
+            let isPlaying = false;
             
-            // به‌روزرسانی نمونه کلمات
-            updateExamples(letter);
-            
-            // پاک کردن کانواس و نتیجه
-            clearCanvas();
-            document.getElementById('result').textContent = '';
-            
-            // برجسته کردن دکمه حرف انتخاب شده
-            document.querySelectorAll('.letter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // پخش تلفظ حرف
-            playLetterSound(letter);
-        }
-
-        // انیمیشن نوشتن حروف
-        function drawLetterAnimation(canvasId, letterData, isUppercase) {
-            const canvas = document.getElementById(canvasId);
-            const ctx = canvas.getContext('2d');
-            const letter = isUppercase ? letterData.uppercase : letterData.lowercase;
-            
-            // پاک کردن کانواس
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // تنظیمات قلم
-            ctx.lineWidth = 6;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.strokeStyle = '#6a11cb';
-            
-            // رسم حرف با انیمیشن
-            let currentPoint = 0;
-            const totalPoints = letter.strokeOrder.length;
-            
-            function animate() {
-                if (currentPoint < totalPoints - 1) {
-                    const startIndex = letter.strokeOrder[currentPoint];
-                    const endIndex = letter.strokeOrder[currentPoint + 1];
-                    
-                    const startX = letter.points[startIndex][0];
-                    const startY = letter.points[startIndex][1];
-                    const endX = letter.points[endIndex][0];
-                    const endY = letter.points[endIndex][1];
-                    
-                    // رسم خط
-                    ctx.beginPath();
-                    ctx.moveTo(startX, startY);
-                    ctx.lineTo(endX, endY);
-                    ctx.stroke();
-                    
-                    currentPoint++;
-                    setTimeout(animate, 200);
+            musicControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    backgroundMusic.pause();
+                    musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                } else {
+                    backgroundMusic.play();
+                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
                 }
+                isPlaying = !isPlaying;
+            });
+        });
+
+        // Initialize alphabet buttons
+        function initializeAlphabet() {
+            const uppercaseList = document.getElementById('uppercaseList');
+            const lowercaseList = document.getElementById('lowercaseList');
+            
+            // Create uppercase letters A-Z
+            for (let i = 65; i <= 90; i++) {
+                const letter = String.fromCharCode(i);
+                const button = document.createElement('button');
+                button.className = 'letter-btn';
+                button.textContent = letter;
+                button.addEventListener('click', () => setActiveLetter(letter));
+                uppercaseList.appendChild(button);
             }
             
-            animate();
+            // Create lowercase letters a-z
+            for (let i = 97; i <= 122; i++) {
+                const letter = String.fromCharCode(i);
+                const button = document.createElement('button');
+                button.className = 'letter-btn';
+                button.textContent = letter;
+                button.addEventListener('click', () => setActiveLetter(letter.toUpperCase()));
+                lowercaseList.appendChild(button);
+            }
         }
 
-        // به‌روزرسانی انیمیشن‌ها
-        function updateAnimations(letter) {
-            drawLetterAnimation('uppercaseAnimation', letterData[letter], true);
-            drawLetterAnimation('lowercaseAnimation', letterData[letter], false);
+        // Set active letter and update display
+        function setActiveLetter(letter) {
+            // Update active button state
+            document.querySelectorAll('.letter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === letter || btn.textContent === letter.toLowerCase()) {
+                    btn.classList.add('active');
+                }
+            });
             
-            // تنظیم دکمه‌های پخش مجدد
-            document.getElementById('replayUppercase').onclick = () => drawLetterAnimation('uppercaseAnimation', letterData[letter], true);
-            document.getElementById('replayLowercase').onclick = () => drawLetterAnimation('lowercaseAnimation', letterData[letter], false);
+            // Update letter display
+            document.getElementById('currentLetterTitle').textContent = `Letter ${letter}`;
+            document.getElementById('currentLetter').textContent = letter;
             
-            // تنظیم دکمه‌های پخش صدا
-            document.getElementById('playUppercase').onclick = () => playLetterSound(letter);
-            document.getElementById('playLowercase').onclick = () => playLetterSound(letter);
+            // Update animations
+            const data = letterData[letter];
+            if (data) {
+                document.getElementById('uppercaseAnimation').src = data.uppercase;
+                document.getElementById('lowercaseAnimation').src = data.lowercase;
+                
+                // Reset overlays
+                document.getElementById('uppercaseOverlay').classList.remove('hidden');
+                document.getElementById('lowercaseOverlay').classList.remove('hidden');
+            }
+            
+            // Update example words
+            updateExamples(letter);
+            
+            // Clear canvas
+            clearCanvas();
+            
+            // Play hover sound
+            playHoverSound();
         }
 
-        // به‌روزرسانی نمونه کلمات
+        // Update example words section
         function updateExamples(letter) {
             const examplesGrid = document.getElementById('examplesGrid');
             examplesGrid.innerHTML = '';
             
-            letterData[letter].examples.forEach(example => {
+            const words = exampleWords[letter] || [];
+            const pron = pronunciation[letter] || '';
+            
+            words.forEach(word => {
                 const exampleItem = document.createElement('div');
                 exampleItem.className = 'example-item';
                 
                 exampleItem.innerHTML = `
-                    <div class="example-word">${example.word}</div>
-                    <div class="example-pronunciation">${example.pronunciation}</div>
-                    <div class="example-meaning">${example.meaning}</div>
-                    <button class="example-sound" data-word="${example.word}">
+                    <div class="example-word">${word}</div>
+                    <div class="example-pronunciation">${pron}</div>
+                    <div class="example-meaning">Starts with ${letter}</div>
+                    <button class="example-sound" onclick="playLetterSound('${letter}')">
                         <i class="fas fa-volume-up"></i>
                     </button>
                 `;
                 
                 examplesGrid.appendChild(exampleItem);
             });
+        }
+
+        // Play letter sound
+        function playLetterSound(letter) {
+            // In a real application, you would use Web Audio API or preloaded sounds
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(letter);
+            utterance.rate = 0.8;
+            synth.speak(utterance);
             
-            // اضافه کردن event listener برای دکمه‌های صدا
-            document.querySelectorAll('.example-sound').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const word = this.getAttribute('data-word');
-                    playExampleSound(word);
-                });
+            // Visual feedback
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = `Playing sound: ${letter}`;
+            resultDiv.style.color = 'var(--success)';
+            
+            setTimeout(() => {
+                resultDiv.textContent = '';
+            }, 2000);
+        }
+
+        // Play hover sound
+        function playHoverSound() {
+            const hoverSound = document.getElementById('hoverSound');
+            hoverSound.volume = 0.3;
+            hoverSound.play().catch(e => console.log('Audio play failed:', e));
+        }
+
+        // Initialize drawing canvas
+        function initializeCanvas() {
+            const canvas = document.getElementById('writingCanvas');
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            
+            // Set canvas size
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+                
+                // Set white background
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Drawing functions
+            function startDrawing(e) {
+                isDrawing = true;
+                [lastX, lastY] = getCoordinates(e);
+            }
+            
+            function draw(e) {
+                if (!isDrawing) return;
+                
+                const [x, y] = getCoordinates(e);
+                const penColor = document.getElementById('penColor').value;
+                const penWidth = document.getElementById('penWidth').value;
+                
+                ctx.strokeStyle = penColor;
+                ctx.lineWidth = penWidth;
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                
+                [lastX, lastY] = [x, y];
+            }
+            
+            function stopDrawing() {
+                isDrawing = false;
+            }
+            
+            function getCoordinates(e) {
+                if (e.type.includes('touch')) {
+                    const rect = canvas.getBoundingClientRect();
+                    return [
+                        e.touches[0].clientX - rect.left,
+                        e.touches[0].clientY - rect.top
+                    ];
+                } else {
+                    return [
+                        e.offsetX,
+                        e.offsetY
+                    ];
+                }
+            }
+            
+            // Event listeners for drawing
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            // Touch events for mobile
+            canvas.addEventListener('touchstart', startDrawing);
+            canvas.addEventListener('touchmove', draw);
+            canvas.addEventListener('touchend', stopDrawing);
+        }
+
+        // Clear canvas
+        function clearCanvas() {
+            const canvas = document.getElementById('writingCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Canvas cleared!';
+            resultDiv.style.color = 'var(--accent)';
+            
+            setTimeout(() => {
+                resultDiv.textContent = '';
+            }, 2000);
+        }
+
+        // Check writing (basic implementation)
+        function checkWriting() {
+            const canvas = document.getElementById('writingCanvas');
+            const currentLetter = document.getElementById('currentLetter').textContent;
+            
+            // This is a simplified check - in a real app you would use ML/AI
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = `Great practice! Keep working on letter ${currentLetter}.`;
+            resultDiv.style.color = 'var(--success)';
+            
+            // Add some random encouragement
+            const encouragements = [
+                "Well done!",
+                "Good effort!",
+                "Nice try!",
+                "You're improving!",
+                "Practice makes perfect!"
+            ];
+            const randomEncouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
+            resultDiv.textContent += ` ${randomEncouragement}`;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Clear button
+            document.getElementById('clearBtn').addEventListener('click', clearCanvas);
+            
+            // Check button
+            document.getElementById('checkBtn').addEventListener('click', checkWriting);
+            
+            // Animation play buttons
+            document.getElementById('playUppercase').addEventListener('click', function() {
+                document.getElementById('uppercaseOverlay').classList.add('hidden');
+            });
+            
+            document.getElementById('playLowercase').addEventListener('click', function() {
+                document.getElementById('lowercaseOverlay').classList.add('hidden');
+            });
+            
+            // Animation replay buttons
+            document.getElementById('replayUppercase').addEventListener('click', function() {
+                const img = document.getElementById('uppercaseAnimation');
+                img.src = img.src;
+                document.getElementById('uppercaseOverlay').classList.remove('hidden');
+            });
+            
+            document.getElementById('replayLowercase').addEventListener('click', function() {
+                const img = document.getElementById('lowercaseAnimation');
+                img.src = img.src;
+                document.getElementById('lowercaseOverlay').classList.remove('hidden');
+            });
+            
+            // Animation box clicks
+            document.getElementById('uppercaseBox').addEventListener('click', function() {
+                document.getElementById('uppercaseOverlay').classList.add('hidden');
+            });
+            
+            document.getElementById('lowercaseBox').addEventListener('click', function() {
+                document.getElementById('lowercaseOverlay').classList.add('hidden');
+            });
+            
+            // Designer card click
+            document.getElementById('designerCard').addEventListener('click', function() {
+                playHoverSound();
+                this.style.transform = this.style.transform === 'scale(0.95)' ? 'scale(1)' : 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 300);
             });
         }
 
-        // پخش تلفظ حرف (شبیه‌سازی)
-        function playLetterSound(letter) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(letterData[letter].sound);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.8;
-                speechSynthesis.speak(utterance);
-            }
-            
-            // نمایش پیام برای کاربر
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = `تلفظ حرف ${letter}: ${letterData[letter].sound}`;
-            resultDiv.style.color = '#4e54c8';
-        }
-
-        // پخش تلفظ مثال (شبیه‌سازی)
-        function playExampleSound(word) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.7;
-                speechSynthesis.speak(utterance);
-            }
-            
-            // نمایش پیام برای کاربر
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = `تلفظ کلمه: ${word}`;
-            resultDiv.style.color = '#28a745';
-        }
-
-        // تنظیمات کانواس برای نوشتن
-        const canvas = document.getElementById('writingCanvas');
-        const ctx = canvas.getContext('2d');
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-
-        // تنظیم اولیه قلم
-        let penColor = document.getElementById('penColor').value;
-        let penWidth = document.getElementById('penWidth').value;
-
-        // به‌روزرسانی تنظیمات قلم
-        document.getElementById('penColor').addEventListener('input', function() {
-            penColor = this.value;
-        });
-
-        document.getElementById('penWidth').addEventListener('input', function() {
-            penWidth = this.value;
-        });
-
-        // تنظیم اندازه قلم و رنگ
-        function updatePenSettings() {
-            ctx.lineWidth = penWidth;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.strokeStyle = penColor;
-        }
-
-        updatePenSettings();
-
-        // شروع رسم
-        function startDrawing(e) {
-            isDrawing = true;
-            updatePenSettings();
-            [lastX, lastY] = getCoordinates(e);
-        }
-
-        // رسم
-        function draw(e) {
-            if (!isDrawing) return;
-            
-            const [x, y] = getCoordinates(e);
-            
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(x, y);
-            ctx.stroke();
-            
-            [lastX, lastY] = [x, y];
-        }
-
-        // پایان رسم
-        function stopDrawing() {
-            isDrawing = false;
-        }
-
-        // دریافت مختصات با توجه به نوع رویداد (موبایل یا دسکتاپ)
-        function getCoordinates(e) {
-            let x, y;
-            
-            if (e.type.includes('touch')) {
-                const rect = canvas.getBoundingClientRect();
-                const scaleX = canvas.width / rect.width;
-                const scaleY = canvas.height / rect.height;
+        // Add some interactive effects
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.letter-btn, .download-btn, button');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 
-                x = (e.touches[0].clientX - rect.left) * scaleX;
-                y = (e.touches[0].clientY - rect.top) * scaleY;
-            } else {
-                const rect = canvas.getBoundingClientRect();
-                const scaleX = canvas.width / rect.width;
-                const scaleY = canvas.height / rect.height;
-                
-                x = (e.clientX - rect.left) * scaleX;
-                y = (e.clientY - rect.top) * scaleY;
-            }
-            
-            return [x, y];
-        }
-
-        // رویدادهای کانواس برای دسکتاپ
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseout', stopDrawing);
-
-        // رویدادهای کانواس برای موبایل
-        canvas.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            startDrawing(e);
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
         });
-        canvas.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-            draw(e);
-        });
-        canvas.addEventListener('touchend', stopDrawing);
-
-        // پاک کردن کانواس
-        function clearCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            document.getElementById('result').textContent = '';
-        }
-
-        document.getElementById('clearBtn').addEventListener('click', clearCanvas);
-
-        // بررسی دستخط (شبیه‌سازی)
-        document.getElementById('checkBtn').addEventListener('click', function() {
-            const currentLetter = document.getElementById('currentLetter').textContent;
-            const resultDiv = document.getElementById('result');
-            
-            const responses = [
-                { text: 'آفرین! دستخط شما عالی است. ✅', color: 'green' },
-                { text: 'خوب است، اما می‌توانید بهتر بنویسید. ⚠️', color: 'orange' },
-                { text: 'لطفاً دوباره تلاش کنید و به شکل حرف دقت بیشتری داشته باشید. 🔄', color: 'red' }
-            ];
-            
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            resultDiv.textContent = randomResponse.text;
-            resultDiv.style.color = randomResponse.color;
-        });
-
-        // کنترل موسیقی پس‌زمینه
-        const backgroundMusic = document.getElementById('backgroundMusic');
-        const musicControl = document.getElementById('musicControl');
-        let isMusicPlaying = false;
-
-        // تنظیم حجم موسیقی
-        backgroundMusic.volume = 0.2;
-
-        // تلاش برای پخش خودکار موسیقی
-        document.addEventListener('click', function() {
-            if (!isMusicPlaying) {
-                backgroundMusic.play().then(() => {
-                    isMusicPlaying = true;
-                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                }).catch(e => {
-                    console.log('Autoplay prevented:', e);
-                });
-            }
-        }, { once: true });
-
-        musicControl.addEventListener('click', function() {
-            if (isMusicPlaying) {
-                backgroundMusic.pause();
-                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            } else {
-                backgroundMusic.play();
-                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }
-            isMusicPlaying = !isMusicPlaying;
-        });
-
-        // انتخاب اولین حرف به صورت پیش‌فرض
-        selectLetter('A', 'uppercase');
     </script>
 </body>
 </html>
