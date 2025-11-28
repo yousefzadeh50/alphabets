@@ -445,7 +445,7 @@
             align-items: center;
             gap: 8px;
             font-size: 1rem;
-            min-width: 140px;
+            min-width: 180px;
             justify-content: center;
         }
         
@@ -805,7 +805,7 @@
             }
             
             .sound-control-btn {
-                min-width: 120px;
+                min-width: 160px;
             }
             
             .music-control-container {
@@ -858,20 +858,6 @@
     </style>
 </head>
 <body>
-    <!-- Audio Elements -->
-    <audio id="backgroundMusic" loop>
-        <source src="https://s34.picofile.com/file/8488328184/Gamer_08_SevilMusic_1_.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    
-    <audio id="hoverSound">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
-    </audio>
-    
-    <audio id="letterClickSound">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3" type="audio/mpeg">
-    </audio>
-
     <!-- Designer Card -->
     <div class="designer-card" id="designerCard">
         <div class="designer-avatar">
@@ -887,7 +873,7 @@
     <div class="music-control-container">
         <div class="volume-control">
             <i class="fas fa-volume-down"></i>
-            <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.2">
+            <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.3">
             <i class="fas fa-volume-up"></i>
         </div>
         <div class="music-control" id="musicControl">
@@ -920,7 +906,7 @@
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="letter-popup" id="letterPopup">
         <div class="popup-header">
-            <h2 class="popup-title" id="popupTitle">Letter S</h2>
+            <h2 class="popup-title" id="popupTitle">Letter R</h2>
             <button class="close-popup" id="closePopup">
                 <i class="fas fa-times"></i>
             </button>
@@ -929,10 +915,10 @@
         <!-- Letter Sound Controls -->
         <div class="letter-sound-controls">
             <button class="sound-control-btn letter-name" id="letterNameBtn">
-                <i class="fas fa-font"></i> Letter Name
+                <i class="fas fa-font"></i> Name of the letter
             </button>
             <button class="sound-control-btn letter-sound" id="letterSoundBtn">
-                <i class="fas fa-volume-up"></i> Letter Sound
+                <i class="fas fa-volume-up"></i> Sound of the letter
             </button>
         </div>
         
@@ -950,6 +936,9 @@
                         <button class="animation-btn" id="playUppercase">
                             <i class="fas fa-play"></i> Play
                         </button>
+                        <button class="animation-btn pause" id="pauseUppercase" style="display: none;">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
                         <button class="animation-btn" id="replayUppercase">
                             <i class="fas fa-redo"></i> Replay
                         </button>
@@ -957,7 +946,7 @@
                 </div>
                 
                 <div class="animation-container">
-                    <div class="animation-title">Lowercase</div>
+                    <div class="animation-title">Lowercase (Small)</div>
                     <div class="animation-box" id="lowercaseBox">
                         <div class="play-overlay" id="lowercaseOverlay">
                             <i class="fas fa-play"></i>
@@ -967,6 +956,9 @@
                     <div class="animation-controls">
                         <button class="animation-btn" id="playLowercase">
                             <i class="fas fa-play"></i> Play
+                        </button>
+                        <button class="animation-btn pause" id="pauseLowercase" style="display: none;">
+                            <i class="fas fa-pause"></i> Pause
                         </button>
                         <button class="animation-btn" id="replayLowercase">
                             <i class="fas fa-redo"></i> Replay
@@ -1234,8 +1226,10 @@
         const uppercaseOverlay = document.getElementById('uppercaseOverlay');
         const lowercaseOverlay = document.getElementById('lowercaseOverlay');
         const playUppercase = document.getElementById('playUppercase');
+        const pauseUppercase = document.getElementById('pauseUppercase');
         const replayUppercase = document.getElementById('replayUppercase');
         const playLowercase = document.getElementById('playLowercase');
+        const pauseLowercase = document.getElementById('pauseLowercase');
         const replayLowercase = document.getElementById('replayLowercase');
         const examplesGrid = document.getElementById('examplesGrid');
         const letterNameBtn = document.getElementById('letterNameBtn');
@@ -1245,13 +1239,13 @@
         const checkBtn = document.getElementById('checkBtn');
         const penColor = document.getElementById('penColor');
         const penWidth = document.getElementById('penWidth');
-        const backgroundMusic = document.getElementById('backgroundMusic');
         const musicControl = document.getElementById('musicControl');
         const volumeControl = document.getElementById('volumeControl');
-        const hoverSound = document.getElementById('hoverSound');
-        const letterClickSound = document.getElementById('letterClickSound');
 
-        // Audio elements for letter sounds
+        // Audio elements
+        const backgroundMusic = new Audio('https://drive.google.com/uc?export=download&id=1zYVcGpxIoiPaGd1KGcOO8kdI7vhruepb');
+        const hoverSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
+        const letterClickSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3');
         const letterNameAudio = new Audio();
         const letterSoundAudio = new Audio();
 
@@ -1261,6 +1255,8 @@
         let lastX = 0;
         let lastY = 0;
         let isMusicPlaying = false;
+        let isUppercasePlaying = false;
+        let isLowercasePlaying = false;
 
         // Initialize the application
         function init() {
@@ -1293,7 +1289,7 @@
                 card.addEventListener('click', () => {
                     const letter = card.dataset.letter;
                     openLetterPopup(letter);
-                    playSound(letterClickSound);
+                    playLetterNameForCard(letter);
                 });
                 
                 card.addEventListener('mouseenter', () => {
@@ -1307,8 +1303,10 @@
 
             // Animation controls
             playUppercase.addEventListener('click', () => playAnimation('uppercase'));
+            pauseUppercase.addEventListener('click', () => pauseAnimation('uppercase'));
             replayUppercase.addEventListener('click', () => replayAnimation('uppercase'));
             playLowercase.addEventListener('click', () => playAnimation('lowercase'));
+            pauseLowercase.addEventListener('click', () => pauseAnimation('lowercase'));
             replayLowercase.addEventListener('click', () => replayAnimation('lowercase'));
 
             // Sound controls
@@ -1353,6 +1351,7 @@
         // Setup audio
         function setupAudio() {
             backgroundMusic.volume = volumeControl.value;
+            backgroundMusic.loop = true;
             
             // Preload sounds
             hoverSound.volume = 0.3;
@@ -1416,9 +1415,9 @@
             
             // Add event listeners to example sound buttons
             document.querySelectorAll('.example-sound').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Play sound for example word
-                    playSound(letterClickSound);
+                btn.addEventListener('click', (e) => {
+                    const word = e.currentTarget.dataset.word;
+                    playExampleWordSound(word);
                 });
             });
         }
@@ -1426,26 +1425,46 @@
         // Animation controls
         function playAnimation(type) {
             const box = type === 'uppercase' ? uppercaseBox : lowercaseBox;
+            const playBtn = type === 'uppercase' ? playUppercase : playLowercase;
+            const pauseBtn = type === 'uppercase' ? pauseUppercase : pauseLowercase;
             const overlay = type === 'uppercase' ? uppercaseOverlay : lowercaseOverlay;
             
             box.classList.add('animation-playing');
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'flex';
             overlay.classList.add('hidden');
+            
+            if (type === 'uppercase') {
+                isUppercasePlaying = true;
+            } else {
+                isLowercasePlaying = true;
+            }
+        }
+
+        function pauseAnimation(type) {
+            const box = type === 'uppercase' ? uppercaseBox : lowercaseBox;
+            const playBtn = type === 'uppercase' ? playUppercase : playLowercase;
+            const pauseBtn = type === 'uppercase' ? pauseUppercase : pauseLowercase;
+            
+            box.classList.remove('animation-playing');
+            playBtn.style.display = 'flex';
+            pauseBtn.style.display = 'none';
+            
+            if (type === 'uppercase') {
+                isUppercasePlaying = false;
+            } else {
+                isLowercasePlaying = false;
+            }
         }
 
         function replayAnimation(type) {
-            const box = type === 'uppercase' ? uppercaseBox : lowercaseBox;
-            
-            box.classList.remove('animation-playing');
-            setTimeout(() => {
-                box.classList.add('animation-playing');
-            }, 100);
+            pauseAnimation(type);
+            setTimeout(() => playAnimation(type), 100);
         }
 
         function resetAnimations() {
-            uppercaseBox.classList.remove('animation-playing');
-            lowercaseBox.classList.remove('animation-playing');
-            uppercaseOverlay.classList.remove('hidden');
-            lowercaseOverlay.classList.remove('hidden');
+            pauseAnimation('uppercase');
+            pauseAnimation('lowercase');
         }
 
         // Sound functions
@@ -1467,6 +1486,20 @@
             // Set and play the letter sound audio
             letterSoundAudio.src = letterData[currentLetter].soundSound;
             letterSoundAudio.play().catch(e => console.log("Audio play failed:", e));
+        }
+
+        function playLetterNameForCard(letter) {
+            const tempAudio = new Audio(letterData[letter].nameSound);
+            tempAudio.volume = 0.7;
+            tempAudio.play().catch(e => console.log("Audio play failed:", e));
+        }
+
+        function playExampleWordSound(word) {
+            // In a real app, you would have specific audio files for each word
+            // For now, we'll use a generic sound
+            const exampleSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
+            exampleSound.volume = 0.7;
+            exampleSound.play().catch(e => console.log("Audio play failed:", e));
         }
 
         function playSound(audioElement) {
