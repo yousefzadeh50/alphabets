@@ -41,23 +41,23 @@
             margin: 0 auto;
         }
         
-        /* Designer Card - Enhanced */
+        /* Designer Card - Smaller and Improved */
         .designer-card {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             background: linear-gradient(135deg, var(--sky-blue), #a1c4fd);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
             z-index: 1000;
-            backdrop-filter: blur(20px);
-            border: 3px solid rgba(255,255,255,0.8);
-            max-width: 350px;
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.8);
+            max-width: 280px;
+            transition: all 0.4s ease;
             overflow: hidden;
             cursor: pointer;
         }
@@ -69,14 +69,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
             transform: rotate(45deg);
             animation: shine 4s infinite;
-            transition: all 0.6s ease;
-        }
-        
-        .designer-card:hover::before {
-            animation: shine 2s infinite;
         }
         
         @keyframes shine {
@@ -85,37 +80,28 @@
         }
         
         .designer-avatar {
-            width: 90px;
-            height: 90px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2.2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             overflow: hidden;
-            border: 4px solid white;
+            border: 3px solid white;
             position: relative;
             z-index: 2;
-            transition: all 0.4s ease;
-        }
-        
-        .designer-avatar:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
         }
         
         .designer-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.4s ease;
-        }
-        
-        .designer-avatar:hover img {
-            transform: scale(1.1);
+            display: block;
         }
         
         .designer-info {
@@ -125,90 +111,65 @@
         }
         
         .designer-name {
-            font-size: 1.6rem;
-            margin-bottom: 5px;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
             color: #1a237e;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.9);
             background: linear-gradient(45deg, #1a237e, #283593);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-family: 'Comic Neue', cursive;
+            line-height: 1.2;
         }
         
         .designer-title {
             color: #283593;
-            font-size: 1rem;
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
             font-weight: 600;
-            background: linear-gradient(45deg, #5c6bc0, #3949ab);
+            background: linear-gradient(45deg, #3949ab, #5c6bc0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.3rem;
-            margin-top: 5px;
+            line-height: 1.2;
         }
         
         .designer-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
         
         /* Music Control - Fixed */
         .music-control {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             border-radius: 50%;
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 1000;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            border: 4px solid white;
-            animation: pulse-glow 2s infinite;
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% { 
-                box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 8px 30px rgba(106, 17, 203, 0.6);
-                transform: scale(1.05);
-            }
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            border: 3px solid white;
         }
         
         .music-control:hover {
-            transform: scale(1.15) rotate(10deg);
-            box-shadow: 0 12px 35px rgba(106, 17, 203, 0.8);
-            animation: none;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
         
         .music-control.playing {
             background: linear-gradient(135deg, #1dd1a1, #10ac84);
-            animation: pulse-glow-playing 1.5s infinite;
-        }
-        
-        @keyframes pulse-glow-playing {
-            0%, 100% { 
-                box-shadow: 0 8px 25px rgba(29, 209, 161, 0.4);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 8px 35px rgba(29, 209, 161, 0.8);
-                transform: scale(1.08);
-            }
         }
         
         .music-control i {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--primary);
             transition: all 0.3s ease;
         }
@@ -320,7 +281,7 @@
             line-height: 1;
         }
         
-        /* Download Section - Moved below alphabet grid */
+        /* Download Section */
         .download-section {
             text-align: center;
             margin: 30px 0;
@@ -352,14 +313,14 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         
-        /* Enhanced Popup with Close Button */
+        /* Enhanced Popup with Larger Width */
         .letter-popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.9);
-            width: 95%;
-            max-width: 500px;
+            width: 90%;
+            max-width: 800px;
             max-height: 90vh;
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             border-radius: 25px;
@@ -418,25 +379,20 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: 3px solid white;
-            font-size: 1.5rem;
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            z-index: 10;
+            font-size: 1.3rem;
         }
         
         .close-popup:hover {
             transform: rotate(90deg) scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
         }
         
         .popup-content {
@@ -467,6 +423,8 @@
             align-items: center;
             gap: 8px;
             font-size: 1rem;
+            min-width: 120px;
+            justify-content: center;
         }
         
         .sound-control-btn:hover {
@@ -485,7 +443,7 @@
         .animation-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 25px;
         }
         
         .animation-container {
@@ -508,7 +466,7 @@
         
         .animation-box {
             width: 100%;
-            height: 180px;
+            height: 200px;
             background: white;
             border-radius: 15px;
             display: flex;
@@ -580,8 +538,8 @@
         
         .examples-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
         }
         
         .example-item {
@@ -773,22 +731,12 @@
             100% {transform: scale(1);}
         }
         
-        @keyframes glow {
-            0% {box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);}
-            50% {box-shadow: 0 0 20px rgba(106, 17, 203, 0.8);}
-            100% {box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);}
-        }
-        
         .bounce {
             animation: bounce 1s;
         }
         
         .pulse {
             animation: pulse 0.5s;
-        }
-        
-        .glow {
-            animation: glow 1.5s infinite;
         }
         
         @media (max-width: 768px) {
@@ -821,7 +769,7 @@
             }
             
             .letter-popup {
-                width: 98%;
+                width: 95%;
                 padding: 20px;
             }
             
@@ -829,16 +777,13 @@
                 font-size: 2rem;
             }
             
-            .close-popup {
-                width: 50px;
-                height: 50px;
-                top: -15px;
-                right: -15px;
-            }
-            
             .letter-sound-controls {
                 flex-direction: column;
                 gap: 10px;
+            }
+            
+            .sound-control-btn {
+                min-width: 100px;
             }
         }
         
@@ -867,16 +812,16 @@
             }
             
             .designer-avatar {
-                width: 70px;
-                height: 70px;
+                width: 50px;
+                height: 50px;
             }
             
             .designer-name {
-                font-size: 1.4rem;
+                font-size: 1rem;
             }
             
             .designer-title {
-                font-size: 1.1rem;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -899,8 +844,7 @@
     <!-- Designer Card -->
     <div class="designer-card" id="designerCard">
         <div class="designer-avatar">
-            <img src="https://s34.picofile.com/file/8488183492/2.png" alt="A.R. Yousefzadeh" 
-                 onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-user-graduate\"></i>';">
+            <img src="https://s34.picofile.com/file/8488183492/2.png" alt="A.R. Yousefzadeh">
         </div>
         <div class="designer-info">
             <h3 class="designer-name">A.R. Yousefzadeh</h3>
@@ -923,7 +867,7 @@
             <!-- Alphabet cards will be added by JavaScript -->
         </div>
         
-        <!-- Download Section - Moved below alphabet grid -->
+        <!-- Download Section -->
         <div class="download-section">
             <a href="https://s34.picofile.com/file/8488325968/Capital_Letters_Tracing_Guide.gif" class="download-btn" target="_blank">
                 <i class="fas fa-download"></i> Uppercase Tracing Guide
@@ -1038,157 +982,131 @@
             'A': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_a.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_a.gif',
-                sound: 'A',
                 type: 'vowel'
             },
             'B': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_b.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_b.gif',
-                sound: 'B',
                 type: 'consonant'
             },
             'C': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_c.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_c.gif',
-                sound: 'C',
                 type: 'consonant'
             },
             'D': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_d.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_d.gif',
-                sound: 'D',
                 type: 'consonant'
             },
             'E': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_e.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_e.gif',
-                sound: 'E',
                 type: 'vowel'
             },
             'F': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_f.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_f.gif',
-                sound: 'F',
                 type: 'consonant'
             },
             'G': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_g.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_g.gif',
-                sound: 'G',
                 type: 'consonant'
             },
             'H': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_h.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_h.gif',
-                sound: 'H',
                 type: 'consonant'
             },
             'I': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_i.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_i.gif',
-                sound: 'I',
                 type: 'vowel'
             },
             'J': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_j.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_j.gif',
-                sound: 'J',
                 type: 'consonant'
             },
             'K': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_k.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_k.gif',
-                sound: 'K',
                 type: 'consonant'
             },
             'L': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_l.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_l.gif',
-                sound: 'L',
                 type: 'consonant'
             },
             'M': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_m.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_m.gif',
-                sound: 'M',
                 type: 'consonant'
             },
             'N': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_n.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_n.gif',
-                sound: 'N',
                 type: 'consonant'
             },
             'O': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_o.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_o.gif',
-                sound: 'O',
                 type: 'vowel'
             },
             'P': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_p.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_p.gif',
-                sound: 'P',
                 type: 'consonant'
             },
             'Q': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_q.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_q.gif',
-                sound: 'Q',
                 type: 'consonant'
             },
             'R': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_r.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_r.gif',
-                sound: 'R',
                 type: 'consonant'
             },
             'S': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_s.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_s.gif',
-                sound: 'S',
                 type: 'consonant'
             },
             'T': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_t.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_t.gif',
-                sound: 'T',
                 type: 'consonant'
             },
             'U': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_u.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_u.gif',
-                sound: 'U',
                 type: 'vowel'
             },
             'V': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_v.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_v.gif',
-                sound: 'V',
                 type: 'consonant'
             },
             'W': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_w.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_w.gif',
-                sound: 'W',
                 type: 'consonant'
             },
             'X': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_x.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_x.gif',
-                sound: 'X',
                 type: 'consonant'
             },
             'Y': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_y.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_y.gif',
-                sound: 'Y',
                 type: 'consonant'
             },
             'Z': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_z.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_z.gif',
-                sound: 'Z',
                 type: 'consonant'
             }
         };
@@ -1223,13 +1141,13 @@
             'Z': ['Zebra', 'Zoo', 'Zipper', 'Zero']
         };
 
-        // Letter sounds for pronunciation
+        // Correct letter sounds for pronunciation
         const letterSounds = {
-            'A': 'æ', 'B': 'b', 'C': 'k', 'D': 'd', 'E': 'ɛ', 
-            'F': 'f', 'G': 'g', 'H': 'h', 'I': 'ɪ', 'J': 'dʒ', 
-            'K': 'k', 'L': 'l', 'M': 'm', 'N': 'n', 'O': 'ɒ', 
-            'P': 'p', 'Q': 'kw', 'R': 'r', 'S': 's', 'T': 't', 
-            'U': 'ʌ', 'V': 'v', 'W': 'w', 'X': 'ks', 'Y': 'j', 'Z': 'z'
+            'A': 'ay', 'B': 'bee', 'C': 'see', 'D': 'dee', 'E': 'ee', 
+            'F': 'ef', 'G': 'jee', 'H': 'aych', 'I': 'eye', 'J': 'jay', 
+            'K': 'kay', 'L': 'el', 'M': 'em', 'N': 'en', 'O': 'oh', 
+            'P': 'pee', 'Q': 'kyoo', 'R': 'ar', 'S': 'ess', 'T': 'tee', 
+            'U': 'yoo', 'V': 'vee', 'W': 'double-yoo', 'X': 'eks', 'Y': 'wie', 'Z': 'zed'
         };
 
         // Animation state management
@@ -1240,6 +1158,7 @@
 
         let currentLetter = 'A';
         let isMusicPlaying = false;
+        let audioContextInitialized = false;
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
@@ -1255,17 +1174,22 @@
             const musicControl = document.getElementById('musicControl');
             
             // Set music volume
-            backgroundMusic.volume = 0.4;
+            backgroundMusic.volume = 0.3;
             
             // Enable audio on user interaction
             const enableAudio = () => {
-                // Try to play and immediately pause to unlock audio
-                backgroundMusic.play().then(() => {
-                    backgroundMusic.pause();
-                    console.log('Audio unlocked successfully');
-                }).catch(e => {
-                    console.log('Audio unlock failed:', e);
-                });
+                if (!audioContextInitialized) {
+                    // Create and play a silent sound to unlock audio
+                    const silentAudio = new Audio();
+                    silentAudio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==';
+                    silentAudio.play().then(() => {
+                        silentAudio.pause();
+                        audioContextInitialized = true;
+                        console.log('Audio context initialized');
+                    }).catch(e => {
+                        console.log('Silent audio play failed:', e);
+                    });
+                }
             };
 
             // Enable audio on any user interaction
@@ -1276,27 +1200,46 @@
             musicControl.addEventListener('click', function(e) {
                 e.stopPropagation();
                 
-                if (isMusicPlaying) {
-                    // Pause music
-                    backgroundMusic.pause();
-                    musicControl.classList.remove('playing');
-                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    isMusicPlaying = false;
-                } else {
-                    // Play music with better error handling
-                    backgroundMusic.play().then(() => {
-                        musicControl.classList.add('playing');
-                        musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                        isMusicPlaying = true;
-                    }).catch(error => {
-                        console.log('Music play failed:', error);
-                        // Show user-friendly instruction
-                        alert('🎵 To enable background music:\n\n1. Click anywhere on the page first\n2. Then click the music button again\n\nSome browsers require user interaction before playing audio.');
-                        musicControl.classList.add('pulse');
-                        setTimeout(() => musicControl.classList.remove('pulse'), 1000);
-                    });
+                if (!audioContextInitialized) {
+                    enableAudio();
+                    setTimeout(() => {
+                        toggleMusic();
+                    }, 100);
+                    return;
                 }
+                
+                toggleMusic();
             });
+
+            function toggleMusic() {
+                try {
+                    if (isMusicPlaying) {
+                        backgroundMusic.pause();
+                        musicControl.classList.remove('playing');
+                        musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                        isMusicPlaying = false;
+                    } else {
+                        // Set volume before playing
+                        backgroundMusic.volume = 0.3;
+                        
+                        const playPromise = backgroundMusic.play();
+                        
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                musicControl.classList.add('playing');
+                                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                                isMusicPlaying = true;
+                            }).catch(error => {
+                                console.log('Audio play failed:', error);
+                                // Show user-friendly message
+                                alert('🔊 Please click anywhere on the page first, then click the music button to enable background music.');
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.log('Music toggle error:', error);
+                }
+            }
 
             // Handle audio errors
             backgroundMusic.addEventListener('error', function(e) {
@@ -1308,8 +1251,6 @@
             // Handle audio loading
             backgroundMusic.addEventListener('canplaythrough', function() {
                 console.log('Audio ready to play');
-                musicControl.classList.add('pulse');
-                setTimeout(() => musicControl.classList.remove('pulse'), 1000);
             });
         }
 
@@ -1413,35 +1354,37 @@
             synth.cancel();
             
             const utterance = new SpeechSynthesisUtterance(currentLetter);
-            utterance.rate = 0.8;
-            utterance.pitch = 1.1;
+            utterance.rate = 0.7;
+            utterance.pitch = 1.0;
             utterance.volume = 1;
             
             const voices = synth.getVoices();
             const femaleVoice = voices.find(voice => 
                 voice.name.includes('Female') || voice.name.includes('woman') ||
-                voice.name.includes('Samantha') || voice.name.includes('Karen')
+                voice.name.includes('Samantha') || voice.name.includes('Karen') ||
+                voice.name.includes('Victoria')
             );
             
             if (femaleVoice) utterance.voice = femaleVoice;
             synth.speak(utterance);
         }
 
-        // Play letter sound
+        // Play letter sound - CORRECTED
         function playLetterSound() {
             const synth = window.speechSynthesis;
             synth.cancel();
             
-            const sound = letterSounds[currentLetter] || currentLetter;
-            const utterance = new SpeechSynthesisUtterance(`The sound is ${sound}`);
+            const sound = letterSounds[currentLetter];
+            const utterance = new SpeechSynthesisUtterance(sound);
             utterance.rate = 0.7;
-            utterance.pitch = 1.2;
+            utterance.pitch = 1.0;
             utterance.volume = 1;
             
             const voices = synth.getVoices();
             const femaleVoice = voices.find(voice => 
                 voice.name.includes('Female') || voice.name.includes('woman') ||
-                voice.name.includes('Samantha') || voice.name.includes('Karen')
+                voice.name.includes('Samantha') || voice.name.includes('Karen') ||
+                voice.name.includes('Victoria')
             );
             
             if (femaleVoice) utterance.voice = femaleVoice;
@@ -1502,13 +1445,14 @@
             
             const utterance = new SpeechSynthesisUtterance(word);
             utterance.rate = 0.7;
-            utterance.pitch = 1.1;
+            utterance.pitch = 1.0;
             utterance.volume = 1;
             
             const voices = synth.getVoices();
             const femaleVoice = voices.find(voice => 
                 voice.name.includes('Female') || voice.name.includes('woman') ||
-                voice.name.includes('Samantha') || voice.name.includes('Karen')
+                voice.name.includes('Samantha') || voice.name.includes('Karen') ||
+                voice.name.includes('Victoria')
             );
             
             if (femaleVoice) utterance.voice = femaleVoice;
