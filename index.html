@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Handwriting Practice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6a11cb;
@@ -126,23 +126,27 @@
         
         .designer-name {
             font-size: 1.6rem;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             color: #1a237e;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
             background: linear-gradient(45deg, #1a237e, #283593);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-family: 'Comic Neue', cursive;
         }
         
         .designer-title {
             color: #283593;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
             font-weight: 600;
-            background: linear-gradient(45deg, #283593, #303f9f);
+            background: linear-gradient(45deg, #5c6bc0, #3949ab);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            margin-top: 5px;
         }
         
         .designer-card:hover {
@@ -240,32 +244,6 @@
             font-weight: 600;
         }
         
-        .download-section {
-            text-align: center;
-            margin: 25px 0;
-        }
-        
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--success), #10ac84);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 0 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.5);
-        }
-        
-        .download-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-        
         .alphabet-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -340,6 +318,38 @@
             color: inherit;
             opacity: 0.9;
             line-height: 1;
+        }
+        
+        /* Download Section - Moved below alphabet grid */
+        .download-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.6);
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--success), #10ac84);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         
         /* Enhanced Popup with Close Button */
@@ -433,6 +443,43 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 25px;
+        }
+        
+        .letter-sound-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .sound-control-btn {
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 2px solid white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+        
+        .sound-control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .sound-control-btn.letter-sound {
+            background: linear-gradient(145deg, #ff6b6b, #ff5252);
+        }
+        
+        .sound-control-btn.letter-name {
+            background: linear-gradient(145deg, #1dd1a1, #10ac84);
         }
         
         .animation-section {
@@ -714,31 +761,6 @@
             pointer-events: none;
         }
         
-        .sound-btn {
-            position: absolute;
-            top: 20px;
-            right: 60px;
-            background: linear-gradient(145deg, var(--success), #10ac84);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border: 3px solid white;
-            font-size: 1.2rem;
-            z-index: 10;
-        }
-        
-        .sound-btn:hover {
-            transform: scale(1.1);
-        }
-        
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
             40% {transform: translateY(-10px);}
@@ -813,6 +835,11 @@
                 top: -15px;
                 right: -15px;
             }
+            
+            .letter-sound-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -849,7 +876,7 @@
             }
             
             .designer-title {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -877,7 +904,7 @@
         </div>
         <div class="designer-info">
             <h3 class="designer-name">A.R. Yousefzadeh</h3>
-            <p class="designer-title">Senior Educational Software Designer</p>
+            <p class="designer-title">Educational Material Designer</p>
         </div>
     </div>
 
@@ -890,19 +917,20 @@
         <header>
             <h1>English Handwriting Practice</h1>
             <p class="subtitle">Learn to write English letters correctly with interactive practice</p>
-            
-            <div class="download-section">
-                <a href="https://www.handwritingforkids.com/handwrite/manuscript/alphabets/images/tguideu.gif" class="download-btn" target="_blank">
-                    <i class="fas fa-download"></i> Uppercase Tracing Guide
-                </a>
-                <a href="https://www.handwritingforkids.com/handwrite/manuscript/alphabets/images/tguidel.gif" class="download-btn" target="_blank">
-                    <i class="fas fa-download"></i> Lowercase Tracing Guide
-                </a>
-            </div>
         </header>
         
         <div class="alphabet-grid" id="alphabetGrid">
             <!-- Alphabet cards will be added by JavaScript -->
+        </div>
+        
+        <!-- Download Section - Moved below alphabet grid -->
+        <div class="download-section">
+            <a href="https://s34.picofile.com/file/8488325968/Capital_Letters_Tracing_Guide.gif" class="download-btn" target="_blank">
+                <i class="fas fa-download"></i> Uppercase Tracing Guide
+            </a>
+            <a href="https://s34.picofile.com/file/8488326018/Small_Letters_Tracing_Guide.gif" class="download-btn" target="_blank">
+                <i class="fas fa-download"></i> Lowercase Tracing Guide
+            </a>
         </div>
     </div>
 
@@ -916,9 +944,15 @@
             </button>
         </div>
         
-        <button class="sound-btn" id="letterSoundBtn">
-            <i class="fas fa-volume-up"></i>
-        </button>
+        <!-- Letter Sound Controls -->
+        <div class="letter-sound-controls">
+            <button class="sound-control-btn letter-name" id="letterNameBtn">
+                <i class="fas fa-font"></i> Letter Name
+            </button>
+            <button class="sound-control-btn letter-sound" id="letterSoundBtn">
+                <i class="fas fa-volume-up"></i> Letter Sound
+            </button>
+        </div>
         
         <div class="popup-content">
             <div class="animation-section">
@@ -1159,34 +1193,43 @@
             }
         };
 
-        // Complete example words for all letters
+        // Complete example words for all letters (4 examples for each letter)
         const exampleWords = {
-            'A': ['Apple', 'Ant', 'Airplane'],
-            'B': ['Ball', 'Banana', 'Butterfly'],
-            'C': ['Cat', 'Car', 'Cake'],
-            'D': ['Dog', 'Duck', 'Dolphin'],
-            'E': ['Elephant', 'Egg', 'Eagle'],
-            'F': ['Fish', 'Flower', 'Frog'],
-            'G': ['Goat', 'Grapes', 'Giraffe'],
-            'H': ['House', 'Hat', 'Horse'],
-            'I': ['Ice Cream', 'Igloo', 'Island'],
-            'J': ['Jellyfish', 'Juice', 'Jacket'],
-            'K': ['Kite', 'Kangaroo', 'Key'],
-            'L': ['Lion', 'Lemon', 'Leaf'],
-            'M': ['Monkey', 'Moon', 'Milk'],
-            'N': ['Nest', 'Nose', 'Net'],
-            'O': ['Orange', 'Owl', 'Ocean'],
-            'P': ['Pencil', 'Pig', 'Pizza'],
-            'Q': ['Queen', 'Quilt', 'Quail'],
-            'R': ['Rabbit', 'Rainbow', 'Rose'],
-            'S': ['Sun', 'Star', 'Snake'],
-            'T': ['Tree', 'Tiger', 'Table'],
-            'U': ['Umbrella', 'Unicorn', 'Uniform'],
-            'V': ['Violin', 'Volcano', 'Vegetable'],
-            'W': ['Watermelon', 'Whale', 'Window'],
-            'X': ['Xylophone', 'X-ray', 'Fox'],
-            'Y': ['Yoyo', 'Yellow', 'Yacht'],
-            'Z': ['Zebra', 'Zoo', 'Zipper']
+            'A': ['Apple', 'Ant', 'Airplane', 'Arrow'],
+            'B': ['Ball', 'Banana', 'Butterfly', 'Book'],
+            'C': ['Cat', 'Car', 'Cake', 'Cloud'],
+            'D': ['Dog', 'Duck', 'Dolphin', 'Door'],
+            'E': ['Elephant', 'Egg', 'Eagle', 'Ear'],
+            'F': ['Fish', 'Flower', 'Frog', 'Flag'],
+            'G': ['Goat', 'Grapes', 'Giraffe', 'Gift'],
+            'H': ['House', 'Hat', 'Horse', 'Heart'],
+            'I': ['Ice Cream', 'Igloo', 'Island', 'Ice'],
+            'J': ['Jellyfish', 'Juice', 'Jacket', 'Jar'],
+            'K': ['Kite', 'Kangaroo', 'Key', 'King'],
+            'L': ['Lion', 'Lemon', 'Leaf', 'Lamp'],
+            'M': ['Monkey', 'Moon', 'Milk', 'Mouse'],
+            'N': ['Nest', 'Nose', 'Net', 'Nut'],
+            'O': ['Orange', 'Owl', 'Ocean', 'Onion'],
+            'P': ['Pencil', 'Pig', 'Pizza', 'Pear'],
+            'Q': ['Queen', 'Quilt', 'Quail', 'Question'],
+            'R': ['Rabbit', 'Rainbow', 'Rose', 'Ring'],
+            'S': ['Sun', 'Star', 'Snake', 'Sock'],
+            'T': ['Tree', 'Tiger', 'Table', 'Toy'],
+            'U': ['Umbrella', 'Unicorn', 'Uniform', 'Up'],
+            'V': ['Violin', 'Volcano', 'Vegetable', 'Van'],
+            'W': ['Watermelon', 'Whale', 'Window', 'Watch'],
+            'X': ['Xylophone', 'X-ray', 'Fox', 'Box'],
+            'Y': ['Yoyo', 'Yellow', 'Yacht', 'Yogurt'],
+            'Z': ['Zebra', 'Zoo', 'Zipper', 'Zero']
+        };
+
+        // Letter sounds for pronunciation
+        const letterSounds = {
+            'A': 'æ', 'B': 'b', 'C': 'k', 'D': 'd', 'E': 'ɛ', 
+            'F': 'f', 'G': 'g', 'H': 'h', 'I': 'ɪ', 'J': 'dʒ', 
+            'K': 'k', 'L': 'l', 'M': 'm', 'N': 'n', 'O': 'ɒ', 
+            'P': 'p', 'Q': 'kw', 'R': 'r', 'S': 's', 'T': 't', 
+            'U': 'ʌ', 'V': 'v', 'W': 'w', 'X': 'ks', 'Y': 'j', 'Z': 'z'
         };
 
         // Animation state management
@@ -1314,12 +1357,9 @@
                 
                 // Reset animation states
                 resetAnimations();
-                
-                // Play letter sound
-                playLetterSound(letter);
             }
             
-            // Update example words - FIXED: Now works for all letters
+            // Update example words
             updateExamples(letter);
             
             // Clear canvas
@@ -1367,6 +1407,47 @@
             });
         }
 
+        // Play letter name
+        function playLetterName() {
+            const synth = window.speechSynthesis;
+            synth.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(currentLetter);
+            utterance.rate = 0.8;
+            utterance.pitch = 1.1;
+            utterance.volume = 1;
+            
+            const voices = synth.getVoices();
+            const femaleVoice = voices.find(voice => 
+                voice.name.includes('Female') || voice.name.includes('woman') ||
+                voice.name.includes('Samantha') || voice.name.includes('Karen')
+            );
+            
+            if (femaleVoice) utterance.voice = femaleVoice;
+            synth.speak(utterance);
+        }
+
+        // Play letter sound
+        function playLetterSound() {
+            const synth = window.speechSynthesis;
+            synth.cancel();
+            
+            const sound = letterSounds[currentLetter] || currentLetter;
+            const utterance = new SpeechSynthesisUtterance(`The sound is ${sound}`);
+            utterance.rate = 0.7;
+            utterance.pitch = 1.2;
+            utterance.volume = 1;
+            
+            const voices = synth.getVoices();
+            const femaleVoice = voices.find(voice => 
+                voice.name.includes('Female') || voice.name.includes('woman') ||
+                voice.name.includes('Samantha') || voice.name.includes('Karen')
+            );
+            
+            if (femaleVoice) utterance.voice = femaleVoice;
+            synth.speak(utterance);
+        }
+
         // Reset animations to initial state
         function resetAnimations() {
             // Hide animation images
@@ -1392,7 +1473,7 @@
             document.getElementById('lowercaseBox').classList.remove('animation-playing');
         }
 
-        // Update example words section - FIXED: Now works for all letters
+        // Update example words section
         function updateExamples(letter) {
             const examplesGrid = document.getElementById('examplesGrid');
             examplesGrid.innerHTML = '';
@@ -1414,65 +1495,23 @@
             });
         }
 
-        // Play letter sound with clear female voice
-        function playLetterSound(letter) {
-            const synth = window.speechSynthesis;
-            
-            // Cancel any ongoing speech
-            synth.cancel();
-            
-            const utterance = new SpeechSynthesisUtterance(letter);
-            
-            // Configure for clear female voice
-            utterance.rate = 0.8;
-            utterance.pitch = 1.2;
-            utterance.volume = 1;
-            
-            // Try to get a female voice
-            const voices = synth.getVoices();
-            const femaleVoice = voices.find(voice => 
-                voice.name.includes('Female') || 
-                voice.name.includes('woman') ||
-                voice.name.includes('Samantha') ||
-                voice.name.includes('Karen') ||
-                voice.name.includes('Victoria')
-            );
-            
-            if (femaleVoice) {
-                utterance.voice = femaleVoice;
-            }
-            
-            synth.speak(utterance);
-        }
-
         // Play word sound with clear female voice
         function playWordSound(word) {
             const synth = window.speechSynthesis;
-            
-            // Cancel any ongoing speech
             synth.cancel();
             
             const utterance = new SpeechSynthesisUtterance(word);
-            
-            // Configure for clear female voice
             utterance.rate = 0.7;
             utterance.pitch = 1.1;
             utterance.volume = 1;
             
-            // Try to get a female voice
             const voices = synth.getVoices();
             const femaleVoice = voices.find(voice => 
-                voice.name.includes('Female') || 
-                voice.name.includes('woman') ||
-                voice.name.includes('Samantha') ||
-                voice.name.includes('Karen') ||
-                voice.name.includes('Victoria')
+                voice.name.includes('Female') || voice.name.includes('woman') ||
+                voice.name.includes('Samantha') || voice.name.includes('Karen')
             );
             
-            if (femaleVoice) {
-                utterance.voice = femaleVoice;
-            }
-            
+            if (femaleVoice) utterance.voice = femaleVoice;
             synth.speak(utterance);
         }
 
@@ -1624,9 +1663,16 @@
             document.getElementById('closePopup').addEventListener('click', closeLetterPopup);
             document.getElementById('popupOverlay').addEventListener('click', closeLetterPopup);
             
+            // Letter name button
+            document.getElementById('letterNameBtn').addEventListener('click', function() {
+                playLetterName();
+                this.classList.add('pulse');
+                setTimeout(() => this.classList.remove('pulse'), 500);
+            });
+            
             // Letter sound button
             document.getElementById('letterSoundBtn').addEventListener('click', function() {
-                playLetterSound(currentLetter);
+                playLetterSound();
                 this.classList.add('pulse');
                 setTimeout(() => this.classList.remove('pulse'), 500);
             });
