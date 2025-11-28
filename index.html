@@ -423,7 +423,7 @@
             align-items: center;
             gap: 8px;
             font-size: 1rem;
-            min-width: 120px;
+            min-width: 140px;
             justify-content: center;
         }
         
@@ -783,7 +783,7 @@
             }
             
             .sound-control-btn {
-                min-width: 100px;
+                min-width: 120px;
             }
         }
         
@@ -891,10 +891,10 @@
         <!-- Letter Sound Controls -->
         <div class="letter-sound-controls">
             <button class="sound-control-btn letter-name" id="letterNameBtn">
-                <i class="fas fa-font"></i> Letter Name
+                <i class="fas fa-font"></i> A Letter Name
             </button>
             <button class="sound-control-btn letter-sound" id="letterSoundBtn">
-                <i class="fas fa-volume-up"></i> Letter Sound
+                <i class="fas fa-volume-up"></i> A Sound
             </button>
         </div>
         
@@ -1141,13 +1141,13 @@
             'Z': ['Zebra', 'Zoo', 'Zipper', 'Zero']
         };
 
-        // Correct letter sounds for pronunciation
+        // Correct letter sounds for pronunciation (PHONETIC SOUNDS)
         const letterSounds = {
-            'A': 'ay', 'B': 'bee', 'C': 'see', 'D': 'dee', 'E': 'ee', 
-            'F': 'ef', 'G': 'jee', 'H': 'aych', 'I': 'eye', 'J': 'jay', 
-            'K': 'kay', 'L': 'el', 'M': 'em', 'N': 'en', 'O': 'oh', 
-            'P': 'pee', 'Q': 'kyoo', 'R': 'ar', 'S': 'ess', 'T': 'tee', 
-            'U': 'yoo', 'V': 'vee', 'W': 'double-yoo', 'X': 'eks', 'Y': 'wie', 'Z': 'zed'
+            'A': 'æ', 'B': 'b', 'C': 'k', 'D': 'd', 'E': 'ɛ', 
+            'F': 'f', 'G': 'g', 'H': 'h', 'I': 'ɪ', 'J': 'dʒ', 
+            'K': 'k', 'L': 'l', 'M': 'm', 'N': 'n', 'O': 'ɒ', 
+            'P': 'p', 'Q': 'kw', 'R': 'r', 'S': 's', 'T': 't', 
+            'U': 'ʌ', 'V': 'v', 'W': 'w', 'X': 'ks', 'Y': 'j', 'Z': 'z'
         };
 
         // Animation state management
@@ -1158,101 +1158,13 @@
 
         let currentLetter = 'A';
         let isMusicPlaying = false;
-        let audioContextInitialized = false;
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             initializeAlphabet();
             initializeCanvas();
             setupEventListeners();
-            initializeAudio();
         });
-
-        // Initialize audio system with better music handling
-        function initializeAudio() {
-            const backgroundMusic = document.getElementById('backgroundMusic');
-            const musicControl = document.getElementById('musicControl');
-            
-            // Set music volume
-            backgroundMusic.volume = 0.3;
-            
-            // Enable audio on user interaction
-            const enableAudio = () => {
-                if (!audioContextInitialized) {
-                    // Create and play a silent sound to unlock audio
-                    const silentAudio = new Audio();
-                    silentAudio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==';
-                    silentAudio.play().then(() => {
-                        silentAudio.pause();
-                        audioContextInitialized = true;
-                        console.log('Audio context initialized');
-                    }).catch(e => {
-                        console.log('Silent audio play failed:', e);
-                    });
-                }
-            };
-
-            // Enable audio on any user interaction
-            document.addEventListener('click', enableAudio, { once: true });
-            document.addEventListener('touchstart', enableAudio, { once: true });
-
-            // Music control with direct audio handling
-            musicControl.addEventListener('click', function(e) {
-                e.stopPropagation();
-                
-                if (!audioContextInitialized) {
-                    enableAudio();
-                    setTimeout(() => {
-                        toggleMusic();
-                    }, 100);
-                    return;
-                }
-                
-                toggleMusic();
-            });
-
-            function toggleMusic() {
-                try {
-                    if (isMusicPlaying) {
-                        backgroundMusic.pause();
-                        musicControl.classList.remove('playing');
-                        musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                        isMusicPlaying = false;
-                    } else {
-                        // Set volume before playing
-                        backgroundMusic.volume = 0.3;
-                        
-                        const playPromise = backgroundMusic.play();
-                        
-                        if (playPromise !== undefined) {
-                            playPromise.then(() => {
-                                musicControl.classList.add('playing');
-                                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                                isMusicPlaying = true;
-                            }).catch(error => {
-                                console.log('Audio play failed:', error);
-                                // Show user-friendly message
-                                alert('🔊 Please click anywhere on the page first, then click the music button to enable background music.');
-                            });
-                        }
-                    }
-                } catch (error) {
-                    console.log('Music toggle error:', error);
-                }
-            }
-
-            // Handle audio errors
-            backgroundMusic.addEventListener('error', function(e) {
-                console.log('Audio error:', e);
-                musicControl.style.background = 'linear-gradient(135deg, #ff6b6b, #ff5252)';
-                musicControl.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
-            });
-
-            // Handle audio loading
-            backgroundMusic.addEventListener('canplaythrough', function() {
-                console.log('Audio ready to play');
-            });
-        }
 
         // Initialize alphabet cards
         function initializeAlphabet() {
@@ -1289,6 +1201,10 @@
             
             // Update popup title
             document.getElementById('popupTitle').textContent = `Letter ${letter}`;
+            
+            // Update button texts
+            document.getElementById('letterNameBtn').innerHTML = '<i class="fas fa-font"></i> ' + letter + ' Letter Name';
+            document.getElementById('letterSoundBtn').innerHTML = '<i class="fas fa-volume-up"></i> ' + letter + ' Sound';
             
             // Update animations
             const data = letterData[letter];
@@ -1369,14 +1285,15 @@
             synth.speak(utterance);
         }
 
-        // Play letter sound - CORRECTED
+        // Play letter sound - CORRECTED PHONETIC SOUND
         function playLetterSound() {
             const synth = window.speechSynthesis;
             synth.cancel();
             
-            const sound = letterSounds[currentLetter];
-            const utterance = new SpeechSynthesisUtterance(sound);
-            utterance.rate = 0.7;
+            // Play the phonetic sound directly
+            const soundText = getPhoneticSound(currentLetter);
+            const utterance = new SpeechSynthesisUtterance(soundText);
+            utterance.rate = 0.6;
             utterance.pitch = 1.0;
             utterance.volume = 1;
             
@@ -1389,6 +1306,18 @@
             
             if (femaleVoice) utterance.voice = femaleVoice;
             synth.speak(utterance);
+        }
+
+        // Get phonetic sound for each letter
+        function getPhoneticSound(letter) {
+            const phoneticSounds = {
+                'A': 'ah', 'B': 'buh', 'C': 'kuh', 'D': 'duh', 'E': 'eh',
+                'F': 'fuh', 'G': 'guh', 'H': 'huh', 'I': 'ih', 'J': 'juh',
+                'K': 'kuh', 'L': 'luh', 'M': 'muh', 'N': 'nuh', 'O': 'oh',
+                'P': 'puh', 'Q': 'kwuh', 'R': 'ruh', 'S': 'sss', 'T': 'tuh',
+                'U': 'uh', 'V': 'vuh', 'W': 'wuh', 'X': 'ks', 'Y': 'yuh', 'Z': 'zzz'
+            };
+            return phoneticSounds[letter] || letter;
         }
 
         // Reset animations to initial state
@@ -1546,6 +1475,33 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
+        // Music control function
+        function toggleMusic() {
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const musicControl = document.getElementById('musicControl');
+            
+            try {
+                if (isMusicPlaying) {
+                    backgroundMusic.pause();
+                    musicControl.classList.remove('playing');
+                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    isMusicPlaying = false;
+                } else {
+                    backgroundMusic.volume = 0.3;
+                    backgroundMusic.play().then(() => {
+                        musicControl.classList.add('playing');
+                        musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                        isMusicPlaying = true;
+                    }).catch(error => {
+                        console.log('Music play failed:', error);
+                        alert('Please click anywhere on the page first, then click the music button to enable background music.');
+                    });
+                }
+            } catch (error) {
+                console.log('Music toggle error:', error);
+            }
+        }
+
         // Animation control functions
         function playUppercaseAnimation() {
             const img = document.getElementById('uppercaseAnimation');
@@ -1621,6 +1577,11 @@
                 setTimeout(() => this.classList.remove('pulse'), 500);
             });
             
+            // Music control
+            document.getElementById('musicControl').addEventListener('click', function() {
+                toggleMusic();
+            });
+            
             // Clear button
             document.getElementById('clearBtn').addEventListener('click', clearCanvas);
             
@@ -1686,6 +1647,17 @@
                     closeLetterPopup();
                 }
             });
+
+            // Enable audio on first click
+            document.addEventListener('click', function initAudio() {
+                const backgroundMusic = document.getElementById('backgroundMusic');
+                backgroundMusic.volume = 0;
+                backgroundMusic.play().then(() => {
+                    backgroundMusic.pause();
+                    backgroundMusic.volume = 0.3;
+                }).catch(e => console.log('Audio init:', e));
+                document.removeEventListener('click', initAudio);
+            }, { once: true });
         }
     </script>
 </body>
