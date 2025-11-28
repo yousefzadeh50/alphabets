@@ -41,7 +41,7 @@
             margin: 0 auto;
         }
         
-        /* Designer Card - Smaller and Improved */
+        /* Designer Card */
         .designer-card {
             position: fixed;
             top: 15px;
@@ -140,11 +140,18 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
         
-        /* Music Control - Fixed */
-        .music-control {
+        /* Music Control */
+        .music-control-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .music-control {
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             border-radius: 50%;
             width: 60px;
@@ -153,7 +160,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 1000;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             border: 3px solid white;
@@ -176,6 +182,22 @@
         
         .music-control.playing i {
             color: white;
+        }
+        
+        .volume-control {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .volume-control input {
+            width: 80px;
+            cursor: pointer;
         }
         
         header {
@@ -785,6 +807,15 @@
             .sound-control-btn {
                 min-width: 120px;
             }
+            
+            .music-control-container {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            .volume-control {
+                order: -1;
+            }
         }
         
         @media (max-width: 480px) {
@@ -852,9 +883,16 @@
         </div>
     </div>
 
-    <!-- Music Control -->
-    <div class="music-control" id="musicControl">
-        <i class="fas fa-volume-up"></i>
+    <!-- Music Control with Volume -->
+    <div class="music-control-container">
+        <div class="volume-control">
+            <i class="fas fa-volume-down"></i>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.3">
+            <i class="fas fa-volume-up"></i>
+        </div>
+        <div class="music-control" id="musicControl">
+            <i class="fas fa-volume-up"></i>
+        </div>
     </div>
 
     <div class="container">
@@ -891,10 +929,10 @@
         <!-- Letter Sound Controls -->
         <div class="letter-sound-controls">
             <button class="sound-control-btn letter-name" id="letterNameBtn">
-                <i class="fas fa-font"></i> A Letter Name
+                <i class="fas fa-font"></i> Letter Name
             </button>
             <button class="sound-control-btn letter-sound" id="letterSoundBtn">
-                <i class="fas fa-volume-up"></i> A Sound
+                <i class="fas fa-volume-up"></i> Letter Sound
             </button>
         </div>
         
@@ -982,683 +1020,490 @@
             'A': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_a.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_a.gif',
-                type: 'vowel'
+                type: 'vowel',
+                examples: ['Apple', 'Ant', 'Alligator', 'Airplane']
             },
             'B': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_b.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_b.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Ball', 'Bear', 'Butterfly', 'Banana']
             },
             'C': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_c.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_c.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Cat', 'Car', 'Cake', 'Cloud']
             },
             'D': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_d.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_d.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Dog', 'Duck', 'Dolphin', 'Dinosaur']
             },
             'E': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_e.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_e.gif',
-                type: 'vowel'
+                type: 'vowel',
+                examples: ['Elephant', 'Egg', 'Eagle', 'Earth']
             },
             'F': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_f.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_f.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Fish', 'Flower', 'Frog', 'Fox']
             },
             'G': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_g.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_g.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Goat', 'Grapes', 'Giraffe', 'Gift']
             },
             'H': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_h.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_h.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['House', 'Heart', 'Horse', 'Hat']
             },
             'I': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_i.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_i.gif',
-                type: 'vowel'
+                type: 'vowel',
+                examples: ['Ice Cream', 'Igloo', 'Island', 'Insect']
             },
             'J': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_j.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_j.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Jellyfish', 'Jar', 'Jacket', 'Juice']
             },
             'K': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_k.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_k.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Kite', 'Key', 'Kangaroo', 'King']
             },
             'L': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_l.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_l.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Lion', 'Leaf', 'Lemon', 'Lamp']
             },
             'M': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_m.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_m.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Monkey', 'Moon', 'Mouse', 'Milk']
             },
             'N': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_n.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_n.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Nest', 'Nose', 'Net', 'Nut']
             },
             'O': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_o.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_o.gif',
-                type: 'vowel'
+                type: 'vowel',
+                examples: ['Orange', 'Owl', 'Octopus', 'Ocean']
             },
             'P': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_p.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_p.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Pig', 'Pencil', 'Pizza', 'Penguin']
             },
             'Q': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_q.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_q.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Queen', 'Quilt', 'Quail', 'Question']
             },
             'R': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_r.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_r.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Rabbit', 'Rainbow', 'Robot', 'Rose']
             },
             'S': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_s.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_s.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Sun', 'Star', 'Snake', 'Socks']
             },
             'T': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_t.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_t.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Tiger', 'Tree', 'Train', 'Turtle']
             },
             'U': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_u.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_u.gif',
-                type: 'vowel'
+                type: 'vowel',
+                examples: ['Umbrella', 'Unicorn', 'Under', 'Up']
             },
             'V': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_v.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_v.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Violin', 'Volcano', 'Vegetable', 'Van']
             },
             'W': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_w.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_w.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Watermelon', 'Whale', 'Wheel', 'Window']
             },
             'X': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_x.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_x.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Xylophone', 'X-ray', 'Fox', 'Box']
             },
             'Y': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_y.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_y.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Yoyo', 'Yellow', 'Yak', 'Yacht']
             },
             'Z': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_z.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_z.gif',
-                type: 'consonant'
+                type: 'consonant',
+                examples: ['Zebra', 'Zoo', 'Zipper', 'Zero']
             }
         };
 
-        // Complete example words for all letters (4 examples for each letter)
-        const exampleWords = {
-            'A': ['Apple', 'Ant', 'Airplane', 'Arrow'],
-            'B': ['Ball', 'Banana', 'Butterfly', 'Book'],
-            'C': ['Cat', 'Car', 'Cake', 'Cloud'],
-            'D': ['Dog', 'Duck', 'Dolphin', 'Door'],
-            'E': ['Elephant', 'Egg', 'Eagle', 'Ear'],
-            'F': ['Fish', 'Flower', 'Frog', 'Flag'],
-            'G': ['Goat', 'Grapes', 'Giraffe', 'Gift'],
-            'H': ['House', 'Hat', 'Horse', 'Heart'],
-            'I': ['Ice Cream', 'Igloo', 'Island', 'Ice'],
-            'J': ['Jellyfish', 'Juice', 'Jacket', 'Jar'],
-            'K': ['Kite', 'Kangaroo', 'Key', 'King'],
-            'L': ['Lion', 'Lemon', 'Leaf', 'Lamp'],
-            'M': ['Monkey', 'Moon', 'Milk', 'Mouse'],
-            'N': ['Nest', 'Nose', 'Net', 'Nut'],
-            'O': ['Orange', 'Owl', 'Ocean', 'Onion'],
-            'P': ['Pencil', 'Pig', 'Pizza', 'Pear'],
-            'Q': ['Queen', 'Quilt', 'Quail', 'Question'],
-            'R': ['Rabbit', 'Rainbow', 'Rose', 'Ring'],
-            'S': ['Sun', 'Star', 'Snake', 'Sock'],
-            'T': ['Tree', 'Tiger', 'Table', 'Toy'],
-            'U': ['Umbrella', 'Unicorn', 'Uniform', 'Up'],
-            'V': ['Violin', 'Volcano', 'Vegetable', 'Van'],
-            'W': ['Watermelon', 'Whale', 'Window', 'Watch'],
-            'X': ['Xylophone', 'X-ray', 'Fox', 'Box'],
-            'Y': ['Yoyo', 'Yellow', 'Yacht', 'Yogurt'],
-            'Z': ['Zebra', 'Zoo', 'Zipper', 'Zero']
-        };
+        // DOM Elements
+        const alphabetGrid = document.getElementById('alphabetGrid');
+        const letterPopup = document.getElementById('letterPopup');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const closePopup = document.getElementById('closePopup');
+        const popupTitle = document.getElementById('popupTitle');
+        const uppercaseAnimation = document.getElementById('uppercaseAnimation');
+        const lowercaseAnimation = document.getElementById('lowercaseAnimation');
+        const uppercaseBox = document.getElementById('uppercaseBox');
+        const lowercaseBox = document.getElementById('lowercaseBox');
+        const uppercaseOverlay = document.getElementById('uppercaseOverlay');
+        const lowercaseOverlay = document.getElementById('lowercaseOverlay');
+        const playUppercase = document.getElementById('playUppercase');
+        const pauseUppercase = document.getElementById('pauseUppercase');
+        const replayUppercase = document.getElementById('replayUppercase');
+        const playLowercase = document.getElementById('playLowercase');
+        const pauseLowercase = document.getElementById('pauseLowercase');
+        const replayLowercase = document.getElementById('replayLowercase');
+        const examplesGrid = document.getElementById('examplesGrid');
+        const letterNameBtn = document.getElementById('letterNameBtn');
+        const letterSoundBtn = document.getElementById('letterSoundBtn');
+        const writingCanvas = document.getElementById('writingCanvas');
+        const clearBtn = document.getElementById('clearBtn');
+        const checkBtn = document.getElementById('checkBtn');
+        const penColor = document.getElementById('penColor');
+        const penWidth = document.getElementById('penWidth');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const musicControl = document.getElementById('musicControl');
+        const volumeControl = document.getElementById('volumeControl');
+        const hoverSound = document.getElementById('hoverSound');
+        const letterClickSound = document.getElementById('letterClickSound');
 
-        // Correct letter sounds for pronunciation (PHONETIC SOUNDS)
-        const letterSounds = {
-            'A': 'æ', 'B': 'b', 'C': 'k', 'D': 'd', 'E': 'ɛ', 
-            'F': 'f', 'G': 'g', 'H': 'h', 'I': 'ɪ', 'J': 'dʒ', 
-            'K': 'k', 'L': 'l', 'M': 'm', 'N': 'n', 'O': 'ɒ', 
-            'P': 'p', 'Q': 'kw', 'R': 'r', 'S': 's', 'T': 't', 
-            'U': 'ʌ', 'V': 'v', 'W': 'w', 'X': 'ks', 'Y': 'j', 'Z': 'z'
-        };
-
-        // Animation state management
-        const animationState = {
-            uppercase: { playing: false },
-            lowercase: { playing: false }
-        };
-
+        // Current selected letter
         let currentLetter = 'A';
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
         let isMusicPlaying = false;
 
         // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeAlphabet();
-            initializeCanvas();
+        function init() {
+            createAlphabetGrid();
             setupEventListeners();
-        });
+            setupCanvas();
+            setupAudio();
+        }
 
-        // Initialize alphabet cards
-        function initializeAlphabet() {
-            const alphabetGrid = document.getElementById('alphabetGrid');
-            
-            // Create cards for A-Z
-            for (let i = 65; i <= 90; i++) {
-                const letter = String.fromCharCode(i);
-                const lowercase = letter.toLowerCase();
+        // Create alphabet grid
+        function createAlphabetGrid() {
+            for (let letter in letterData) {
+                const letterCard = document.createElement('div');
+                letterCard.className = 'letter-card';
+                letterCard.dataset.letter = letter;
                 
-                const card = document.createElement('button');
-                card.className = 'letter-card';
-                card.innerHTML = `
+                letterCard.innerHTML = `
                     <div class="uppercase-letter">${letter}</div>
-                    <div class="lowercase-letter">${lowercase}</div>
+                    <div class="lowercase-letter">${letter.toLowerCase()}</div>
                 `;
                 
+                alphabetGrid.appendChild(letterCard);
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Letter card clicks
+            document.querySelectorAll('.letter-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    playLetterClickSound();
-                    card.classList.add('bounce');
-                    setTimeout(() => card.classList.remove('bounce'), 1000);
+                    const letter = card.dataset.letter;
                     openLetterPopup(letter);
+                    playSound(letterClickSound);
                 });
                 
-                alphabetGrid.appendChild(card);
-            }
+                card.addEventListener('mouseenter', () => {
+                    playSound(hoverSound);
+                });
+            });
+
+            // Popup controls
+            closePopup.addEventListener('click', closeLetterPopup);
+            popupOverlay.addEventListener('click', closeLetterPopup);
+
+            // Animation controls
+            playUppercase.addEventListener('click', () => playAnimation('uppercase'));
+            pauseUppercase.addEventListener('click', () => pauseAnimation('uppercase'));
+            replayUppercase.addEventListener('click', () => replayAnimation('uppercase'));
+            playLowercase.addEventListener('click', () => playAnimation('lowercase'));
+            pauseLowercase.addEventListener('click', () => pauseAnimation('lowercase'));
+            replayLowercase.addEventListener('click', () => replayAnimation('lowercase'));
+
+            // Sound controls
+            letterNameBtn.addEventListener('click', playLetterName);
+            letterSoundBtn.addEventListener('click', playLetterSound);
+
+            // Canvas controls
+            clearBtn.addEventListener('click', clearCanvas);
+            checkBtn.addEventListener('click', checkWriting);
+
+            // Music controls
+            musicControl.addEventListener('click', toggleMusic);
+            volumeControl.addEventListener('input', adjustVolume);
+        }
+
+        // Setup canvas for drawing
+        function setupCanvas() {
+            const ctx = writingCanvas.getContext('2d');
+            
+            // Set canvas size
+            writingCanvas.width = writingCanvas.offsetWidth;
+            writingCanvas.height = writingCanvas.offsetHeight;
+            
+            // Set initial drawing style
+            ctx.strokeStyle = penColor.value;
+            ctx.lineWidth = penWidth.value;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // Drawing events
+            writingCanvas.addEventListener('mousedown', startDrawing);
+            writingCanvas.addEventListener('mousemove', draw);
+            writingCanvas.addEventListener('mouseup', stopDrawing);
+            writingCanvas.addEventListener('mouseout', stopDrawing);
+            
+            // Touch events for mobile
+            writingCanvas.addEventListener('touchstart', handleTouchStart);
+            writingCanvas.addEventListener('touchmove', handleTouchMove);
+            writingCanvas.addEventListener('touchend', stopDrawing);
+        }
+
+        // Setup audio
+        function setupAudio() {
+            backgroundMusic.volume = volumeControl.value;
+            
+            // Preload sounds
+            hoverSound.volume = 0.3;
+            letterClickSound.volume = 0.5;
         }
 
         // Open letter popup
         function openLetterPopup(letter) {
             currentLetter = letter;
-            const popup = document.getElementById('letterPopup');
-            const overlay = document.getElementById('popupOverlay');
+            popupTitle.textContent = `Letter ${letter}`;
             
-            // Update popup title
-            document.getElementById('popupTitle').textContent = `Letter ${letter}`;
+            // Set animation images
+            uppercaseAnimation.src = letterData[letter].uppercase;
+            lowercaseAnimation.src = letterData[letter].lowercase;
             
-            // Update button texts
-            document.getElementById('letterNameBtn').innerHTML = '<i class="fas fa-font"></i> ' + letter + ' Letter Name';
-            document.getElementById('letterSoundBtn').innerHTML = '<i class="fas fa-volume-up"></i> ' + letter + ' Sound';
+            // Reset animation states
+            resetAnimations();
             
-            // Update animations
-            const data = letterData[letter];
-            if (data) {
-                document.getElementById('uppercaseAnimation').src = data.uppercase;
-                document.getElementById('lowercaseAnimation').src = data.lowercase;
-                
-                // Reset animation states
-                resetAnimations();
-            }
-            
-            // Update example words
-            updateExamples(letter);
+            // Create example words
+            createExampleWords(letter);
             
             // Clear canvas
             clearCanvas();
             
             // Show popup
-            popup.classList.add('active');
-            overlay.classList.add('active');
+            letterPopup.classList.add('active');
+            popupOverlay.classList.add('active');
             
-            // Prevent body scroll
-            document.body.style.overflow = 'hidden';
-            
-            // Add glow effect to active letter
-            document.querySelectorAll('.letter-card').forEach(card => {
-                card.classList.remove('active', 'glow');
-                if (card.querySelector('.uppercase-letter').textContent === letter) {
-                    card.classList.add('active', 'glow');
-                }
-            });
+            // Play letter name by default
+            setTimeout(playLetterName, 500);
         }
 
         // Close letter popup
         function closeLetterPopup() {
-            const popup = document.getElementById('letterPopup');
-            const overlay = document.getElementById('popupOverlay');
-            
-            popup.classList.remove('active');
-            overlay.classList.remove('active');
-            
-            // Restore body scroll
-            document.body.style.overflow = '';
-            
-            // Reset all animations
+            letterPopup.classList.remove('active');
+            popupOverlay.classList.remove('active');
             resetAnimations();
         }
 
-        // Play letter click sound
-        function playLetterClickSound() {
-            const clickSound = document.getElementById('letterClickSound');
-            clickSound.volume = 0.6;
-            clickSound.currentTime = 0;
-            
-            clickSound.play().catch(error => {
-                console.log('Click sound play failed:', error);
-            });
-        }
-
-        // Play letter name
-        function playLetterName() {
-            const synth = window.speechSynthesis;
-            synth.cancel();
-            
-            const utterance = new SpeechSynthesisUtterance(currentLetter);
-            utterance.rate = 0.7;
-            utterance.pitch = 1.0;
-            utterance.volume = 1;
-            
-            const voices = synth.getVoices();
-            const femaleVoice = voices.find(voice => 
-                voice.name.includes('Female') || voice.name.includes('woman') ||
-                voice.name.includes('Samantha') || voice.name.includes('Karen') ||
-                voice.name.includes('Victoria')
-            );
-            
-            if (femaleVoice) utterance.voice = femaleVoice;
-            synth.speak(utterance);
-        }
-
-        // Play letter sound - CORRECTED PHONETIC SOUND
-        function playLetterSound() {
-            const synth = window.speechSynthesis;
-            synth.cancel();
-            
-            // Play the phonetic sound directly
-            const soundText = getPhoneticSound(currentLetter);
-            const utterance = new SpeechSynthesisUtterance(soundText);
-            utterance.rate = 0.6;
-            utterance.pitch = 1.0;
-            utterance.volume = 1;
-            
-            const voices = synth.getVoices();
-            const femaleVoice = voices.find(voice => 
-                voice.name.includes('Female') || voice.name.includes('woman') ||
-                voice.name.includes('Samantha') || voice.name.includes('Karen') ||
-                voice.name.includes('Victoria')
-            );
-            
-            if (femaleVoice) utterance.voice = femaleVoice;
-            synth.speak(utterance);
-        }
-
-        // Get phonetic sound for each letter
-        function getPhoneticSound(letter) {
-            const phoneticSounds = {
-                'A': 'ah', 'B': 'buh', 'C': 'kuh', 'D': 'duh', 'E': 'eh',
-                'F': 'fuh', 'G': 'guh', 'H': 'huh', 'I': 'ih', 'J': 'juh',
-                'K': 'kuh', 'L': 'luh', 'M': 'muh', 'N': 'nuh', 'O': 'oh',
-                'P': 'puh', 'Q': 'kwuh', 'R': 'ruh', 'S': 'sss', 'T': 'tuh',
-                'U': 'uh', 'V': 'vuh', 'W': 'wuh', 'X': 'ks', 'Y': 'yuh', 'Z': 'zzz'
-            };
-            return phoneticSounds[letter] || letter;
-        }
-
-        // Reset animations to initial state
-        function resetAnimations() {
-            // Hide animation images
-            document.getElementById('uppercaseAnimation').style.display = 'none';
-            document.getElementById('lowercaseAnimation').style.display = 'none';
-            
-            // Show overlays
-            document.getElementById('uppercaseOverlay').classList.remove('hidden');
-            document.getElementById('lowercaseOverlay').classList.remove('hidden');
-            
-            // Reset animation states
-            animationState.uppercase.playing = false;
-            animationState.lowercase.playing = false;
-            
-            // Reset button states
-            document.getElementById('playUppercase').style.display = 'flex';
-            document.getElementById('pauseUppercase').style.display = 'none';
-            document.getElementById('playLowercase').style.display = 'flex';
-            document.getElementById('pauseLowercase').style.display = 'none';
-            
-            // Remove playing class
-            document.getElementById('uppercaseBox').classList.remove('animation-playing');
-            document.getElementById('lowercaseBox').classList.remove('animation-playing');
-        }
-
-        // Update example words section
-        function updateExamples(letter) {
-            const examplesGrid = document.getElementById('examplesGrid');
+        // Create example words
+        function createExampleWords(letter) {
             examplesGrid.innerHTML = '';
             
-            const words = exampleWords[letter] || [];
-            
-            words.forEach(word => {
+            letterData[letter].examples.forEach(word => {
                 const exampleItem = document.createElement('div');
                 exampleItem.className = 'example-item';
                 
                 exampleItem.innerHTML = `
                     <div class="example-word">${word}</div>
-                    <button class="example-sound" onclick="playWordSound('${word}')">
+                    <button class="example-sound" data-word="${word}">
                         <i class="fas fa-volume-up"></i>
                     </button>
                 `;
                 
                 examplesGrid.appendChild(exampleItem);
             });
+            
+            // Add event listeners to example sound buttons
+            document.querySelectorAll('.example-sound').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // In a real app, you would play the word pronunciation here
+                    playSound(letterClickSound);
+                });
+            });
         }
 
-        // Play word sound with clear female voice
-        function playWordSound(word) {
-            const synth = window.speechSynthesis;
-            synth.cancel();
+        // Animation controls
+        function playAnimation(type) {
+            const box = type === 'uppercase' ? uppercaseBox : lowercaseBox;
+            const playBtn = type === 'uppercase' ? playUppercase : playLowercase;
+            const pauseBtn = type === 'uppercase' ? pauseUppercase : pauseLowercase;
+            const overlay = type === 'uppercase' ? uppercaseOverlay : lowercaseOverlay;
             
-            const utterance = new SpeechSynthesisUtterance(word);
-            utterance.rate = 0.7;
-            utterance.pitch = 1.0;
-            utterance.volume = 1;
-            
-            const voices = synth.getVoices();
-            const femaleVoice = voices.find(voice => 
-                voice.name.includes('Female') || voice.name.includes('woman') ||
-                voice.name.includes('Samantha') || voice.name.includes('Karen') ||
-                voice.name.includes('Victoria')
-            );
-            
-            if (femaleVoice) utterance.voice = femaleVoice;
-            synth.speak(utterance);
+            box.classList.add('animation-playing');
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'flex';
+            overlay.classList.add('hidden');
         }
 
-        // Initialize drawing canvas
-        function initializeCanvas() {
-            const canvas = document.getElementById('writingCanvas');
-            const ctx = canvas.getContext('2d');
-            let isDrawing = false;
-            let lastX = 0;
-            let lastY = 0;
+        function pauseAnimation(type) {
+            const box = type === 'uppercase' ? uppercaseBox : lowercaseBox;
+            const playBtn = type === 'uppercase' ? playUppercase : playLowercase;
+            const pauseBtn = type === 'uppercase' ? pauseUppercase : pauseLowercase;
             
-            // Set canvas size
-            function resizeCanvas() {
-                const container = canvas.parentElement;
-                canvas.width = container.clientWidth;
-                canvas.height = container.clientHeight;
-                
-                // Set white background
-                ctx.fillStyle = 'white';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-            
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-            
-            // Drawing functions
-            function startDrawing(e) {
-                isDrawing = true;
-                [lastX, lastY] = getCoordinates(e);
-            }
-            
-            function draw(e) {
-                if (!isDrawing) return;
-                
-                const [x, y] = getCoordinates(e);
-                const penColor = document.getElementById('penColor').value;
-                const penWidth = document.getElementById('penWidth').value;
-                
-                ctx.strokeStyle = penColor;
-                ctx.lineWidth = penWidth;
-                ctx.lineJoin = 'round';
-                ctx.lineCap = 'round';
-                
-                ctx.beginPath();
-                ctx.moveTo(lastX, lastY);
-                ctx.lineTo(x, y);
-                ctx.stroke();
-                
-                [lastX, lastY] = [x, y];
-            }
-            
-            function stopDrawing() {
-                isDrawing = false;
-            }
-            
-            function getCoordinates(e) {
-                if (e.type.includes('touch')) {
-                    const rect = canvas.getBoundingClientRect();
-                    return [
-                        e.touches[0].clientX - rect.left,
-                        e.touches[0].clientY - rect.top
-                    ];
-                } else {
-                    return [
-                        e.offsetX,
-                        e.offsetY
-                    ];
-                }
-            }
-            
-            // Event listeners for drawing
-            canvas.addEventListener('mousedown', startDrawing);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', stopDrawing);
-            canvas.addEventListener('mouseout', stopDrawing);
-            
-            // Touch events for mobile
-            canvas.addEventListener('touchstart', startDrawing);
-            canvas.addEventListener('touchmove', draw);
-            canvas.addEventListener('touchend', stopDrawing);
+            box.classList.remove('animation-playing');
+            playBtn.style.display = 'flex';
+            pauseBtn.style.display = 'none';
         }
 
-        // Clear canvas
+        function replayAnimation(type) {
+            pauseAnimation(type);
+            setTimeout(() => playAnimation(type), 100);
+        }
+
+        function resetAnimations() {
+            pauseAnimation('uppercase');
+            pauseAnimation('lowercase');
+        }
+
+        // Sound functions
+        function playLetterName() {
+            // In a real app, you would play the letter name audio here
+            playSound(letterClickSound);
+        }
+
+        function playLetterSound() {
+            // In a real app, you would play the letter sound audio here
+            playSound(letterClickSound);
+        }
+
+        function playSound(audioElement) {
+            audioElement.currentTime = 0;
+            audioElement.play().catch(e => console.log("Audio play failed:", e));
+        }
+
+        // Canvas drawing functions
+        function startDrawing(e) {
+            isDrawing = true;
+            const rect = writingCanvas.getBoundingClientRect();
+            lastX = e.clientX - rect.left;
+            lastY = e.clientY - rect.top;
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const ctx = writingCanvas.getContext('2d');
+            const rect = writingCanvas.getBoundingClientRect();
+            const currentX = e.clientX - rect.left;
+            const currentY = e.clientY - rect.top;
+            
+            ctx.strokeStyle = penColor.value;
+            ctx.lineWidth = penWidth.value;
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+            
+            lastX = currentX;
+            lastY = currentY;
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            writingCanvas.dispatchEvent(mouseEvent);
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            writingCanvas.dispatchEvent(mouseEvent);
+        }
+
         function clearCanvas() {
-            const canvas = document.getElementById('writingCanvas');
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const ctx = writingCanvas.getContext('2d');
+            ctx.clearRect(0, 0, writingCanvas.width, writingCanvas.height);
         }
 
-        // Music control function
+        function checkWriting() {
+            // In a real app, you would implement handwriting recognition here
+            alert('Great job! Keep practicing to improve your handwriting.');
+        }
+
+        // Music controls
         function toggleMusic() {
-            const backgroundMusic = document.getElementById('backgroundMusic');
-            const musicControl = document.getElementById('musicControl');
-            
-            try {
-                if (isMusicPlaying) {
-                    backgroundMusic.pause();
-                    musicControl.classList.remove('playing');
-                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    isMusicPlaying = false;
-                } else {
-                    backgroundMusic.volume = 0.3;
-                    backgroundMusic.play().then(() => {
-                        musicControl.classList.add('playing');
-                        musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                        isMusicPlaying = true;
-                    }).catch(error => {
-                        console.log('Music play failed:', error);
-                        alert('Please click anywhere on the page first, then click the music button to enable background music.');
-                    });
-                }
-            } catch (error) {
-                console.log('Music toggle error:', error);
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+                musicControl.classList.remove('playing');
+                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                backgroundMusic.play().catch(e => console.log("Audio play failed:", e));
+                musicControl.classList.add('playing');
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
             }
+            isMusicPlaying = !isMusicPlaying;
         }
 
-        // Animation control functions
-        function playUppercaseAnimation() {
-            const img = document.getElementById('uppercaseAnimation');
-            const box = document.getElementById('uppercaseBox');
-            
-            img.style.display = 'block';
-            box.classList.add('animation-playing');
-            animationState.uppercase.playing = true;
-            
-            document.getElementById('playUppercase').style.display = 'none';
-            document.getElementById('pauseUppercase').style.display = 'flex';
+        function adjustVolume() {
+            backgroundMusic.volume = volumeControl.value;
         }
 
-        function pauseUppercaseAnimation() {
-            const img = document.getElementById('uppercaseAnimation');
-            
-            // For GIFs, we need to reload to pause
-            const currentSrc = img.src;
-            img.src = '';
-            img.src = currentSrc;
-            img.style.display = 'none';
-            
-            animationState.uppercase.playing = false;
-            
-            document.getElementById('playUppercase').style.display = 'flex';
-            document.getElementById('pauseUppercase').style.display = 'none';
-        }
-
-        function playLowercaseAnimation() {
-            const img = document.getElementById('lowercaseAnimation');
-            const box = document.getElementById('lowercaseBox');
-            
-            img.style.display = 'block';
-            box.classList.add('animation-playing');
-            animationState.lowercase.playing = true;
-            
-            document.getElementById('playLowercase').style.display = 'none';
-            document.getElementById('pauseLowercase').style.display = 'flex';
-        }
-
-        function pauseLowercaseAnimation() {
-            const img = document.getElementById('lowercaseAnimation');
-            
-            // For GIFs, we need to reload to pause
-            const currentSrc = img.src;
-            img.src = '';
-            img.src = currentSrc;
-            img.style.display = 'none';
-            
-            animationState.lowercase.playing = false;
-            
-            document.getElementById('playLowercase').style.display = 'flex';
-            document.getElementById('pauseLowercase').style.display = 'none';
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Close popup
-            document.getElementById('closePopup').addEventListener('click', closeLetterPopup);
-            document.getElementById('popupOverlay').addEventListener('click', closeLetterPopup);
-            
-            // Letter name button
-            document.getElementById('letterNameBtn').addEventListener('click', function() {
-                playLetterName();
-                this.classList.add('pulse');
-                setTimeout(() => this.classList.remove('pulse'), 500);
-            });
-            
-            // Letter sound button
-            document.getElementById('letterSoundBtn').addEventListener('click', function() {
-                playLetterSound();
-                this.classList.add('pulse');
-                setTimeout(() => this.classList.remove('pulse'), 500);
-            });
-            
-            // Music control
-            document.getElementById('musicControl').addEventListener('click', function() {
-                toggleMusic();
-            });
-            
-            // Clear button
-            document.getElementById('clearBtn').addEventListener('click', clearCanvas);
-            
-            // Check button
-            document.getElementById('checkBtn').addEventListener('click', function() {
-                this.classList.add('pulse');
-                setTimeout(() => this.classList.remove('pulse'), 500);
-                
-                // Simple encouragement message
-                const encouragements = [
-                    "Great job! 🎉",
-                    "Well done! ✨",
-                    "Excellent work! 🌟",
-                    "You're amazing! 💫",
-                    "Keep practicing! 📚"
-                ];
-                const randomEncouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
-                alert(randomEncouragement);
-            });
-            
-            // Uppercase animation controls
-            document.getElementById('playUppercase').addEventListener('click', playUppercaseAnimation);
-            document.getElementById('pauseUppercase').addEventListener('click', pauseUppercaseAnimation);
-            document.getElementById('replayUppercase').addEventListener('click', function() {
-                this.classList.add('pulse');
-                setTimeout(() => this.classList.remove('pulse'), 300);
-                pauseUppercaseAnimation();
-                setTimeout(playUppercaseAnimation, 100);
-            });
-            
-            // Lowercase animation controls
-            document.getElementById('playLowercase').addEventListener('click', playLowercaseAnimation);
-            document.getElementById('pauseLowercase').addEventListener('click', pauseLowercaseAnimation);
-            document.getElementById('replayLowercase').addEventListener('click', function() {
-                this.classList.add('pulse');
-                setTimeout(() => this.classList.remove('pulse'), 300);
-                pauseLowercaseAnimation();
-                setTimeout(playLowercaseAnimation, 100);
-            });
-            
-            // Animation box clicks
-            document.getElementById('uppercaseBox').addEventListener('click', function() {
-                if (!animationState.uppercase.playing) {
-                    playUppercaseAnimation();
-                }
-            });
-            
-            document.getElementById('lowercaseBox').addEventListener('click', function() {
-                if (!animationState.lowercase.playing) {
-                    playLowercaseAnimation();
-                }
-            });
-            
-            // Designer card click
-            document.getElementById('designerCard').addEventListener('click', function() {
-                this.classList.add('pulse');
-                setTimeout(() => this.classList.remove('pulse'), 500);
-            });
-            
-            // Close popup with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeLetterPopup();
-                }
-            });
-
-            // Enable audio on first click
-            document.addEventListener('click', function initAudio() {
-                const backgroundMusic = document.getElementById('backgroundMusic');
-                backgroundMusic.volume = 0;
-                backgroundMusic.play().then(() => {
-                    backgroundMusic.pause();
-                    backgroundMusic.volume = 0.3;
-                }).catch(e => console.log('Audio init:', e));
-                document.removeEventListener('click', initAudio);
-            }, { once: true });
-        }
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
