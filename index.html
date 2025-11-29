@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Handwriting Practice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Dancing+Script:wght@600&family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6a11cb;
@@ -18,6 +18,8 @@
             --paper: #fff9e6;
             --line: #d4af37;
             --sky-blue: #87CEEB;
+            --deep-blue: #0d47a1;
+            --gold: #FFD700;
         }
         
         * {
@@ -41,12 +43,12 @@
             margin: 0 auto;
         }
         
-        /* Designer Card */
+        /* Designer Card - Updated */
         .designer-card {
             position: fixed;
             top: 15px;
             left: 15px;
-            background: linear-gradient(135deg, var(--sky-blue), #a1c4fd);
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             border-radius: 15px;
             padding: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -56,9 +58,10 @@
             z-index: 1000;
             backdrop-filter: blur(15px);
             border: 2px solid rgba(255,255,255,0.8);
-            max-width: 280px;
+            max-width: 240px;
             transition: all 0.4s ease;
             overflow: hidden;
+            font-family: 'Playfair Display', serif;
         }
         
         .designer-card::before {
@@ -109,28 +112,60 @@
         }
         
         .designer-name {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 3px;
-            color: #1a237e;
-            font-weight: bold;
+            font-weight: 700;
             text-shadow: 1px 1px 3px rgba(255,255,255,0.9);
-            background: linear-gradient(45deg, #1a237e, #283593);
+            color: var(--deep-blue);
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #0d47a1, #1565c0, #0d47a1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-family: 'Comic Neue', cursive;
-            line-height: 1.2;
+            animation: textGlow 3s infinite alternate;
+            letter-spacing: 0.5px;
+        }
+        
+        @keyframes textGlow {
+            0% { 
+                text-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+                transform: scale(1);
+            }
+            100% { 
+                text-shadow: 0 0 15px rgba(13, 71, 161, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+                transform: scale(1.02);
+            }
         }
         
         .designer-title {
-            color: #283593;
-            font-size: 0.9rem;
+            font-size: 1rem;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
             font-weight: 600;
-            background: linear-gradient(45deg, #3949ab, #5c6bc0);
+            color: #1565c0;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #1565c0, #1976d2, #0d47a1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-family: 'Dancing Script', cursive;
-            line-height: 1.2;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .designer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #0d47a1, transparent);
+            animation: linePulse 2s infinite;
+        }
+        
+        @keyframes linePulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
         
         .designer-card:hover {
@@ -138,7 +173,11 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
         
-        /* Music Control */
+        .designer-card:hover .designer-name {
+            animation-duration: 1s;
+        }
+        
+        /* Music Control - Moved to bottom right */
         .music-control-container {
             position: fixed;
             bottom: 20px;
@@ -147,20 +186,25 @@
             align-items: center;
             gap: 10px;
             z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 15px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.8);
         }
         
         .music-control {
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
-            border: 3px solid white;
+            border: 2px solid white;
         }
         
         .music-control:hover {
@@ -173,7 +217,7 @@
         }
         
         .music-control i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
             transition: all 0.3s ease;
         }
@@ -183,14 +227,14 @@
         }
         
         .volume-control {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 12px;
-            border-radius: 25px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            border: 2px solid white;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        
+        .volume-control i {
+            color: var(--primary);
+            font-size: 1.1rem;
         }
         
         .volume-control input {
@@ -419,45 +463,6 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 25px;
-        }
-        
-        .letter-sound-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .sound-control-btn {
-            background: linear-gradient(145deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            border: 2px solid white;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1rem;
-            min-width: 200px;
-            justify-content: center;
-        }
-        
-        .sound-control-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-        }
-        
-        .sound-control-btn.letter-sound {
-            background: linear-gradient(145deg, #ff6b6b, #ff5252);
-        }
-        
-        .sound-control-btn.letter-name {
-            background: linear-gradient(145deg, #1dd1a1, #10ac84);
         }
         
         .animation-section {
@@ -797,18 +802,11 @@
                 font-size: 2rem;
             }
             
-            .letter-sound-controls {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .sound-control-btn {
-                min-width: 180px;
-            }
-            
             .music-control-container {
                 flex-direction: column;
-                align-items: flex-end;
+                align-items: center;
+                padding: 10px;
+                width: auto;
             }
             
             .volume-control {
@@ -852,6 +850,12 @@
             .designer-title {
                 font-size: 0.8rem;
             }
+            
+            .music-control-container {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
@@ -863,11 +867,11 @@
         </div>
         <div class="designer-info">
             <h3 class="designer-name">A.R. Yousefzadeh</h3>
-            <p class="designer-title">Educational Material Designer</p>
+            <p class="designer-title">Designer</p>
         </div>
     </div>
 
-    <!-- Music Control with Volume -->
+    <!-- Music Control - Moved to bottom right -->
     <div class="music-control-container">
         <div class="volume-control">
             <i class="fas fa-volume-down"></i>
@@ -875,7 +879,7 @@
             <i class="fas fa-volume-up"></i>
         </div>
         <div class="music-control" id="musicControl">
-            <i class="fas fa-volume-up"></i>
+            <i class="fas fa-play"></i>
         </div>
     </div>
 
@@ -910,16 +914,6 @@
             </button>
         </div>
         
-        <!-- Letter Sound Controls -->
-        <div class="letter-sound-controls">
-            <button class="sound-control-btn letter-name" id="letterNameBtn">
-                <i class="fas fa-font"></i> The name of the letter
-            </button>
-            <button class="sound-control-btn letter-sound" id="letterSoundBtn">
-                <i class="fas fa-volume-up"></i> The sound of the letter
-            </button>
-        </div>
-        
         <div class="popup-content">
             <div class="animation-section">
                 <div class="animation-container">
@@ -936,9 +930,6 @@
                         </button>
                         <button class="animation-btn pause" id="pauseUppercase" style="display: none;">
                             <i class="fas fa-pause"></i> Pause
-                        </button>
-                        <button class="animation-btn" id="replayUppercase">
-                            <i class="fas fa-redo"></i> Replay
                         </button>
                     </div>
                 </div>
@@ -957,9 +948,6 @@
                         </button>
                         <button class="animation-btn pause" id="pauseLowercase" style="display: none;">
                             <i class="fas fa-pause"></i> Pause
-                        </button>
-                        <button class="animation-btn" id="replayLowercase">
-                            <i class="fas fa-redo"></i> Replay
                         </button>
                     </div>
                 </div>
@@ -997,6 +985,16 @@
             </div>
         </div>
     </div>
+
+    <!-- Hover Sound -->
+    <audio id="hoverSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         // Complete alphabet data with real GIF animations
@@ -1173,27 +1171,21 @@
         const lowercaseOverlay = document.getElementById('lowercaseOverlay');
         const playUppercase = document.getElementById('playUppercase');
         const pauseUppercase = document.getElementById('pauseUppercase');
-        const replayUppercase = document.getElementById('replayUppercase');
         const playLowercase = document.getElementById('playLowercase');
         const pauseLowercase = document.getElementById('pauseLowercase');
-        const replayLowercase = document.getElementById('replayLowercase');
         const examplesGrid = document.getElementById('examplesGrid');
-        const letterNameBtn = document.getElementById('letterNameBtn');
-        const letterSoundBtn = document.getElementById('letterSoundBtn');
         const writingCanvas = document.getElementById('writingCanvas');
         const clearBtn = document.getElementById('clearBtn');
         const checkBtn = document.getElementById('checkBtn');
         const penColor = document.getElementById('penColor');
         const penWidth = document.getElementById('penWidth');
+        const hoverSound = document.getElementById('hoverSound');
         const musicControl = document.getElementById('musicControl');
         const volumeControl = document.getElementById('volumeControl');
+        const backgroundMusic = document.getElementById('backgroundMusic');
 
         // Speech Synthesis
         const speech = window.speechSynthesis;
-        
-        // Background music
-        let backgroundMusic = null;
-        let isMusicPlaying = false;
         
         // Current selected letter
         let currentLetter = 'A';
@@ -1203,6 +1195,7 @@
         let isUppercasePlaying = false;
         let isLowercasePlaying = false;
         let hasSpoken = false; // Flag to prevent double speaking
+        let isMusicPlaying = false;
 
         // Initialize the application
         function init() {
@@ -1236,6 +1229,9 @@
                     const letter = card.dataset.letter;
                     openLetterPopup(letter);
                 });
+                
+                // Add hover sound to all buttons and interactive elements
+                card.addEventListener('mouseenter', playHoverSound);
             });
 
             // Popup controls
@@ -1245,14 +1241,8 @@
             // Animation controls
             playUppercase.addEventListener('click', () => playAnimation('uppercase'));
             pauseUppercase.addEventListener('click', () => pauseAnimation('uppercase'));
-            replayUppercase.addEventListener('click', () => replayAnimation('uppercase'));
             playLowercase.addEventListener('click', () => playAnimation('lowercase'));
             pauseLowercase.addEventListener('click', () => pauseAnimation('lowercase'));
-            replayLowercase.addEventListener('click', () => replayAnimation('lowercase'));
-
-            // Sound controls
-            letterNameBtn.addEventListener('click', () => speakLetterName(currentLetter));
-            letterSoundBtn.addEventListener('click', () => speakLetterSound(currentLetter));
 
             // Canvas controls
             clearBtn.addEventListener('click', clearCanvas);
@@ -1261,6 +1251,11 @@
             // Music controls
             musicControl.addEventListener('click', toggleMusic);
             volumeControl.addEventListener('input', adjustVolume);
+
+            // Add hover sound to all buttons
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('mouseenter', playHoverSound);
+            });
         }
 
         // Setup canvas for drawing
@@ -1291,54 +1286,22 @@
 
         // Setup background music
         function setupBackgroundMusic() {
-            // Create a simple background melody using Web Audio API
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            backgroundMusic.volume = volumeControl.value;
             
-            // Create a soothing melody
-            const notes = [
-                { freq: 523.25, duration: 0.8 }, // C
-                { freq: 587.33, duration: 0.8 }, // D
-                { freq: 659.25, duration: 0.8 }, // E
-                { freq: 698.46, duration: 0.8 }, // F
-                { freq: 783.99, duration: 0.8 }, // G
-                { freq: 880.00, duration: 0.8 }, // A
-                { freq: 987.77, duration: 0.8 }, // B
-                { freq: 1046.50, duration: 1.2 } // C (high)
-            ];
-            
-            function playMelody() {
-                let currentTime = audioContext.currentTime;
-                
-                function playNote(index) {
-                    if (index >= notes.length || !isMusicPlaying) return;
-                    
-                    const note = notes[index];
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.value = note.freq;
-                    oscillator.type = 'sine';
-                    
-                    gainNode.gain.setValueAtTime(0.05, currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
-                    
-                    oscillator.start(currentTime);
-                    oscillator.stop(currentTime + note.duration);
-                    
-                    currentTime += note.duration;
-                    
-                    // Schedule next note
-                    setTimeout(() => playNote(index + 1), note.duration * 1000);
+            // Auto-play music when user interacts with the page
+            document.body.addEventListener('click', function initMusic() {
+                if (!isMusicPlaying) {
+                    toggleMusic();
                 }
-                
-                playNote(0);
-            }
-            
-            // Store the play function
-            backgroundMusic = playMelody;
+                document.body.removeEventListener('click', initMusic);
+            });
+        }
+
+        // Play hover sound
+        function playHoverSound() {
+            hoverSound.currentTime = 0;
+            hoverSound.volume = 0.3;
+            hoverSound.play().catch(e => console.log("Hover sound play failed:", e));
         }
 
         // Speech functions
@@ -1473,6 +1436,9 @@
                     const word = e.currentTarget.dataset.word;
                     speakExampleWord(word);
                 });
+                
+                // Add hover sound
+                btn.addEventListener('mouseenter', playHoverSound);
             });
         }
 
@@ -1509,11 +1475,6 @@
             } else {
                 isLowercasePlaying = false;
             }
-        }
-
-        function replayAnimation(type) {
-            pauseAnimation(type);
-            setTimeout(() => playAnimation(type), 100);
         }
 
         function resetAnimations() {
@@ -1587,33 +1548,28 @@
         function toggleMusic() {
             if (isMusicPlaying) {
                 // Stop background music
+                backgroundMusic.pause();
                 isMusicPlaying = false;
                 musicControl.classList.remove('playing');
-                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                musicControl.innerHTML = '<i class="fas fa-play"></i>';
             } else {
                 // Play background music
+                backgroundMusic.play().catch(e => {
+                    console.log("Music play failed, trying again on user interaction:", e);
+                    // If autoplay is blocked, wait for user interaction
+                    document.body.addEventListener('click', function retryPlay() {
+                        backgroundMusic.play();
+                        document.body.removeEventListener('click', retryPlay);
+                    });
+                });
                 isMusicPlaying = true;
                 musicControl.classList.add('playing');
                 musicControl.innerHTML = '<i class="fas fa-pause"></i>';
-                
-                // Start the melody
-                if (backgroundMusic) {
-                    backgroundMusic();
-                    
-                    // Keep the music playing in a loop
-                    const melodyDuration = 6 * 1000; // 6 seconds
-                    setInterval(() => {
-                        if (isMusicPlaying) {
-                            backgroundMusic();
-                        }
-                    }, melodyDuration);
-                }
             }
         }
 
         function adjustVolume() {
-            // Volume control for future audio implementations
-            console.log("Volume adjusted to:", volumeControl.value);
+            backgroundMusic.volume = volumeControl.value;
         }
 
         // Initialize the app when DOM is loaded
