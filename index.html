@@ -443,7 +443,7 @@
             align-items: center;
             gap: 8px;
             font-size: 1rem;
-            min-width: 140px;
+            min-width: 200px;
             justify-content: center;
         }
         
@@ -803,7 +803,7 @@
             }
             
             .sound-control-btn {
-                min-width: 120px;
+                min-width: 180px;
             }
             
             .music-control-container {
@@ -913,10 +913,10 @@
         <!-- Letter Sound Controls -->
         <div class="letter-sound-controls">
             <button class="sound-control-btn letter-name" id="letterNameBtn">
-                <i class="fas fa-font"></i> Name
+                <i class="fas fa-font"></i> The name of the letter
             </button>
             <button class="sound-control-btn letter-sound" id="letterSoundBtn">
-                <i class="fas fa-volume-up"></i> Sound
+                <i class="fas fa-volume-up"></i> The sound of the letter
             </button>
         </div>
         
@@ -1191,21 +1191,25 @@
         // Speech Synthesis
         const speech = window.speechSynthesis;
         
+        // Background music
+        let backgroundMusic = null;
+        let isMusicPlaying = false;
+        
         // Current selected letter
         let currentLetter = 'A';
         let isDrawing = false;
         let lastX = 0;
         let lastY = 0;
-        let isMusicPlaying = false;
         let isUppercasePlaying = false;
         let isLowercasePlaying = false;
+        let hasSpoken = false; // Flag to prevent double speaking
 
         // Initialize the application
         function init() {
             createAlphabetGrid();
             setupEventListeners();
             setupCanvas();
-            setupAudio();
+            setupBackgroundMusic();
         }
 
         // Create alphabet grid
@@ -1231,12 +1235,6 @@
                 card.addEventListener('click', () => {
                     const letter = card.dataset.letter;
                     openLetterPopup(letter);
-                    speakLetterName(letter);
-                });
-                
-                card.addEventListener('mouseenter', () => {
-                    // Play hover sound effect
-                    playClickSound();
                 });
             });
 
@@ -1291,9 +1289,56 @@
             writingCanvas.addEventListener('touchend', stopDrawing);
         }
 
-        // Setup audio
-        function setupAudio() {
-            // No external audio files needed for speech synthesis
+        // Setup background music
+        function setupBackgroundMusic() {
+            // Create a simple background melody using Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Create a soothing melody
+            const notes = [
+                { freq: 523.25, duration: 0.8 }, // C
+                { freq: 587.33, duration: 0.8 }, // D
+                { freq: 659.25, duration: 0.8 }, // E
+                { freq: 698.46, duration: 0.8 }, // F
+                { freq: 783.99, duration: 0.8 }, // G
+                { freq: 880.00, duration: 0.8 }, // A
+                { freq: 987.77, duration: 0.8 }, // B
+                { freq: 1046.50, duration: 1.2 } // C (high)
+            ];
+            
+            function playMelody() {
+                let currentTime = audioContext.currentTime;
+                
+                function playNote(index) {
+                    if (index >= notes.length || !isMusicPlaying) return;
+                    
+                    const note = notes[index];
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = note.freq;
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0.05, currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+                    
+                    oscillator.start(currentTime);
+                    oscillator.stop(currentTime + note.duration);
+                    
+                    currentTime += note.duration;
+                    
+                    // Schedule next note
+                    setTimeout(() => playNote(index + 1), note.duration * 1000);
+                }
+                
+                playNote(0);
+            }
+            
+            // Store the play function
+            backgroundMusic = playMelody;
         }
 
         // Speech functions
@@ -1307,41 +1352,41 @@
             utterance.volume = 0.8;
             
             speech.speak(utterance);
-            playClickSound();
         }
 
         function speakLetterSound(letter) {
             // Stop any current speech
             speech.cancel();
             
+            // Only speak the phonetic sound, not the full sentence
             let soundText = '';
             switch(letter.toUpperCase()) {
-                case 'A': soundText = 'æ as in apple'; break;
-                case 'B': soundText = 'b as in ball'; break;
-                case 'C': soundText = 'k as in cat'; break;
-                case 'D': soundText = 'd as in dog'; break;
-                case 'E': soundText = 'ɛ as in egg'; break;
-                case 'F': soundText = 'f as in fish'; break;
-                case 'G': soundText = 'g as in goat'; break;
-                case 'H': soundText = 'h as in house'; break;
-                case 'I': soundText = 'ɪ as in igloo'; break;
-                case 'J': soundText = 'dʒ as in jellyfish'; break;
-                case 'K': soundText = 'k as in kite'; break;
-                case 'L': soundText = 'l as in lion'; break;
-                case 'M': soundText = 'm as in monkey'; break;
-                case 'N': soundText = 'n as in nest'; break;
-                case 'O': soundText = 'ɒ as in orange'; break;
-                case 'P': soundText = 'p as in pig'; break;
-                case 'Q': soundText = 'kw as in queen'; break;
-                case 'R': soundText = 'r as in rabbit'; break;
-                case 'S': soundText = 's as in sun'; break;
-                case 'T': soundText = 't as in tiger'; break;
-                case 'U': soundText = 'ʌ as in umbrella'; break;
-                case 'V': soundText = 'v as in violin'; break;
-                case 'W': soundText = 'w as in watermelon'; break;
-                case 'X': soundText = 'ks as in xylophone'; break;
-                case 'Y': soundText = 'j as in yoyo'; break;
-                case 'Z': soundText = 'z as in zebra'; break;
+                case 'A': soundText = 'æ'; break;
+                case 'B': soundText = 'b'; break;
+                case 'C': soundText = 'k'; break;
+                case 'D': soundText = 'd'; break;
+                case 'E': soundText = 'ɛ'; break;
+                case 'F': soundText = 'f'; break;
+                case 'G': soundText = 'g'; break;
+                case 'H': soundText = 'h'; break;
+                case 'I': soundText = 'ɪ'; break;
+                case 'J': soundText = 'dʒ'; break;
+                case 'K': soundText = 'k'; break;
+                case 'L': soundText = 'l'; break;
+                case 'M': soundText = 'm'; break;
+                case 'N': soundText = 'n'; break;
+                case 'O': soundText = 'ɒ'; break;
+                case 'P': soundText = 'p'; break;
+                case 'Q': soundText = 'kw'; break;
+                case 'R': soundText = 'r'; break;
+                case 'S': soundText = 's'; break;
+                case 'T': soundText = 't'; break;
+                case 'U': soundText = 'ʌ'; break;
+                case 'V': soundText = 'v'; break;
+                case 'W': soundText = 'w'; break;
+                case 'X': soundText = 'ks'; break;
+                case 'Y': soundText = 'j'; break;
+                case 'Z': soundText = 'z'; break;
                 default: soundText = letter;
             }
             
@@ -1351,7 +1396,6 @@
             utterance.volume = 0.8;
             
             speech.speak(utterance);
-            playClickSound();
         }
 
         function speakExampleWord(word) {
@@ -1364,26 +1408,6 @@
             utterance.volume = 0.8;
             
             speech.speak(utterance);
-            playClickSound();
-        }
-
-        function playClickSound() {
-            // Simple beep sound using Web Audio API
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.value = 800;
-            oscillator.type = 'sine';
-            
-            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-            
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.1);
         }
 
         // Open letter popup
@@ -1408,8 +1432,13 @@
             letterPopup.classList.add('active');
             popupOverlay.classList.add('active');
             
-            // Speak letter name by default
-            setTimeout(() => speakLetterName(letter), 500);
+            // Speak letter name only once
+            if (!hasSpoken) {
+                setTimeout(() => {
+                    speakLetterName(letter);
+                    hasSpoken = true;
+                }, 500);
+            }
         }
 
         // Close letter popup
@@ -1417,6 +1446,7 @@
             letterPopup.classList.remove('active');
             popupOverlay.classList.remove('active');
             resetAnimations();
+            hasSpoken = false; // Reset the flag
         }
 
         // Create example words
@@ -1553,48 +1583,31 @@
             alert('Great job! Keep practicing to improve your handwriting.');
         }
 
-        // Music controls (using Web Audio API for background sound)
+        // Music controls
         function toggleMusic() {
             if (isMusicPlaying) {
-                // Stop any background sound
-                speech.cancel();
+                // Stop background music
+                isMusicPlaying = false;
                 musicControl.classList.remove('playing');
                 musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
             } else {
-                // Play a simple background melody
-                playBackgroundMelody();
+                // Play background music
+                isMusicPlaying = true;
                 musicControl.classList.add('playing');
                 musicControl.innerHTML = '<i class="fas fa-pause"></i>';
-            }
-            isMusicPlaying = !isMusicPlaying;
-        }
-
-        function playBackgroundMelody() {
-            // Simple background melody using Web Audio API
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const notes = [523.25, 587.33, 659.25, 698.46, 783.99]; // C, D, E, F, G
-            
-            function playNote(frequency, startTime, duration) {
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
                 
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.value = frequency;
-                oscillator.type = 'sine';
-                
-                gainNode.gain.setValueAtTime(0.1, startTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-                
-                oscillator.start(startTime);
-                oscillator.stop(startTime + duration);
-            }
-            
-            let currentTime = audioContext.currentTime;
-            for (let i = 0; i < notes.length; i++) {
-                playNote(notes[i], currentTime, 0.3);
-                currentTime += 0.5;
+                // Start the melody
+                if (backgroundMusic) {
+                    backgroundMusic();
+                    
+                    // Keep the music playing in a loop
+                    const melodyDuration = 6 * 1000; // 6 seconds
+                    setInterval(() => {
+                        if (isMusicPlaying) {
+                            backgroundMusic();
+                        }
+                    }, melodyDuration);
+                }
             }
         }
 
