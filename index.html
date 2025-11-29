@@ -59,7 +59,6 @@
             max-width: 280px;
             transition: all 0.4s ease;
             overflow: hidden;
-            cursor: pointer;
         }
         
         .designer-card::before {
@@ -94,7 +93,6 @@
             border: 3px solid white;
             position: relative;
             z-index: 2;
-            transition: all 0.3s ease;
         }
         
         .designer-avatar img {
@@ -445,7 +443,7 @@
             align-items: center;
             gap: 8px;
             font-size: 1rem;
-            min-width: 180px;
+            min-width: 140px;
             justify-content: center;
         }
         
@@ -805,7 +803,7 @@
             }
             
             .sound-control-btn {
-                min-width: 160px;
+                min-width: 120px;
             }
             
             .music-control-container {
@@ -915,10 +913,10 @@
         <!-- Letter Sound Controls -->
         <div class="letter-sound-controls">
             <button class="sound-control-btn letter-name" id="letterNameBtn">
-                <i class="fas fa-font"></i> Name of the letter
+                <i class="fas fa-font"></i> Name
             </button>
             <button class="sound-control-btn letter-sound" id="letterSoundBtn">
-                <i class="fas fa-volume-up"></i> Sound of the letter
+                <i class="fas fa-volume-up"></i> Sound
             </button>
         </div>
         
@@ -1007,209 +1005,157 @@
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_a.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_a.gif',
                 type: 'vowel',
-                examples: ['Apple', 'Ant', 'Alligator', 'Airplane'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Apple', 'Ant', 'Alligator', 'Airplane']
             },
             'B': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_b.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_b.gif',
                 type: 'consonant',
-                examples: ['Ball', 'Bear', 'Butterfly', 'Banana'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Ball', 'Bear', 'Butterfly', 'Banana']
             },
             'C': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_c.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_c.gif',
                 type: 'consonant',
-                examples: ['Cat', 'Car', 'Cake', 'Cloud'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Cat', 'Car', 'Cake', 'Cloud']
             },
             'D': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_d.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_d.gif',
                 type: 'consonant',
-                examples: ['Dog', 'Duck', 'Dolphin', 'Dinosaur'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Dog', 'Duck', 'Dolphin', 'Dinosaur']
             },
             'E': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_e.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_e.gif',
                 type: 'vowel',
-                examples: ['Elephant', 'Egg', 'Eagle', 'Earth'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Elephant', 'Egg', 'Eagle', 'Earth']
             },
             'F': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_f.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_f.gif',
                 type: 'consonant',
-                examples: ['Fish', 'Flower', 'Frog', 'Fox'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Fish', 'Flower', 'Frog', 'Fox']
             },
             'G': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_g.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_g.gif',
                 type: 'consonant',
-                examples: ['Goat', 'Grapes', 'Giraffe', 'Gift'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Goat', 'Grapes', 'Giraffe', 'Gift']
             },
             'H': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_h.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_h.gif',
                 type: 'consonant',
-                examples: ['House', 'Heart', 'Horse', 'Hat'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['House', 'Heart', 'Horse', 'Hat']
             },
             'I': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_i.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_i.gif',
                 type: 'vowel',
-                examples: ['Ice Cream', 'Igloo', 'Island', 'Insect'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Ice Cream', 'Igloo', 'Island', 'Insect']
             },
             'J': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_j.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_j.gif',
                 type: 'consonant',
-                examples: ['Jellyfish', 'Jar', 'Jacket', 'Juice'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Jellyfish', 'Jar', 'Jacket', 'Juice']
             },
             'K': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_k.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_k.gif',
                 type: 'consonant',
-                examples: ['Kite', 'Key', 'Kangaroo', 'King'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Kite', 'Key', 'Kangaroo', 'King']
             },
             'L': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_l.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_l.gif',
                 type: 'consonant',
-                examples: ['Lion', 'Leaf', 'Lemon', 'Lamp'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Lion', 'Leaf', 'Lemon', 'Lamp']
             },
             'M': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_m.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_m.gif',
                 type: 'consonant',
-                examples: ['Monkey', 'Moon', 'Mouse', 'Milk'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Monkey', 'Moon', 'Mouse', 'Milk']
             },
             'N': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_n.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_n.gif',
                 type: 'consonant',
-                examples: ['Nest', 'Nose', 'Net', 'Nut'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Nest', 'Nose', 'Net', 'Nut']
             },
             'O': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_o.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_o.gif',
                 type: 'vowel',
-                examples: ['Orange', 'Owl', 'Octopus', 'Ocean'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Orange', 'Owl', 'Octopus', 'Ocean']
             },
             'P': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_p.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_p.gif',
                 type: 'consonant',
-                examples: ['Pig', 'Pencil', 'Pizza', 'Penguin'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Pig', 'Pencil', 'Pizza', 'Penguin']
             },
             'Q': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_q.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_q.gif',
                 type: 'consonant',
-                examples: ['Queen', 'Quilt', 'Quail', 'Question'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Queen', 'Quilt', 'Quail', 'Question']
             },
             'R': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_r.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_r.gif',
                 type: 'consonant',
-                examples: ['Rabbit', 'Rainbow', 'Robot', 'Rose'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Rabbit', 'Rainbow', 'Robot', 'Rose']
             },
             'S': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_s.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_s.gif',
                 type: 'consonant',
-                examples: ['Sun', 'Star', 'Snake', 'Socks'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Sun', 'Star', 'Snake', 'Socks']
             },
             'T': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_t.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_t.gif',
                 type: 'consonant',
-                examples: ['Tiger', 'Tree', 'Train', 'Turtle'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Tiger', 'Tree', 'Train', 'Turtle']
             },
             'U': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_u.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_u.gif',
                 type: 'vowel',
-                examples: ['Umbrella', 'Unicorn', 'Under', 'Up'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Umbrella', 'Unicorn', 'Under', 'Up']
             },
             'V': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_v.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_v.gif',
                 type: 'consonant',
-                examples: ['Violin', 'Volcano', 'Vegetable', 'Van'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Violin', 'Volcano', 'Vegetable', 'Van']
             },
             'W': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_w.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_w.gif',
                 type: 'consonant',
-                examples: ['Watermelon', 'Whale', 'Wheel', 'Window'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Watermelon', 'Whale', 'Wheel', 'Window']
             },
             'X': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_x.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_x.gif',
                 type: 'consonant',
-                examples: ['Xylophone', 'X-ray', 'Fox', 'Box'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Xylophone', 'X-ray', 'Fox', 'Box']
             },
             'Y': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_y.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_y.gif',
                 type: 'consonant',
-                examples: ['Yoyo', 'Yellow', 'Yak', 'Yacht'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Yoyo', 'Yellow', 'Yak', 'Yacht']
             },
             'Z': { 
                 uppercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animation_z.gif',
                 lowercase: 'https://www.handwritingforkids.com/handwrite/manuscript/animation/images/animationl_z.gif',
                 type: 'consonant',
-                examples: ['Zebra', 'Zoo', 'Zipper', 'Zero'],
-                nameSound: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3',
-                soundSound: 'https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3'
+                examples: ['Zebra', 'Zoo', 'Zipper', 'Zero']
             }
         };
 
@@ -1242,13 +1188,9 @@
         const musicControl = document.getElementById('musicControl');
         const volumeControl = document.getElementById('volumeControl');
 
-        // Audio elements
-        const backgroundMusic = new Audio('https://drive.google.com/uc?export=download&id=1zYVcGpxIoiPaGd1KGcOO8kdI7vhruepb');
-        const hoverSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
-        const letterClickSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-cool-interface-click-tone-2568.mp3');
-        const letterNameAudio = new Audio();
-        const letterSoundAudio = new Audio();
-
+        // Speech Synthesis
+        const speech = window.speechSynthesis;
+        
         // Current selected letter
         let currentLetter = 'A';
         let isDrawing = false;
@@ -1289,11 +1231,12 @@
                 card.addEventListener('click', () => {
                     const letter = card.dataset.letter;
                     openLetterPopup(letter);
-                    playLetterNameForCard(letter);
+                    speakLetterName(letter);
                 });
                 
                 card.addEventListener('mouseenter', () => {
-                    playSound(hoverSound);
+                    // Play hover sound effect
+                    playClickSound();
                 });
             });
 
@@ -1310,8 +1253,8 @@
             replayLowercase.addEventListener('click', () => replayAnimation('lowercase'));
 
             // Sound controls
-            letterNameBtn.addEventListener('click', playLetterName);
-            letterSoundBtn.addEventListener('click', playLetterSound);
+            letterNameBtn.addEventListener('click', () => speakLetterName(currentLetter));
+            letterSoundBtn.addEventListener('click', () => speakLetterSound(currentLetter));
 
             // Canvas controls
             clearBtn.addEventListener('click', clearCanvas);
@@ -1350,16 +1293,97 @@
 
         // Setup audio
         function setupAudio() {
-            backgroundMusic.volume = volumeControl.value;
-            backgroundMusic.loop = true;
+            // No external audio files needed for speech synthesis
+        }
+
+        // Speech functions
+        function speakLetterName(letter) {
+            // Stop any current speech
+            speech.cancel();
             
-            // Preload sounds
-            hoverSound.volume = 0.3;
-            letterClickSound.volume = 0.5;
+            const utterance = new SpeechSynthesisUtterance(letter);
+            utterance.rate = 0.8;
+            utterance.pitch = 1.2;
+            utterance.volume = 0.8;
             
-            // Set volume for letter sounds
-            letterNameAudio.volume = 0.7;
-            letterSoundAudio.volume = 0.7;
+            speech.speak(utterance);
+            playClickSound();
+        }
+
+        function speakLetterSound(letter) {
+            // Stop any current speech
+            speech.cancel();
+            
+            let soundText = '';
+            switch(letter.toUpperCase()) {
+                case 'A': soundText = 'æ as in apple'; break;
+                case 'B': soundText = 'b as in ball'; break;
+                case 'C': soundText = 'k as in cat'; break;
+                case 'D': soundText = 'd as in dog'; break;
+                case 'E': soundText = 'ɛ as in egg'; break;
+                case 'F': soundText = 'f as in fish'; break;
+                case 'G': soundText = 'g as in goat'; break;
+                case 'H': soundText = 'h as in house'; break;
+                case 'I': soundText = 'ɪ as in igloo'; break;
+                case 'J': soundText = 'dʒ as in jellyfish'; break;
+                case 'K': soundText = 'k as in kite'; break;
+                case 'L': soundText = 'l as in lion'; break;
+                case 'M': soundText = 'm as in monkey'; break;
+                case 'N': soundText = 'n as in nest'; break;
+                case 'O': soundText = 'ɒ as in orange'; break;
+                case 'P': soundText = 'p as in pig'; break;
+                case 'Q': soundText = 'kw as in queen'; break;
+                case 'R': soundText = 'r as in rabbit'; break;
+                case 'S': soundText = 's as in sun'; break;
+                case 'T': soundText = 't as in tiger'; break;
+                case 'U': soundText = 'ʌ as in umbrella'; break;
+                case 'V': soundText = 'v as in violin'; break;
+                case 'W': soundText = 'w as in watermelon'; break;
+                case 'X': soundText = 'ks as in xylophone'; break;
+                case 'Y': soundText = 'j as in yoyo'; break;
+                case 'Z': soundText = 'z as in zebra'; break;
+                default: soundText = letter;
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(soundText);
+            utterance.rate = 0.7;
+            utterance.pitch = 1.1;
+            utterance.volume = 0.8;
+            
+            speech.speak(utterance);
+            playClickSound();
+        }
+
+        function speakExampleWord(word) {
+            // Stop any current speech
+            speech.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.rate = 0.8;
+            utterance.pitch = 1.0;
+            utterance.volume = 0.8;
+            
+            speech.speak(utterance);
+            playClickSound();
+        }
+
+        function playClickSound() {
+            // Simple beep sound using Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
         }
 
         // Open letter popup
@@ -1384,8 +1408,8 @@
             letterPopup.classList.add('active');
             popupOverlay.classList.add('active');
             
-            // Play letter name by default
-            setTimeout(playLetterName, 500);
+            // Speak letter name by default
+            setTimeout(() => speakLetterName(letter), 500);
         }
 
         // Close letter popup
@@ -1417,7 +1441,7 @@
             document.querySelectorAll('.example-sound').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const word = e.currentTarget.dataset.word;
-                    playExampleWordSound(word);
+                    speakExampleWord(word);
                 });
             });
         }
@@ -1465,46 +1489,6 @@
         function resetAnimations() {
             pauseAnimation('uppercase');
             pauseAnimation('lowercase');
-        }
-
-        // Sound functions
-        function playLetterName() {
-            // Stop any currently playing sounds
-            letterNameAudio.pause();
-            letterSoundAudio.pause();
-            
-            // Set and play the letter name audio
-            letterNameAudio.src = letterData[currentLetter].nameSound;
-            letterNameAudio.play().catch(e => console.log("Audio play failed:", e));
-        }
-
-        function playLetterSound() {
-            // Stop any currently playing sounds
-            letterNameAudio.pause();
-            letterSoundAudio.pause();
-            
-            // Set and play the letter sound audio
-            letterSoundAudio.src = letterData[currentLetter].soundSound;
-            letterSoundAudio.play().catch(e => console.log("Audio play failed:", e));
-        }
-
-        function playLetterNameForCard(letter) {
-            const tempAudio = new Audio(letterData[letter].nameSound);
-            tempAudio.volume = 0.7;
-            tempAudio.play().catch(e => console.log("Audio play failed:", e));
-        }
-
-        function playExampleWordSound(word) {
-            // In a real app, you would have specific audio files for each word
-            // For now, we'll use a generic sound
-            const exampleSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
-            exampleSound.volume = 0.7;
-            exampleSound.play().catch(e => console.log("Audio play failed:", e));
-        }
-
-        function playSound(audioElement) {
-            audioElement.currentTime = 0;
-            audioElement.play().catch(e => console.log("Audio play failed:", e));
         }
 
         // Canvas drawing functions
@@ -1569,22 +1553,54 @@
             alert('Great job! Keep practicing to improve your handwriting.');
         }
 
-        // Music controls
+        // Music controls (using Web Audio API for background sound)
         function toggleMusic() {
             if (isMusicPlaying) {
-                backgroundMusic.pause();
+                // Stop any background sound
+                speech.cancel();
                 musicControl.classList.remove('playing');
                 musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
             } else {
-                backgroundMusic.play().catch(e => console.log("Audio play failed:", e));
+                // Play a simple background melody
+                playBackgroundMelody();
                 musicControl.classList.add('playing');
                 musicControl.innerHTML = '<i class="fas fa-pause"></i>';
             }
             isMusicPlaying = !isMusicPlaying;
         }
 
+        function playBackgroundMelody() {
+            // Simple background melody using Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const notes = [523.25, 587.33, 659.25, 698.46, 783.99]; // C, D, E, F, G
+            
+            function playNote(frequency, startTime, duration) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, startTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+                
+                oscillator.start(startTime);
+                oscillator.stop(startTime + duration);
+            }
+            
+            let currentTime = audioContext.currentTime;
+            for (let i = 0; i < notes.length; i++) {
+                playNote(notes[i], currentTime, 0.3);
+                currentTime += 0.5;
+            }
+        }
+
         function adjustVolume() {
-            backgroundMusic.volume = volumeControl.value;
+            // Volume control for future audio implementations
+            console.log("Volume adjusted to:", volumeControl.value);
         }
 
         // Initialize the app when DOM is loaded
