@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Handwriting Practice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Dancing+Script:wght@600&family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6a11cb;
@@ -18,8 +18,7 @@
             --paper: #fff9e6;
             --line: #d4af37;
             --sky-blue: #87CEEB;
-            --deep-blue: #0d47a1;
-            --gold: #FFD700;
+            --dark-blue: #0d47a1;
         }
         
         * {
@@ -48,7 +47,7 @@
             position: fixed;
             top: 15px;
             left: 15px;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            background: linear-gradient(135deg, var(--sky-blue), #a1c4fd);
             border-radius: 15px;
             padding: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -58,10 +57,9 @@
             z-index: 1000;
             backdrop-filter: blur(15px);
             border: 2px solid rgba(255,255,255,0.8);
-            max-width: 240px;
+            max-width: 250px;
             transition: all 0.4s ease;
             overflow: hidden;
-            font-family: 'Playfair Display', serif;
         }
         
         .designer-card::before {
@@ -74,6 +72,18 @@
             background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
             transform: rotate(45deg);
             animation: shine 4s infinite;
+        }
+        
+        .designer-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(13, 71, 161, 0.1), rgba(25, 118, 210, 0.1));
+            border-radius: 15px;
+            z-index: 1;
         }
         
         @keyframes shine {
@@ -96,6 +106,12 @@
             border: 3px solid white;
             position: relative;
             z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .designer-avatar:hover {
+            transform: rotate(360deg);
+            transition: transform 0.8s ease;
         }
         
         .designer-avatar img {
@@ -112,72 +128,84 @@
         }
         
         .designer-name {
-            font-size: 1.3rem;
-            margin-bottom: 3px;
-            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark-blue);
+            font-weight: bold;
             text-shadow: 1px 1px 3px rgba(255,255,255,0.9);
-            color: var(--deep-blue);
-            font-family: 'Playfair Display', serif;
-            line-height: 1.2;
-            background: linear-gradient(45deg, #0d47a1, #1565c0, #0d47a1);
+            background: linear-gradient(45deg, #0d47a1, #1565c0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: textGlow 3s infinite alternate;
+            font-family: 'Comic Neue', cursive;
+            line-height: 1.2;
             letter-spacing: 0.5px;
         }
         
-        @keyframes textGlow {
-            0% { 
-                text-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
-                transform: scale(1);
-            }
-            100% { 
-                text-shadow: 0 0 15px rgba(13, 71, 161, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
-                transform: scale(1.02);
-            }
-        }
-        
         .designer-title {
+            color: var(--dark-blue);
             font-size: 1rem;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-            font-weight: 600;
-            color: #1565c0;
-            font-family: 'Playfair Display', serif;
-            line-height: 1.2;
-            background: linear-gradient(45deg, #1565c0, #1976d2, #0d47a1);
+            font-weight: 700;
+            background: linear-gradient(45deg, #0d47a1, #1976d2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-            position: relative;
+            font-family: 'Dancing Script', cursive;
+            line-height: 1.2;
+            padding: 4px 8px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
             display: inline-block;
+            animation: pulseTitle 2s infinite alternate;
         }
         
-        .designer-title::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #0d47a1, transparent);
-            animation: linePulse 2s infinite;
-        }
-        
-        @keyframes linePulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        @keyframes pulseTitle {
+            0% { transform: scale(1); background-color: rgba(255, 255, 255, 0.3); }
+            100% { transform: scale(1.05); background-color: rgba(255, 255, 255, 0.5); }
         }
         
         .designer-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         
-        .designer-card:hover .designer-name {
-            animation-duration: 1s;
+        /* Sounds and Letters Button - New */
+        .sounds-letters-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 3px solid rgba(255,255,255,0.7);
         }
         
-        /* Music Control - Moved to bottom right */
+        .sounds-letters-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, #ff5252, #ff3838);
+        }
+        
+        .sounds-letters-btn.playing {
+            background: linear-gradient(135deg, #1dd1a1, #10ac84);
+        }
+        
+        /* Hidden Audio Player */
+        .hidden-audio {
+            display: none;
+        }
+        
+        /* Music Control - Updated */
         .music-control-container {
             position: fixed;
             bottom: 20px;
@@ -186,29 +214,26 @@
             align-items: center;
             gap: 10px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 12px 15px;
-            border-radius: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.8);
         }
         
         .music-control {
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            border-radius: 12px;
+            width: auto;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
-            border: 2px solid white;
+            border: 3px solid white;
+            padding: 0 25px;
+            gap: 10px;
         }
         
         .music-control:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
         
@@ -217,7 +242,7 @@
         }
         
         .music-control i {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--primary);
             transition: all 0.3s ease;
         }
@@ -226,15 +251,25 @@
             color: white;
         }
         
+        .music-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .music-control.playing .music-text {
+            color: white;
+        }
+        
         .volume-control {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: 2px solid white;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-        
-        .volume-control i {
-            color: var(--primary);
-            font-size: 1.1rem;
         }
         
         .volume-control input {
@@ -377,7 +412,7 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         
-        /* Enhanced Popup with Larger Width */
+        /* Enhanced Popup with Larger Width - Updated */
         .letter-popup {
             position: fixed;
             top: 50%;
@@ -464,6 +499,8 @@
             grid-template-columns: 1fr;
             gap: 25px;
         }
+        
+        /* Letter Sound Controls Removed */
         
         .animation-section {
             display: grid;
@@ -802,11 +839,24 @@
                 font-size: 2rem;
             }
             
+            .music-control {
+                padding: 0 15px;
+            }
+            
+            .music-text {
+                font-size: 1rem;
+            }
+            
+            .sounds-letters-btn {
+                bottom: 80px;
+                left: 20px;
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+            
             .music-control-container {
                 flex-direction: column;
-                align-items: center;
-                padding: 10px;
-                width: auto;
+                align-items: flex-end;
             }
             
             .volume-control {
@@ -848,13 +898,12 @@
             }
             
             .designer-title {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
             
-            .music-control-container {
-                bottom: 10px;
-                right: 10px;
-                padding: 8px 12px;
+            .sounds-letters-btn {
+                font-size: 0.9rem;
+                padding: 10px 15px;
             }
         }
     </style>
@@ -871,7 +920,19 @@
         </div>
     </div>
 
-    <!-- Music Control - Moved to bottom right -->
+    <!-- Sounds and Letters Button -->
+    <button class="sounds-letters-btn" id="soundsLettersBtn">
+        <i class="fas fa-volume-up"></i>
+        <span>Sounds and Letters</span>
+    </button>
+
+    <!-- Hidden Audio Player for Sounds and Letters -->
+    <audio id="lettersAudio" class="hidden-audio" preload="auto">
+        <source src="https://raw.githubusercontent.com/yousefzadeh50/Sounds-and-Letters/main/Sounds%20and%20Letters.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Control with Volume -->
     <div class="music-control-container">
         <div class="volume-control">
             <i class="fas fa-volume-down"></i>
@@ -879,7 +940,8 @@
             <i class="fas fa-volume-up"></i>
         </div>
         <div class="music-control" id="musicControl">
-            <i class="fas fa-play"></i>
+            <i class="fas fa-music"></i>
+            <span class="music-text">Music</span>
         </div>
     </div>
 
@@ -931,6 +993,9 @@
                         <button class="animation-btn pause" id="pauseUppercase" style="display: none;">
                             <i class="fas fa-pause"></i> Pause
                         </button>
+                        <button class="animation-btn" id="replayUppercase">
+                            <i class="fas fa-redo"></i> Replay
+                        </button>
                     </div>
                 </div>
                 
@@ -948,6 +1013,9 @@
                         </button>
                         <button class="animation-btn pause" id="pauseLowercase" style="display: none;">
                             <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button class="animation-btn" id="replayLowercase">
+                            <i class="fas fa-redo"></i> Replay
                         </button>
                     </div>
                 </div>
@@ -985,16 +1053,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Hover Sound -->
-    <audio id="hoverSound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Background Music -->
-    <audio id="backgroundMusic" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3" type="audio/mpeg">
-    </audio>
 
     <script>
         // Complete alphabet data with real GIF animations
@@ -1157,423 +1215,548 @@
             }
         };
 
-        // DOM Elements
-        const alphabetGrid = document.getElementById('alphabetGrid');
-        const letterPopup = document.getElementById('letterPopup');
-        const popupOverlay = document.getElementById('popupOverlay');
-        const closePopup = document.getElementById('closePopup');
-        const popupTitle = document.getElementById('popupTitle');
-        const uppercaseAnimation = document.getElementById('uppercaseAnimation');
-        const lowercaseAnimation = document.getElementById('lowercaseAnimation');
-        const uppercaseBox = document.getElementById('uppercaseBox');
-        const lowercaseBox = document.getElementById('lowercaseBox');
-        const uppercaseOverlay = document.getElementById('uppercaseOverlay');
-        const lowercaseOverlay = document.getElementById('lowercaseOverlay');
-        const playUppercase = document.getElementById('playUppercase');
-        const pauseUppercase = document.getElementById('pauseUppercase');
-        const playLowercase = document.getElementById('playLowercase');
-        const pauseLowercase = document.getElementById('pauseLowercase');
-        const examplesGrid = document.getElementById('examplesGrid');
-        const writingCanvas = document.getElementById('writingCanvas');
-        const clearBtn = document.getElementById('clearBtn');
-        const checkBtn = document.getElementById('checkBtn');
-        const penColor = document.getElementById('penColor');
-        const penWidth = document.getElementById('penWidth');
-        const hoverSound = document.getElementById('hoverSound');
-        const musicControl = document.getElementById('musicControl');
-        const volumeControl = document.getElementById('volumeControl');
-        const backgroundMusic = document.getElementById('backgroundMusic');
-
-        // Speech Synthesis
-        const speech = window.speechSynthesis;
-        
-        // Current selected letter
-        let currentLetter = 'A';
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-        let isUppercasePlaying = false;
-        let isLowercasePlaying = false;
-        let hasSpoken = false; // Flag to prevent double speaking
-        let isMusicPlaying = false;
-
-        // Initialize the application
-        function init() {
-            createAlphabetGrid();
-            setupEventListeners();
-            setupCanvas();
-            setupBackgroundMusic();
-        }
-
-        // Create alphabet grid
-        function createAlphabetGrid() {
-            for (let letter in letterData) {
-                const letterCard = document.createElement('div');
-                letterCard.className = 'letter-card';
-                letterCard.dataset.letter = letter;
+        // Application Controller
+        class HandwritingApp {
+            constructor() {
+                this.currentLetter = 'A';
+                this.isDrawing = false;
+                this.lastX = 0;
+                this.lastY = 0;
+                this.isUppercasePlaying = false;
+                this.isLowercasePlaying = false;
+                this.hasSpoken = false;
+                this.isMusicPlaying = false;
+                this.isSoundsPlaying = false;
+                this.backgroundMusic = null;
+                this.lettersAudio = null;
+                this.audioContext = null;
                 
-                letterCard.innerHTML = `
-                    <div class="uppercase-letter">${letter}</div>
-                    <div class="lowercase-letter">${letter.toLowerCase()}</div>
-                `;
-                
-                alphabetGrid.appendChild(letterCard);
+                this.init();
             }
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Letter card clicks
-            document.querySelectorAll('.letter-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const letter = card.dataset.letter;
-                    openLetterPopup(letter);
+            
+            init() {
+                this.setupDOMReferences();
+                this.createAlphabetGrid();
+                this.setupEventListeners();
+                this.setupCanvas();
+                this.setupBackgroundMusic();
+                this.setupLettersAudio();
+            }
+            
+            setupDOMReferences() {
+                // Cache DOM elements for better performance
+                this.elements = {
+                    alphabetGrid: document.getElementById('alphabetGrid'),
+                    letterPopup: document.getElementById('letterPopup'),
+                    popupOverlay: document.getElementById('popupOverlay'),
+                    closePopup: document.getElementById('closePopup'),
+                    popupTitle: document.getElementById('popupTitle'),
+                    uppercaseAnimation: document.getElementById('uppercaseAnimation'),
+                    lowercaseAnimation: document.getElementById('lowercaseAnimation'),
+                    uppercaseBox: document.getElementById('uppercaseBox'),
+                    lowercaseBox: document.getElementById('lowercaseBox'),
+                    uppercaseOverlay: document.getElementById('uppercaseOverlay'),
+                    lowercaseOverlay: document.getElementById('lowercaseOverlay'),
+                    playUppercase: document.getElementById('playUppercase'),
+                    pauseUppercase: document.getElementById('pauseUppercase'),
+                    replayUppercase: document.getElementById('replayUppercase'),
+                    playLowercase: document.getElementById('playLowercase'),
+                    pauseLowercase: document.getElementById('pauseLowercase'),
+                    replayLowercase: document.getElementById('replayLowercase'),
+                    examplesGrid: document.getElementById('examplesGrid'),
+                    writingCanvas: document.getElementById('writingCanvas'),
+                    clearBtn: document.getElementById('clearBtn'),
+                    checkBtn: document.getElementById('checkBtn'),
+                    penColor: document.getElementById('penColor'),
+                    penWidth: document.getElementById('penWidth'),
+                    musicControl: document.getElementById('musicControl'),
+                    volumeControl: document.getElementById('volumeControl'),
+                    soundsLettersBtn: document.getElementById('soundsLettersBtn'),
+                    lettersAudio: document.getElementById('lettersAudio')
+                };
+            }
+            
+            createAlphabetGrid() {
+                const fragment = document.createDocumentFragment();
+                
+                for (let letter in letterData) {
+                    const letterCard = document.createElement('div');
+                    letterCard.className = 'letter-card';
+                    letterCard.dataset.letter = letter;
+                    
+                    letterCard.innerHTML = `
+                        <div class="uppercase-letter">${letter}</div>
+                        <div class="lowercase-letter">${letter.toLowerCase()}</div>
+                    `;
+                    
+                    fragment.appendChild(letterCard);
+                }
+                
+                this.elements.alphabetGrid.appendChild(fragment);
+            }
+            
+            setupEventListeners() {
+                // Letter card clicks
+                this.elements.alphabetGrid.addEventListener('click', (e) => {
+                    const card = e.target.closest('.letter-card');
+                    if (card) {
+                        this.openLetterPopup(card.dataset.letter);
+                    }
                 });
                 
-                // Add hover sound to all buttons and interactive elements
-                card.addEventListener('mouseenter', playHoverSound);
-            });
-
-            // Popup controls
-            closePopup.addEventListener('click', closeLetterPopup);
-            popupOverlay.addEventListener('click', closeLetterPopup);
-
-            // Animation controls
-            playUppercase.addEventListener('click', () => playAnimation('uppercase'));
-            pauseUppercase.addEventListener('click', () => pauseAnimation('uppercase'));
-            playLowercase.addEventListener('click', () => playAnimation('lowercase'));
-            pauseLowercase.addEventListener('click', () => pauseAnimation('lowercase'));
-
-            // Canvas controls
-            clearBtn.addEventListener('click', clearCanvas);
-            checkBtn.addEventListener('click', checkWriting);
-
-            // Music controls
-            musicControl.addEventListener('click', toggleMusic);
-            volumeControl.addEventListener('input', adjustVolume);
-
-            // Add hover sound to all buttons
-            document.querySelectorAll('button').forEach(btn => {
-                btn.addEventListener('mouseenter', playHoverSound);
-            });
-        }
-
-        // Setup canvas for drawing
-        function setupCanvas() {
-            const ctx = writingCanvas.getContext('2d');
-            
-            // Set canvas size
-            writingCanvas.width = writingCanvas.offsetWidth;
-            writingCanvas.height = writingCanvas.offsetHeight;
-            
-            // Set initial drawing style
-            ctx.strokeStyle = penColor.value;
-            ctx.lineWidth = penWidth.value;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            
-            // Drawing events
-            writingCanvas.addEventListener('mousedown', startDrawing);
-            writingCanvas.addEventListener('mousemove', draw);
-            writingCanvas.addEventListener('mouseup', stopDrawing);
-            writingCanvas.addEventListener('mouseout', stopDrawing);
-            
-            // Touch events for mobile
-            writingCanvas.addEventListener('touchstart', handleTouchStart);
-            writingCanvas.addEventListener('touchmove', handleTouchMove);
-            writingCanvas.addEventListener('touchend', stopDrawing);
-        }
-
-        // Setup background music
-        function setupBackgroundMusic() {
-            backgroundMusic.volume = volumeControl.value;
-            
-            // Auto-play music when user interacts with the page
-            document.body.addEventListener('click', function initMusic() {
-                if (!isMusicPlaying) {
-                    toggleMusic();
-                }
-                document.body.removeEventListener('click', initMusic);
-            });
-        }
-
-        // Play hover sound
-        function playHoverSound() {
-            hoverSound.currentTime = 0;
-            hoverSound.volume = 0.3;
-            hoverSound.play().catch(e => console.log("Hover sound play failed:", e));
-        }
-
-        // Speech functions
-        function speakLetterName(letter) {
-            // Stop any current speech
-            speech.cancel();
-            
-            const utterance = new SpeechSynthesisUtterance(letter);
-            utterance.rate = 0.8;
-            utterance.pitch = 1.2;
-            utterance.volume = 0.8;
-            
-            speech.speak(utterance);
-        }
-
-        function speakLetterSound(letter) {
-            // Stop any current speech
-            speech.cancel();
-            
-            // Only speak the phonetic sound, not the full sentence
-            let soundText = '';
-            switch(letter.toUpperCase()) {
-                case 'A': soundText = 'æ'; break;
-                case 'B': soundText = 'b'; break;
-                case 'C': soundText = 'k'; break;
-                case 'D': soundText = 'd'; break;
-                case 'E': soundText = 'ɛ'; break;
-                case 'F': soundText = 'f'; break;
-                case 'G': soundText = 'g'; break;
-                case 'H': soundText = 'h'; break;
-                case 'I': soundText = 'ɪ'; break;
-                case 'J': soundText = 'dʒ'; break;
-                case 'K': soundText = 'k'; break;
-                case 'L': soundText = 'l'; break;
-                case 'M': soundText = 'm'; break;
-                case 'N': soundText = 'n'; break;
-                case 'O': soundText = 'ɒ'; break;
-                case 'P': soundText = 'p'; break;
-                case 'Q': soundText = 'kw'; break;
-                case 'R': soundText = 'r'; break;
-                case 'S': soundText = 's'; break;
-                case 'T': soundText = 't'; break;
-                case 'U': soundText = 'ʌ'; break;
-                case 'V': soundText = 'v'; break;
-                case 'W': soundText = 'w'; break;
-                case 'X': soundText = 'ks'; break;
-                case 'Y': soundText = 'j'; break;
-                case 'Z': soundText = 'z'; break;
-                default: soundText = letter;
+                // Popup controls
+                this.elements.closePopup.addEventListener('click', () => this.closeLetterPopup());
+                this.elements.popupOverlay.addEventListener('click', () => this.closeLetterPopup());
+                
+                // Animation controls
+                this.elements.playUppercase.addEventListener('click', () => this.playAnimation('uppercase'));
+                this.elements.pauseUppercase.addEventListener('click', () => this.pauseAnimation('uppercase'));
+                this.elements.replayUppercase.addEventListener('click', () => this.replayAnimation('uppercase'));
+                this.elements.playLowercase.addEventListener('click', () => this.playAnimation('lowercase'));
+                this.elements.pauseLowercase.addEventListener('click', () => this.pauseAnimation('lowercase'));
+                this.elements.replayLowercase.addEventListener('click', () => this.replayAnimation('lowercase'));
+                
+                // Canvas controls
+                this.elements.clearBtn.addEventListener('click', () => this.clearCanvas());
+                this.elements.checkBtn.addEventListener('click', () => this.checkWriting());
+                
+                // Music controls
+                this.elements.musicControl.addEventListener('click', () => this.toggleMusic());
+                this.elements.volumeControl.addEventListener('input', () => this.adjustVolume());
+                
+                // Sounds and Letters button
+                this.elements.soundsLettersBtn.addEventListener('click', () => this.toggleLettersAudio());
+                
+                // Play overlays
+                this.elements.uppercaseOverlay.addEventListener('click', () => this.playAnimation('uppercase'));
+                this.elements.lowercaseOverlay.addEventListener('click', () => this.playAnimation('lowercase'));
+                
+                // Audio events
+                this.elements.lettersAudio.addEventListener('play', () => {
+                    this.elements.soundsLettersBtn.classList.add('playing');
+                    this.elements.soundsLettersBtn.innerHTML = '<i class="fas fa-pause"></i><span>Sounds and Letters</span>';
+                    this.isSoundsPlaying = true;
+                });
+                
+                this.elements.lettersAudio.addEventListener('pause', () => {
+                    this.elements.soundsLettersBtn.classList.remove('playing');
+                    this.elements.soundsLettersBtn.innerHTML = '<i class="fas fa-volume-up"></i><span>Sounds and Letters</span>';
+                    this.isSoundsPlaying = false;
+                });
+                
+                this.elements.lettersAudio.addEventListener('ended', () => {
+                    this.elements.soundsLettersBtn.classList.remove('playing');
+                    this.elements.soundsLettersBtn.innerHTML = '<i class="fas fa-volume-up"></i><span>Sounds and Letters</span>';
+                    this.isSoundsPlaying = false;
+                });
             }
             
-            const utterance = new SpeechSynthesisUtterance(soundText);
-            utterance.rate = 0.7;
-            utterance.pitch = 1.1;
-            utterance.volume = 0.8;
+            setupCanvas() {
+                const ctx = this.elements.writingCanvas.getContext('2d');
+                
+                // Set canvas size
+                this.elements.writingCanvas.width = this.elements.writingCanvas.offsetWidth;
+                this.elements.writingCanvas.height = this.elements.writingCanvas.offsetHeight;
+                
+                // Set initial drawing style
+                ctx.strokeStyle = this.elements.penColor.value;
+                ctx.lineWidth = this.elements.penWidth.value;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                
+                // Drawing events
+                this.elements.writingCanvas.addEventListener('mousedown', (e) => this.startDrawing(e));
+                this.elements.writingCanvas.addEventListener('mousemove', (e) => this.draw(e));
+                this.elements.writingCanvas.addEventListener('mouseup', () => this.stopDrawing());
+                this.elements.writingCanvas.addEventListener('mouseout', () => this.stopDrawing());
+                
+                // Touch events for mobile
+                this.elements.writingCanvas.addEventListener('touchstart', (e) => this.handleTouchStart(e));
+                this.elements.writingCanvas.addEventListener('touchmove', (e) => this.handleTouchMove(e));
+                this.elements.writingCanvas.addEventListener('touchend', () => this.stopDrawing());
+                
+                // Pen controls
+                this.elements.penColor.addEventListener('input', () => {
+                    ctx.strokeStyle = this.elements.penColor.value;
+                });
+                
+                this.elements.penWidth.addEventListener('input', () => {
+                    ctx.lineWidth = this.elements.penWidth.value;
+                });
+            }
             
-            speech.speak(utterance);
-        }
-
-        function speakExampleWord(word) {
-            // Stop any current speech
-            speech.cancel();
+            setupBackgroundMusic() {
+                // Create a simple background melody using Web Audio API
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Create a soothing melody
+                const notes = [
+                    { freq: 523.25, duration: 0.8 }, // C
+                    { freq: 587.33, duration: 0.8 }, // D
+                    { freq: 659.25, duration: 0.8 }, // E
+                    { freq: 698.46, duration: 0.8 }, // F
+                    { freq: 783.99, duration: 0.8 }, // G
+                    { freq: 880.00, duration: 0.8 }, // A
+                    { freq: 987.77, duration: 0.8 }, // B
+                    { freq: 1046.50, duration: 1.2 } // C (high)
+                ];
+                
+                const playMelody = () => {
+                    let currentTime = this.audioContext.currentTime;
+                    
+                    const playNote = (index) => {
+                        if (index >= notes.length || !this.isMusicPlaying) return;
+                        
+                        const note = notes[index];
+                        const oscillator = this.audioContext.createOscillator();
+                        const gainNode = this.audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(this.audioContext.destination);
+                        
+                        oscillator.frequency.value = note.freq;
+                        oscillator.type = 'sine';
+                        
+                        const volume = parseFloat(this.elements.volumeControl.value);
+                        gainNode.gain.setValueAtTime(volume * 0.1, currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+                        
+                        oscillator.start(currentTime);
+                        oscillator.stop(currentTime + note.duration);
+                        
+                        currentTime += note.duration;
+                        
+                        // Schedule next note
+                        setTimeout(() => playNote(index + 1), note.duration * 1000);
+                    };
+                    
+                    playNote(0);
+                };
+                
+                // Store the play function
+                this.backgroundMusic = playMelody;
+            }
             
-            const utterance = new SpeechSynthesisUtterance(word);
-            utterance.rate = 0.8;
-            utterance.pitch = 1.0;
-            utterance.volume = 0.8;
+            setupLettersAudio() {
+                // Set volume based on control
+                this.elements.lettersAudio.volume = parseFloat(this.elements.volumeControl.value);
+                
+                // Preload the audio
+                this.elements.lettersAudio.load();
+                
+                // Add loading indicator
+                this.elements.lettersAudio.addEventListener('loadstart', () => {
+                    console.log('Loading Sounds and Letters audio...');
+                });
+                
+                this.elements.lettersAudio.addEventListener('canplaythrough', () => {
+                    console.log('Sounds and Letters audio ready to play');
+                });
+                
+                this.elements.lettersAudio.addEventListener('error', (e) => {
+                    console.error('Error loading Sounds and Letters audio:', e);
+                    this.elements.soundsLettersBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Audio Error</span>';
+                    this.elements.soundsLettersBtn.style.background = 'linear-gradient(135deg, #ffa726, #ff9800)';
+                });
+            }
             
-            speech.speak(utterance);
-        }
-
-        // Open letter popup
-        function openLetterPopup(letter) {
-            currentLetter = letter;
-            popupTitle.textContent = `Letter ${letter}`;
+            toggleLettersAudio() {
+                if (this.isSoundsPlaying) {
+                    // Pause the audio
+                    this.elements.lettersAudio.pause();
+                } else {
+                    // Play the audio
+                    this.elements.lettersAudio.play().catch(e => {
+                        console.error('Error playing Sounds and Letters audio:', e);
+                        alert('Could not play audio. Please make sure the audio file is accessible.');
+                    });
+                }
+            }
             
-            // Set animation images
-            uppercaseAnimation.src = letterData[letter].uppercase;
-            lowercaseAnimation.src = letterData[letter].lowercase;
+            // Speech functions
+            speakLetterName(letter) {
+                // Stop any current speech
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(letter);
+                utterance.rate = 0.8;
+                utterance.pitch = 1.2;
+                utterance.volume = 0.8;
+                
+                window.speechSynthesis.speak(utterance);
+            }
             
-            // Reset animation states
-            resetAnimations();
+            speakLetterSound(letter) {
+                // Stop any current speech
+                window.speechSynthesis.cancel();
+                
+                // Only speak the phonetic sound, not the full sentence
+                let soundText = '';
+                switch(letter.toUpperCase()) {
+                    case 'A': soundText = 'æ'; break;
+                    case 'B': soundText = 'b'; break;
+                    case 'C': soundText = 'k'; break;
+                    case 'D': soundText = 'd'; break;
+                    case 'E': soundText = 'ɛ'; break;
+                    case 'F': soundText = 'f'; break;
+                    case 'G': soundText = 'g'; break;
+                    case 'H': soundText = 'h'; break;
+                    case 'I': soundText = 'ɪ'; break;
+                    case 'J': soundText = 'dʒ'; break;
+                    case 'K': soundText = 'k'; break;
+                    case 'L': soundText = 'l'; break;
+                    case 'M': soundText = 'm'; break;
+                    case 'N': soundText = 'n'; break;
+                    case 'O': soundText = 'ɒ'; break;
+                    case 'P': soundText = 'p'; break;
+                    case 'Q': soundText = 'kw'; break;
+                    case 'R': soundText = 'r'; break;
+                    case 'S': soundText = 's'; break;
+                    case 'T': soundText = 't'; break;
+                    case 'U': soundText = 'ʌ'; break;
+                    case 'V': soundText = 'v'; break;
+                    case 'W': soundText = 'w'; break;
+                    case 'X': soundText = 'ks'; break;
+                    case 'Y': soundText = 'j'; break;
+                    case 'Z': soundText = 'z'; break;
+                    default: soundText = letter;
+                }
+                
+                const utterance = new SpeechSynthesisUtterance(soundText);
+                utterance.rate = 0.7;
+                utterance.pitch = 1.1;
+                utterance.volume = 0.8;
+                
+                window.speechSynthesis.speak(utterance);
+            }
+            
+            speakExampleWord(word) {
+                // Stop any current speech
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.rate = 0.8;
+                utterance.pitch = 1.0;
+                utterance.volume = 0.8;
+                
+                window.speechSynthesis.speak(utterance);
+            }
+            
+            // Open letter popup
+            openLetterPopup(letter) {
+                this.currentLetter = letter;
+                this.elements.popupTitle.textContent = `Letter ${letter}`;
+                
+                // Set animation images
+                this.elements.uppercaseAnimation.src = letterData[letter].uppercase;
+                this.elements.lowercaseAnimation.src = letterData[letter].lowercase;
+                
+                // Reset animation states
+                this.resetAnimations();
+                
+                // Create example words
+                this.createExampleWords(letter);
+                
+                // Clear canvas
+                this.clearCanvas();
+                
+                // Show popup
+                this.elements.letterPopup.classList.add('active');
+                this.elements.popupOverlay.classList.add('active');
+                
+                // Speak letter name only once
+                if (!this.hasSpoken) {
+                    setTimeout(() => {
+                        this.speakLetterName(letter);
+                        this.hasSpoken = true;
+                    }, 500);
+                }
+            }
+            
+            // Close letter popup
+            closeLetterPopup() {
+                this.elements.letterPopup.classList.remove('active');
+                this.elements.popupOverlay.classList.remove('active');
+                this.resetAnimations();
+                this.hasSpoken = false; // Reset the flag
+            }
             
             // Create example words
-            createExampleWords(letter);
-            
-            // Clear canvas
-            clearCanvas();
-            
-            // Show popup
-            letterPopup.classList.add('active');
-            popupOverlay.classList.add('active');
-            
-            // Speak letter name only once
-            if (!hasSpoken) {
-                setTimeout(() => {
-                    speakLetterName(letter);
-                    hasSpoken = true;
-                }, 500);
-            }
-        }
-
-        // Close letter popup
-        function closeLetterPopup() {
-            letterPopup.classList.remove('active');
-            popupOverlay.classList.remove('active');
-            resetAnimations();
-            hasSpoken = false; // Reset the flag
-        }
-
-        // Create example words
-        function createExampleWords(letter) {
-            examplesGrid.innerHTML = '';
-            
-            letterData[letter].examples.forEach(word => {
-                const exampleItem = document.createElement('div');
-                exampleItem.className = 'example-item';
+            createExampleWords(letter) {
+                this.elements.examplesGrid.innerHTML = '';
+                const fragment = document.createDocumentFragment();
                 
-                exampleItem.innerHTML = `
-                    <div class="example-word">${word}</div>
-                    <button class="example-sound" data-word="${word}">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                `;
-                
-                examplesGrid.appendChild(exampleItem);
-            });
-            
-            // Add event listeners to example sound buttons
-            document.querySelectorAll('.example-sound').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const word = e.currentTarget.dataset.word;
-                    speakExampleWord(word);
+                letterData[letter].examples.forEach(word => {
+                    const exampleItem = document.createElement('div');
+                    exampleItem.className = 'example-item';
+                    
+                    exampleItem.innerHTML = `
+                        <div class="example-word">${word}</div>
+                        <button class="example-sound" data-word="${word}">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                    `;
+                    
+                    fragment.appendChild(exampleItem);
                 });
                 
-                // Add hover sound
-                btn.addEventListener('mouseenter', playHoverSound);
-            });
-        }
-
-        // Animation controls
-        function playAnimation(type) {
-            const box = type === 'uppercase' ? uppercaseBox : lowercaseBox;
-            const playBtn = type === 'uppercase' ? playUppercase : playLowercase;
-            const pauseBtn = type === 'uppercase' ? pauseUppercase : pauseLowercase;
-            const overlay = type === 'uppercase' ? uppercaseOverlay : lowercaseOverlay;
-            
-            box.classList.add('animation-playing');
-            playBtn.style.display = 'none';
-            pauseBtn.style.display = 'flex';
-            overlay.classList.add('hidden');
-            
-            if (type === 'uppercase') {
-                isUppercasePlaying = true;
-            } else {
-                isLowercasePlaying = true;
-            }
-        }
-
-        function pauseAnimation(type) {
-            const box = type === 'uppercase' ? uppercaseBox : lowercaseBox;
-            const playBtn = type === 'uppercase' ? playUppercase : playLowercase;
-            const pauseBtn = type === 'uppercase' ? pauseUppercase : pauseLowercase;
-            
-            box.classList.remove('animation-playing');
-            playBtn.style.display = 'flex';
-            pauseBtn.style.display = 'none';
-            
-            if (type === 'uppercase') {
-                isUppercasePlaying = false;
-            } else {
-                isLowercasePlaying = false;
-            }
-        }
-
-        function resetAnimations() {
-            pauseAnimation('uppercase');
-            pauseAnimation('lowercase');
-        }
-
-        // Canvas drawing functions
-        function startDrawing(e) {
-            isDrawing = true;
-            const rect = writingCanvas.getBoundingClientRect();
-            lastX = e.clientX - rect.left;
-            lastY = e.clientY - rect.top;
-        }
-
-        function draw(e) {
-            if (!isDrawing) return;
-            
-            const ctx = writingCanvas.getContext('2d');
-            const rect = writingCanvas.getBoundingClientRect();
-            const currentX = e.clientX - rect.left;
-            const currentY = e.clientY - rect.top;
-            
-            ctx.strokeStyle = penColor.value;
-            ctx.lineWidth = penWidth.value;
-            
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(currentX, currentY);
-            ctx.stroke();
-            
-            lastX = currentX;
-            lastY = currentY;
-        }
-
-        function stopDrawing() {
-            isDrawing = false;
-        }
-
-        function handleTouchStart(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            writingCanvas.dispatchEvent(mouseEvent);
-        }
-
-        function handleTouchMove(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            writingCanvas.dispatchEvent(mouseEvent);
-        }
-
-        function clearCanvas() {
-            const ctx = writingCanvas.getContext('2d');
-            ctx.clearRect(0, 0, writingCanvas.width, writingCanvas.height);
-        }
-
-        function checkWriting() {
-            // In a real app, you would implement handwriting recognition here
-            alert('Great job! Keep practicing to improve your handwriting.');
-        }
-
-        // Music controls
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                // Stop background music
-                backgroundMusic.pause();
-                isMusicPlaying = false;
-                musicControl.classList.remove('playing');
-                musicControl.innerHTML = '<i class="fas fa-play"></i>';
-            } else {
-                // Play background music
-                backgroundMusic.play().catch(e => {
-                    console.log("Music play failed, trying again on user interaction:", e);
-                    // If autoplay is blocked, wait for user interaction
-                    document.body.addEventListener('click', function retryPlay() {
-                        backgroundMusic.play();
-                        document.body.removeEventListener('click', retryPlay);
-                    });
+                this.elements.examplesGrid.appendChild(fragment);
+                
+                // Add event listeners to example sound buttons
+                this.elements.examplesGrid.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.example-sound');
+                    if (btn) {
+                        const word = btn.dataset.word;
+                        this.speakExampleWord(word);
+                    }
                 });
-                isMusicPlaying = true;
-                musicControl.classList.add('playing');
-                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
             }
-        }
-
-        function adjustVolume() {
-            backgroundMusic.volume = volumeControl.value;
+            
+            // Animation controls
+            playAnimation(type) {
+                const box = type === 'uppercase' ? this.elements.uppercaseBox : this.elements.lowercaseBox;
+                const playBtn = type === 'uppercase' ? this.elements.playUppercase : this.elements.playLowercase;
+                const pauseBtn = type === 'uppercase' ? this.elements.pauseUppercase : this.elements.pauseLowercase;
+                const overlay = type === 'uppercase' ? this.elements.uppercaseOverlay : this.elements.lowercaseOverlay;
+                
+                box.classList.add('animation-playing');
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'flex';
+                overlay.classList.add('hidden');
+                
+                if (type === 'uppercase') {
+                    this.isUppercasePlaying = true;
+                } else {
+                    this.isLowercasePlaying = true;
+                }
+            }
+            
+            pauseAnimation(type) {
+                const box = type === 'uppercase' ? this.elements.uppercaseBox : this.elements.lowercaseBox;
+                const playBtn = type === 'uppercase' ? this.elements.playUppercase : this.elements.playLowercase;
+                const pauseBtn = type === 'uppercase' ? this.elements.pauseUppercase : this.elements.pauseLowercase;
+                
+                box.classList.remove('animation-playing');
+                playBtn.style.display = 'flex';
+                pauseBtn.style.display = 'none';
+                
+                if (type === 'uppercase') {
+                    this.isUppercasePlaying = false;
+                } else {
+                    this.isLowercasePlaying = false;
+                }
+            }
+            
+            replayAnimation(type) {
+                this.pauseAnimation(type);
+                setTimeout(() => this.playAnimation(type), 100);
+            }
+            
+            resetAnimations() {
+                this.pauseAnimation('uppercase');
+                this.pauseAnimation('lowercase');
+            }
+            
+            // Canvas drawing functions
+            startDrawing(e) {
+                this.isDrawing = true;
+                const rect = this.elements.writingCanvas.getBoundingClientRect();
+                this.lastX = e.clientX - rect.left;
+                this.lastY = e.clientY - rect.top;
+            }
+            
+            draw(e) {
+                if (!this.isDrawing) return;
+                
+                const ctx = this.elements.writingCanvas.getContext('2d');
+                const rect = this.elements.writingCanvas.getBoundingClientRect();
+                const currentX = e.clientX - rect.left;
+                const currentY = e.clientY - rect.top;
+                
+                ctx.beginPath();
+                ctx.moveTo(this.lastX, this.lastY);
+                ctx.lineTo(currentX, currentY);
+                ctx.stroke();
+                
+                this.lastX = currentX;
+                this.lastY = currentY;
+            }
+            
+            stopDrawing() {
+                this.isDrawing = false;
+            }
+            
+            handleTouchStart(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousedown', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                this.elements.writingCanvas.dispatchEvent(mouseEvent);
+            }
+            
+            handleTouchMove(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousemove', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                this.elements.writingCanvas.dispatchEvent(mouseEvent);
+            }
+            
+            clearCanvas() {
+                const ctx = this.elements.writingCanvas.getContext('2d');
+                ctx.clearRect(0, 0, this.elements.writingCanvas.width, this.elements.writingCanvas.height);
+            }
+            
+            checkWriting() {
+                // In a real app, you would implement handwriting recognition here
+                alert('Great job! Keep practicing to improve your handwriting.');
+            }
+            
+            // Music controls
+            toggleMusic() {
+                if (this.isMusicPlaying) {
+                    // Stop background music
+                    this.isMusicPlaying = false;
+                    this.elements.musicControl.classList.remove('playing');
+                    this.elements.musicControl.innerHTML = '<i class="fas fa-music"></i><span class="music-text">Music</span>';
+                } else {
+                    // Play background music
+                    this.isMusicPlaying = true;
+                    this.elements.musicControl.classList.add('playing');
+                    this.elements.musicControl.innerHTML = '<i class="fas fa-pause"></i><span class="music-text">Music</span>';
+                    
+                    // Start the melody
+                    if (this.backgroundMusic) {
+                        this.backgroundMusic();
+                        
+                        // Keep the music playing in a loop
+                        const melodyDuration = 6 * 1000; // 6 seconds
+                        setInterval(() => {
+                            if (this.isMusicPlaying) {
+                                this.backgroundMusic();
+                            }
+                        }, melodyDuration);
+                    }
+                }
+            }
+            
+            adjustVolume() {
+                // Adjust volume for both audio elements
+                const volume = parseFloat(this.elements.volumeControl.value);
+                if (this.elements.lettersAudio) {
+                    this.elements.lettersAudio.volume = volume;
+                }
+            }
         }
 
         // Initialize the app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', () => {
+            new HandwritingApp();
+        });
     </script>
 </body>
 </html>
